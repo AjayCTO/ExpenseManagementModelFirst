@@ -1,0 +1,50 @@
+﻿
+<div class="row">
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+    <div class="col-md-8">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>City</th>
+                    <th>Shipped</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="order in orders">
+                    <td>
+                        {{ order.orderID }}
+                    </td>
+                    <td>
+                        {{ order.customerName }}
+                    </td>
+                    <td>
+                        {{ order.shipperCity }}
+                    </td>
+                    <td>
+                        <input type="checkbox" data-ng-model="order.isShipped" disabled="disabled">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+</div>
+
+
+<form class="form-login" role="form">
+    <h2 class="form-login-heading">Create Project</h2>
+    <input type="text" class="form-control" placeholder="Name" data-ng-model="project.Name" required autofocus>
+    <input type="text" class="form-control" placeholder="Billing Method" data-ng-model="project.BillingMethod" required>
+    <input type="text" class="form-control" placeholder="Customer Name" data-ng-model="project.CustomerName" required>
+    <input type="text" class="form-control" placeholder="Total Cost" data-ng-model="project.TotalCost" required>
+    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="addProject()">Submit</button>
+    <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{message}}
+    </div>
+</form>

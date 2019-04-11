@@ -12,7 +12,105 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
         });
     };
 
+
+    var _getProjects = function () {
+
+        return $http.get(serviceBase + 'api/Project').then(function (results) {
+            return results;
+        });
+    };
+
+
+    var _saveProject = function (project) {
+        _logOut();
+
+        return $http.post(serviceBase + 'api/Project/PostProject', project).then(function (response) {
+            return response;
+        });
+
+    };
+
+    var _getAssets = function () {
+
+        return $http.get(serviceBase + 'api/Asset').then(function (results) {
+            return results;
+        });
+    };
+
+
+    var _saveAsset = function (Asset) {
+        _logOut();
+
+        return $http.post(serviceBase + 'api/Asset/PostAsset', Asset).then(function (response) {
+            return response;
+        });
+
+    };
+
+
+    var _getCategory = function () {
+
+        return $http.get(serviceBase + 'api/Category').then(function (results) {
+            return results;
+        });
+    };
+
+
+    var _saveCategory = function (Category) {
+        _logOut();
+
+        return $http.post(serviceBase + 'api/Category/PostCategory', Category).then(function (response) {
+            return response;
+        });
+
+    };
+
+    var _getExpense = function () {
+
+        return $http.get(serviceBase + 'api/Expense').then(function (results) {
+            return results;
+        });
+    };
+
+
+    var _saveExpense = function (Expense) {
+        _logOut();
+
+        return $http.post(serviceBase + 'api/Expense/PostExpense', Expense).then(function (response) {
+            return response;
+        });
+
+    };
+
+    var _getIncoming = function () {
+
+        return $http.get(serviceBase + 'api/Incoming').then(function (results) {
+            return results;
+        });
+    };
+
+
+    var _saveExpense = function (Incoming) {
+        _logOut();
+
+        return $http.post(serviceBase + 'api/Incoming/IncomingExpense', Incoming).then(function (response) {
+            return response;
+        });
+
+    };
+
     ordersServiceFactory.getOrders = _getOrders;
+    ordersServiceFactory.getProjects = _getProjects;
+    ordersServiceFactory.saveProject = _saveProject;
+    ordersServiceFactory.getAssets = _getAssets;
+    ordersServiceFactory.saveAsset = _saveAsset;
+    ordersServiceFactory.getCategory = _getCategory;
+    ordersServiceFactory.saveCategory = _saveCategory;
+    ordersServiceFactory.getExpense = _getExpense;
+    ordersServiceFactory.saveExpense = _saveExpense;
+    ordersServiceFactory.getIncoming = _getIncoming;
+    ordersServiceFactory.saveIncoming = _saveIncoming;
+    
 
     return ordersServiceFactory;
 

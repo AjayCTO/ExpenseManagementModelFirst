@@ -36,6 +36,31 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/associate", {
         controller: "associateController",
         templateUrl: "/app/views/associate.html"
+    });    
+
+    $routeProvider.when("/project", {
+        controller: "projectController",
+        templateUrl: "/app/views/project.html"
+    });
+
+    $routeProvider.when("/assets", {
+        controller: "assetsController",
+        templateUrl: "/app/views/assets.html"
+    });
+
+    $routeProvider.when("/category", {
+        controller: "categoryController",
+        templateUrl: "/app/views/category.html"
+    });
+
+    $routeProvider.when("/expense", {
+        controller: "expenseController",
+        templateUrl: "/app/views/expense.html"
+    });
+
+    $routeProvider.when("/incoming", {
+        controller: "incomingController",
+        templateUrl: "/app/views/incoming.html"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });
