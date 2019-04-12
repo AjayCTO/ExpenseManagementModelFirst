@@ -13,11 +13,14 @@ using AngularJSAuthentication.API;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+     [RoutePrefix("api/Category")]
     public class CategoryController : ApiController
     {
         private AuthContext db = new AuthContext();
 
         // GET api/Category
+        [Authorize]
+        [Route("")]
         public IQueryable<Category> GetCategory()
         {
             return db.Category;
@@ -25,6 +28,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // GET api/Category/5
         [ResponseType(typeof(Category))]
+        [Route("GetCategory")]
         public IHttpActionResult GetCategory(short id)
         {
             Category category = db.Category.Find(id);
@@ -37,17 +41,18 @@ namespace AngularJSAuthentication.API.Controllers
         }
 
         // PUT api/Category/5
-        public IHttpActionResult PutCategory(short id, Category category)
+          [Route("PutCategory")]
+        public IHttpActionResult PutCategory(Category category)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != category.CategoryID)
-            {
-                return BadRequest();
-            }
+            //if (id != category.CategoryID)
+            //{
+            //    return BadRequest();
+            //}
 
             db.Entry(category).State = EntityState.Modified;
 
@@ -57,14 +62,14 @@ namespace AngularJSAuthentication.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                //if (!CategoryExists(id))
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -72,6 +77,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // POST api/Category
         [ResponseType(typeof(Category))]
+        [Route("PostCategory")]
         public IHttpActionResult PostCategory(Category category)
         {
             if (!ModelState.IsValid)
@@ -87,6 +93,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // DELETE api/Category/5
         [ResponseType(typeof(Category))]
+        [Route("DeleteCategory")]
         public IHttpActionResult DeleteCategory(short id)
         {
             Category category = db.Category.Find(id);

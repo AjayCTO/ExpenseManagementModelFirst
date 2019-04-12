@@ -1,15 +1,44 @@
 ﻿
+<div class="breadcrumb">
+    <h1>Project Management</h1>
+    <ul>
+        <li><a href="">Dashboard</a></li>
+        <li>Version 1</li>
+    </ul>
+</div>
 
+<div class="separator-breadcrumb border-top"></div>
 
 
 <form class="form-login" role="form">
-    <h2 class="form-login-heading">Create Project</h2>
-    <input type="text" class="form-control" placeholder="Name" data-ng-model="project.Name" required autofocus>
-    <input type="text" class="form-control" placeholder="Billing Method" data-ng-model="project.BillingMethod" required>
-    <input type="text" class="form-control" placeholder="Customer Name" data-ng-model="project.CustomerName" required>
-    <input type="text" class="form-control" placeholder="Total Cost" data-ng-model="project.TotalCost" required>
-    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="addProject()">Submit</button>
-    <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
-        {{message}}
+   
+
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" placeholder="Name" data-ng-model="project.Name" required autofocus>
     </div>
+
+    <div class="form-group">
+        <label>Billing Method</label>
+        <input type="text" class="form-control" placeholder="Billing Method" data-ng-model="project.BillingMethod" required>
+    </div>
+
+    <div class="form-group">
+        <label>Customer Name</label>
+        <input type="text" class="form-control" placeholder="Customer Name" data-ng-model="project.CustomerName" required>
+    </div>
+
+    <div class="form-group">
+        <label>Estimated Cost</label>
+        <input type="text" class="form-control" placeholder="Total Cost" data-ng-model="project.TotalCost" required>
+    </div>
+
+   
+ 
+   
+  
+    <button class="btn btn-primary m-1" type="submit" data-ng-click="addProject()">Save</button>
+    <!--<div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{message}}
+    </div>-->
 </form>

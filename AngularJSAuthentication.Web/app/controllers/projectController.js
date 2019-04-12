@@ -10,20 +10,29 @@ app.controller('projectController', ['$scope', 'ordersService', function ($scope
     };
     $scope.savedSuccessfully = false;
 
-    $scope.orders = [];
+  
+    $scope.ListOfOrders = [];
 
     ordersService.getProjects().then(function (results) {
-
-        console.log("==============|Projects================")
-        console.log(results.data)
-        console.log("==============|Projects================")
-
-        $scope.orders = results.data;
+        $scope.ListOfOrders = results.data;
 
     }, function (error) {
         //alert(error.data.message);
     });
 
+
+    $scope.getProjectsByID = function (id) {
+
+        ordersService.getProjectsByID(id).then(function (results) {
+
+            $scope.project = results.data;
+
+        }, function (error) {
+            //alert(error.data.message);
+        });
+    }
+
+    
 
 
     $scope.addProject = function () {
@@ -46,7 +55,36 @@ app.controller('projectController', ['$scope', 'ordersService', function ($scope
     };
 
 
+    $scope.updateProject = function () {
 
+        ordersService.updateProject($scope.project).then(function (response) {
+
+            $scope.savedSuccessfully = true;
+            $scope.message = "Project has been updated successfully";
+
+        },
+         function (response) {
+             var errors = [];
+             for (var key in response.data.modelState) {
+                 for (var i = 0; i < response.data.modelState[key].length; i++) {
+                     errors.push(response.data.modelState[key][i]);
+                 }
+             }
+             $scope.message = "Failed to add update due to:" + errors.join(' ');
+         });
+    };
+
+
+    $scope.deleteProject = function (id) {
+        ordersService.deleteProject(id).then(function (results) {
+            $scope.orders = results.data;
+        }, function (error) {
+            //alert(error.data.message);
+        });
+    };
+
+
+    
 
 
 }]);

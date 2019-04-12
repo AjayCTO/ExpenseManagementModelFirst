@@ -13,11 +13,14 @@ using AngularJSAuthentication.API;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+      [RoutePrefix("api/Incoming")]
     public class IncomingController : ApiController
     {
         private AuthContext db = new AuthContext();
 
         // GET api/Incoming
+        [Authorize]
+        [Route("")]
         public IQueryable<Incoming> GetIncoming()
         {
             return db.Incoming;
@@ -25,6 +28,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // GET api/Incoming/5
         [ResponseType(typeof(Incoming))]
+        [Route("GetIncoming")]
         public IHttpActionResult GetIncoming(short id)
         {
             Incoming incoming = db.Incoming.Find(id);
@@ -37,17 +41,18 @@ namespace AngularJSAuthentication.API.Controllers
         }
 
         // PUT api/Incoming/5
-        public IHttpActionResult PutIncoming(short id, Incoming incoming)
+            [Route("PutIncoming")]
+        public IHttpActionResult PutIncoming(Incoming incoming)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != incoming.IncomeID)
-            {
-                return BadRequest();
-            }
+            //if (id != incoming.IncomeID)
+            //{
+            //    return BadRequest();
+            //}
 
             db.Entry(incoming).State = EntityState.Modified;
 
@@ -57,14 +62,14 @@ namespace AngularJSAuthentication.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IncomingExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                //if (!IncomingExists(id))
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -72,6 +77,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // POST api/Incoming
         [ResponseType(typeof(Incoming))]
+        [Route("PostIncoming")]
         public IHttpActionResult PostIncoming(Incoming incoming)
         {
             if (!ModelState.IsValid)
@@ -87,6 +93,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // DELETE api/Incoming/5
         [ResponseType(typeof(Incoming))]
+        [Route("DeleteIncoming")]
         public IHttpActionResult DeleteIncoming(short id)
         {
             Incoming incoming = db.Incoming.Find(id);

@@ -22,7 +22,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
     var _saveProject = function (project) {
-        _logOut();
+      
 
         return $http.post(serviceBase + 'api/Project/PostProject', project).then(function (response) {
             return response;
@@ -39,7 +39,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
     var _saveAsset = function (Asset) {
-        _logOut();
+      
 
         return $http.post(serviceBase + 'api/Asset/PostAsset', Asset).then(function (response) {
             return response;
@@ -57,7 +57,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
     var _saveCategory = function (Category) {
-        _logOut();
+      
 
         return $http.post(serviceBase + 'api/Category/PostCategory', Category).then(function (response) {
             return response;
@@ -74,7 +74,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
     var _saveExpense = function (Expense) {
-        _logOut();
+      
 
         return $http.post(serviceBase + 'api/Expense/PostExpense', Expense).then(function (response) {
             return response;
@@ -90,10 +90,10 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     };
 
 
-    var _saveExpense = function (Incoming) {
-        _logOut();
+    var _saveIncoming = function (Incoming) {
+       
 
-        return $http.post(serviceBase + 'api/Incoming/IncomingExpense', Incoming).then(function (response) {
+        return $http.post(serviceBase + 'api/Incoming/PostIncoming', Incoming).then(function (response) {
             return response;
         });
 

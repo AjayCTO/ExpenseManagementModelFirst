@@ -11,23 +11,38 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
         UserID: null,
         ApplicationUser_Id:null
     };
+
+
+
+
+    $scope.ListOfAssets = [];
+
     $scope.savedSuccessfully = false;
 
-    $scope.orders = [];
+  
 
     ordersService.getAssets().then(function (results) {
 
-        console.log("==============|Asset================")
-        console.log(results.data)
-        console.log("==============|Asset================")
-
-        $scope.orders = results.data;
+        $scope.ListOfAssets = results.data;
 
     }, function (error) {
         //alert(error.data.message);
     });
 
 
+    $scope.getAssetsByID = function (id) {
+        ordersService.getAssetsByID(id).then(function (results) {
+
+            $scope.Asset = results.data;
+
+        }, function (error) {
+            //alert(error.data.message);
+        });
+
+    }
+
+
+    
 
     $scope.addAsset = function () {
 
@@ -48,8 +63,32 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
          });
     };
 
+    $scope.updateAsset = function () {
 
+        ordersService.updateAsset($scope.Asset).then(function (response) {
 
+            $scope.savedSuccessfully = true;
+            $scope.message = "Asset has been updated successfully";
+
+        },
+         function (response) {
+             var errors = [];
+             for (var key in response.data.modelState) {
+                 for (var i = 0; i < response.data.modelState[key].length; i++) {
+                     errors.push(response.data.modelState[key][i]);
+                 }
+             }
+             $scope.message = "Failed to update Asset due to:" + errors.join(' ');
+         });
+    };
+
+    $scope.deleteAsset = function (id) {
+        ordersService.deleteAsset(id).then(function (results) {
+            $scope.orders = results.data;
+        }, function (error) {
+            //alert(error.data.message);
+        });
+    };
 
 
 }]);

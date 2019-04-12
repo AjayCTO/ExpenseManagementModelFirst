@@ -13,11 +13,14 @@ using AngularJSAuthentication.API;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+     [RoutePrefix("api/Expense")]
     public class ExpenseController : ApiController
     {
         private AuthContext db = new AuthContext();
 
         // GET api/Expense
+        [Authorize]
+        [Route("")]
         public IQueryable<Expense> GetExpense()
         {
             return db.Expense;
@@ -25,6 +28,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // GET api/Expense/5
         [ResponseType(typeof(Expense))]
+        [Route("GetExpense")]
         public IHttpActionResult GetExpense(short id)
         {
             Expense expense = db.Expense.Find(id);
@@ -37,17 +41,18 @@ namespace AngularJSAuthentication.API.Controllers
         }
 
         // PUT api/Expense/5
-        public IHttpActionResult PutExpense(short id, Expense expense)
+          [Route("PutExpense")]
+        public IHttpActionResult PutExpense(Expense expense)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != expense.ExpenseID)
-            {
-                return BadRequest();
-            }
+            //if (id != expense.ExpenseID)
+            //{
+            //    return BadRequest();
+            //}
 
             db.Entry(expense).State = EntityState.Modified;
 
@@ -57,14 +62,14 @@ namespace AngularJSAuthentication.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ExpenseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                //if (!ExpenseExists(id))
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -72,11 +77,12 @@ namespace AngularJSAuthentication.API.Controllers
 
         // POST api/Expense
         [ResponseType(typeof(Expense))]
+        [Route("PostExpense")]
         public IHttpActionResult PostExpense(Expense expense)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                //return BadRequest(ModelState);
             }
 
             db.Expense.Add(expense);
@@ -87,6 +93,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // DELETE api/Expense/5
         [ResponseType(typeof(Expense))]
+        [Route("DeleteExpense")]
         public IHttpActionResult DeleteExpense(short id)
         {
             Expense expense = db.Expense.Find(id);

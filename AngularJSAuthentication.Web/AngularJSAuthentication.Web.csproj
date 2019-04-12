@@ -88,6 +88,7 @@
     <Content Include="app\views\tokens.html" />
     <Content Include="authComplete.html" />
     <Content Include="content\css\font-awesome.min.css" />
+    <Content Include="content\css\lite-purple.min.css" />
     <Content Include="content\css\loading-bar.css" />
     <Content Include="content\css\loading-bar.min.css" />
     <Content Include="content\css\site.css" />
@@ -115,7 +116,9 @@
     <Content Include="index.html" />
     <Content Include="scripts\angular-local-storage.min.js" />
     <Content Include="scripts\authComplete.js" />
+    <Content Include="scripts\common-bundle-script.js" />
     <Content Include="scripts\loading-bar.min.js" />
+    <Content Include="scripts\script.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

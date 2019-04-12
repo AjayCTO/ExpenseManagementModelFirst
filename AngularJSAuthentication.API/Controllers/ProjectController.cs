@@ -13,6 +13,7 @@ using AngularJSAuthentication.API;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+     [RoutePrefix("api/Project")]
     public class ProjectController : ApiController
     {
         private AuthContext db = new AuthContext();
@@ -26,6 +27,7 @@ namespace AngularJSAuthentication.API.Controllers
         }
 
         // GET api/Project/5
+        [Route("GetProject")]
         [ResponseType(typeof(Project))]
         public IHttpActionResult GetProject(short id)
         {
@@ -39,17 +41,18 @@ namespace AngularJSAuthentication.API.Controllers
         }
 
         // PUT api/Project/5
-        public IHttpActionResult PutProject(short id, Project project)
+          [Route("PutProject")]
+        public IHttpActionResult PutProject(Project project)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != project.ProjectID)
-            {
-                return BadRequest();
-            }
+            //if (id != project.ProjectID)
+            //{
+            //    return BadRequest();
+            //}
 
             db.Entry(project).State = EntityState.Modified;
 
@@ -59,14 +62,14 @@ namespace AngularJSAuthentication.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                //if (!ProjectExists(id))
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -78,7 +81,7 @@ namespace AngularJSAuthentication.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                //return BadRequest(ModelState);
             }
 
             db.Project.Add(project);
@@ -89,6 +92,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // DELETE api/Project/5
         [ResponseType(typeof(Project))]
+        [Route("DeleteProject")]
         public IHttpActionResult DeleteProject(short id)
         {
             Project project = db.Project.Find(id);

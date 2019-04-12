@@ -13,11 +13,14 @@ using AngularJSAuthentication.API;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+     [RoutePrefix("api/Asset")]
     public class AssetController : ApiController
     {
         private AuthContext db = new AuthContext();
 
         // GET api/Asset
+        [Authorize]
+        [Route("")]
         public IQueryable<Asset> GetAsset()
         {
             return db.Asset;
@@ -25,6 +28,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // GET api/Asset/5
         [ResponseType(typeof(Asset))]
+        [Route("GetAsset")]
         public IHttpActionResult GetAsset(short id)
         {
             Asset asset = db.Asset.Find(id);
@@ -37,17 +41,18 @@ namespace AngularJSAuthentication.API.Controllers
         }
 
         // PUT api/Asset/5
-        public IHttpActionResult PutAsset(short id, Asset asset)
+          [Route("PutAsset")]
+        public IHttpActionResult PutAsset(Asset asset)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != asset.AssetID)
-            {
-                return BadRequest();
-            }
+            //if (id != asset.AssetID)
+            //{
+            //    return BadRequest();
+            //}
 
             db.Entry(asset).State = EntityState.Modified;
 
@@ -57,14 +62,14 @@ namespace AngularJSAuthentication.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AssetExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                //if (!AssetExists(id))
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -72,11 +77,12 @@ namespace AngularJSAuthentication.API.Controllers
 
         // POST api/Asset
         [ResponseType(typeof(Asset))]
+        [Route("PostAsset")]
         public IHttpActionResult PostAsset(Asset asset)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                //return BadRequest(ModelState);
             }
 
             db.Asset.Add(asset);
@@ -87,6 +93,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // DELETE api/Asset/5
         [ResponseType(typeof(Asset))]
+        [Route("DeleteAsset")]
         public IHttpActionResult DeleteAsset(short id)
         {
             Asset asset = db.Asset.Find(id);
