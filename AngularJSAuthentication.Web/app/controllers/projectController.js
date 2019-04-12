@@ -2,6 +2,7 @@
 app.controller('projectController', ['$scope', 'ordersService', function ($scope, ordersService) {
 
     $scope.project = {
+        ProjectID:null,
         Name: "",
         BillingMethod: "",
         CustomerName: "",

@@ -2,6 +2,10 @@
 app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope, ordersService) {
 
     $scope.Expense = {
+        ExpenseID: null,
+        ProjectID: null,
+        AssetID: null,
+        CategoryID:null,
         Date: "",
         Amount: "",
         Refrense: "",
@@ -15,9 +19,9 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
 
     ordersService.getExpense().then(function (results) {
 
-        console.log("==============|Projects================")
+        console.log("==============|Expense================")
         console.log(results.data)
-        console.log("==============|Projects================")
+        console.log("==============|Expense================")
 
         $scope.orders = results.data;
 
@@ -32,7 +36,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
         ordersService.saveExpense($scope.Expense).then(function (response) {
 
             $scope.savedSuccessfully = true;
-            $scope.message = "Project has been added successfully";
+            $scope.message = "Expense has been added successfully";
 
         },
          function (response) {
@@ -42,7 +46,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
                      errors.push(response.data.modelState[key][i]);
                  }
              }
-             $scope.message = "Failed to add project due to:" + errors.join(' ');
+             $scope.message = "Failed to add Expense due to:" + errors.join(' ');
          });
     };
 }]);

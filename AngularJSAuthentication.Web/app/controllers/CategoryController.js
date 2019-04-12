@@ -2,6 +2,8 @@
 app.controller('CategoryController', ['$scope', 'ordersService', function ($scope, ordersService) {
 
     $scope.Category = {
+        CategoryID:null,
+        ProjectID:null,
         Name: "",
         Description: ""
     };
@@ -11,9 +13,9 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
 
     ordersService.getCategory().then(function (results) {
 
-        console.log("==============|Projects================")
+        console.log("==============|Category================")
         console.log(results.data)
-        console.log("==============|Projects================")
+        console.log("==============|Category================")
 
         $scope.orders = results.data;
 
@@ -28,7 +30,7 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
         ordersService.saveCategory($scope.Category).then(function (response) {
 
             $scope.savedSuccessfully = true;
-            $scope.message = "Project has been added successfully";
+            $scope.message = "Category has been added successfully";
 
         },
          function (response) {
@@ -38,7 +40,7 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
                      errors.push(response.data.modelState[key][i]);
                  }
              }
-             $scope.message = "Failed to add project due to:" + errors.join(' ');
+             $scope.message = "Failed to add Category due to:" + errors.join(' ');
          });
     };
 }]);

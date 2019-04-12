@@ -1,0 +1,20 @@
+﻿
+
+
+
+<form class="form-login" role="form">
+    <h2 class="form-login-heading">Create Expense</h2>
+    <input type="text" class="form-control" placeholder="Date" data-ng-model="Expense.Date" required autofocus>
+    <input type="text" class="form-control" placeholder="Amount" data-ng-model="Expense.Amount" required>
+    <input type="text" class="form-control" placeholder="Refrence" data-ng-model="Expense.Refrence" required>
+    <input type="text" class="form-control" placeholder="ReceiptPath" data-ng-model="Expense.ReceiptPath" required>
+    <input type="text" class="form-control" placeholder="Contact" data-ng-model="Expense.Contact" required>
+    <input type="text" class="form-control" placeholder="IsApproved" data-ng-model="Expense.IsApproved" required>
+    <input type="text" class="form-control" placeholder="Description" data-ng-model="Expense.Description" required>
+    <input type="text" class="form-control" placeholder="AssetID" data-ng-model="Expense.AssetID" required>
+    <input type="text" class="form-control" placeholder="CategoryID" data-ng-model="Expense.CategoryID" required>
+    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="addExpense()">Submit</button>
+    <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{message}}
+    </div>
+</form>

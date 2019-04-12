@@ -2,10 +2,14 @@
 app.controller('AssetsController', ['$scope', 'ordersService', function ($scope, ordersService) {
 
     $scope.Asset = {
+        AssetID: null,
+        ProjectID:null,
         Name: "",
         Contact: "",
         Address: "",
-        Business: ""
+        Business: "",
+        UserID: null,
+        ApplicationUser_Id:null
     };
     $scope.savedSuccessfully = false;
 
@@ -13,9 +17,9 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
 
     ordersService.getAssets().then(function (results) {
 
-        console.log("==============|Projects================")
+        console.log("==============|Asset================")
         console.log(results.data)
-        console.log("==============|Projects================")
+        console.log("==============|Asset================")
 
         $scope.orders = results.data;
 
@@ -30,7 +34,7 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
         ordersService.saveAsset($scope.Asset).then(function (response) {
 
             $scope.savedSuccessfully = true;
-            $scope.message = "Project has been added successfully";
+            $scope.message = "Asset has been added successfully";
 
         },
          function (response) {
@@ -40,7 +44,7 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
                      errors.push(response.data.modelState[key][i]);
                  }
              }
-             $scope.message = "Failed to add project due to:" + errors.join(' ');
+             $scope.message = "Failed to add Asset due to:" + errors.join(' ');
          });
     };
 

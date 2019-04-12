@@ -1,0 +1,13 @@
+﻿
+
+
+
+<form class="form-login" role="form">
+    <h2 class="form-login-heading">Create Category</h2>
+    <input type="text" class="form-control" placeholder="Name" data-ng-model="Category.Name" required autofocus>
+    <input type="text" class="form-control" placeholder="Billing Method" data-ng-model="Category.Contact" required>
+    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="addCategory()">Submit</button>
+    <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{message}}
+    </div>
+</form>

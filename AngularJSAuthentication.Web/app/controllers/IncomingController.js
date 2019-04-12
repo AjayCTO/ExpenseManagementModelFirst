@@ -2,6 +2,8 @@
 app.controller('IncomingController', ['$scope', 'ordersService', function ($scope, ordersService) {
 
     $scope.Incoming = {
+        IncomingID: null,
+        ProjectID:null,
         Date: "",
         Amount: "",
         SourceName:""
@@ -12,9 +14,9 @@ app.controller('IncomingController', ['$scope', 'ordersService', function ($scop
 
     ordersService.getIncoming().then(function (results) {
 
-        console.log("==============|Projects================")
+        console.log("==============|Incoming================")
         console.log(results.data)
-        console.log("==============|Projects================")
+        console.log("==============|Incoming================")
 
         $scope.orders = results.data;
 
@@ -29,7 +31,7 @@ app.controller('IncomingController', ['$scope', 'ordersService', function ($scop
         ordersService.saveIncoming($scope.Incoming).then(function (response) {
 
             $scope.savedSuccessfully = true;
-            $scope.message = "Project has been added successfully";
+            $scope.message = "Incoming has been added successfully";
 
         },
          function (response) {
@@ -39,7 +41,7 @@ app.controller('IncomingController', ['$scope', 'ordersService', function ($scop
                      errors.push(response.data.modelState[key][i]);
                  }
              }
-             $scope.message = "Failed to add project due to:" + errors.join(' ');
+             $scope.message = "Failed to add Incoming due to:" + errors.join(' ');
          });
     };
 }]);

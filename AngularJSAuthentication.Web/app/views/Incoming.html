@@ -1,0 +1,14 @@
+﻿
+
+
+
+<form class="form-login" role="form">
+    <h2 class="form-login-heading">Create Incoming</h2>
+    <input type="text" class="form-control" placeholder="Date" data-ng-model="Incoming.Date" required autofocus>
+    <input type="text" class="form-control" placeholder="Amount" data-ng-model="Incoming.Amount" required>
+    <input type="text" class="form-control" placeholder="SourceName" data-ng-model="Incoming.SourceName" required>
+    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="addIncoming()">Submit</button>
+    <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{message}}
+    </div>
+</form>
