@@ -1,6 +1,7 @@
 ﻿'use strict';
 app.controller('AssetsController', ['$scope', 'ordersService', function ($scope, ordersService) {
 
+
     $scope.Asset = {
         AssetID: null,
         ProjectID:null,
@@ -25,9 +26,20 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
 
         $scope.ListOfAssets = results.data;
 
+
     }, function (error) {
+
+      
         //alert(error.data.message);
     });
+
+
+    ordersService.getProjects().then(function (results) {
+        $scope.projects = results.data;
+     
+    }, function (error) {
+    });
+
 
 
     $scope.getAssetsByID = function (id) {
@@ -42,17 +54,25 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
     }
 
 
+
+
     
 
     $scope.addAsset = function () {
 
         ordersService.saveAsset($scope.Asset).then(function (response) {
 
+            alert("Successs");
+
             $scope.savedSuccessfully = true;
             $scope.message = "Asset has been added successfully";
 
         },
-         function (response) {
+         function (error) {
+             alert("Err");
+
+             debugger;
+
              var errors = [];
              for (var key in response.data.modelState) {
                  for (var i = 0; i < response.data.modelState[key].length; i++) {

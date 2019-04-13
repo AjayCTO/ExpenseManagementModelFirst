@@ -21,9 +21,9 @@ namespace AngularJSAuthentication.API.Controllers
         // GET api/Asset
         [Authorize]
         [Route("")]
-        public IQueryable<Asset> GetAsset()
+        public IEnumerable<Asset> GetAsset()
         {
-            return db.Asset;
+            return db.Asset.ToList();
         }
 
         // GET api/Asset/5
@@ -85,8 +85,17 @@ namespace AngularJSAuthentication.API.Controllers
                 //return BadRequest(ModelState);
             }
 
-            db.Asset.Add(asset);
-            db.SaveChanges();
+            try
+            {
+                db.Asset.Add(asset);
+                db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                
+            }
+
+           
 
             return CreatedAtRoute("DefaultApi", new { id = asset.AssetID }, asset);
         }

@@ -19,11 +19,17 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
     $scope.ListOfExpenses = [];
 
     ordersService.getExpense().then(function (results) {
+      
+
         $scope.ListOfExpenses = results.data;
 
     }, function (error) {
+
+      
         //alert(error.data.message);
     });
+
+   
 
 
     $scope.getExpenseByID = function (id) {

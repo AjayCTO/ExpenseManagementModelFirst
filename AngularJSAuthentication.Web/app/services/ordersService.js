@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuthSettings) {
 
-    var serviceBase = ngAuthSettings.apiServiceBaseUri;
+  
 
     var ordersServiceFactory = {};
 
@@ -16,13 +16,16 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     var _getProjects = function () {
 
         return $http.get(serviceBase + 'api/Project').then(function (results) {
+
+          
             return results;
         });
     };
 
 
     var _saveProject = function (project) {
-      
+
+    
 
         return $http.post(serviceBase + 'api/Project/PostProject', project).then(function (response) {
             return response;
@@ -39,7 +42,10 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
     var _saveAsset = function (Asset) {
-      
+
+        alert("In");
+        debugger;
+
 
         return $http.post(serviceBase + 'api/Asset/PostAsset', Asset).then(function (response) {
             return response;

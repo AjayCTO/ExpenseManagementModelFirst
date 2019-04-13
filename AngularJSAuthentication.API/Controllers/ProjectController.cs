@@ -21,9 +21,9 @@ namespace AngularJSAuthentication.API.Controllers
         // GET api/Project
         [Authorize]
         [Route("")]
-        public IQueryable<Project> GetProject()
+        public IEnumerable<Project> GetProject()
         {
-            return db.Project;
+            return db.Project.ToList();
         }
 
         // GET api/Project/5

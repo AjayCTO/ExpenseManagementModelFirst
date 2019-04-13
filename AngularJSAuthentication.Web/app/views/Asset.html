@@ -1,15 +1,47 @@
 ﻿
+<div class="breadcrumb">
+    <h1>Aasset Management</h1>
+    <ul>
+        <li><a href="">Dashboard</a></li>
+    </ul>
+</div>
 
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" placeholder="Name" data-ng-model="Asset.Name" required autofocus>   
+</div> 
+
+<div class="form-group">
+    <label>Contact</label>
+    <input type="text" class="form-control" placeholder="Contact" data-ng-model="Asset.Contact" required>
+</div>
+
+<div class="form-group">
+    <label>Business</label>
+    <input type="text" class="form-control" placeholder="Business" data-ng-model="Asset.Business" required>
+</div>
+
+<div class="form-group">
+    <label>Project Name</label>
+
+    <select ng-model="Asset.ProjectID" class="form-control">
+        <option selected value="">- Select Project -</option>
+        <option ng-repeat="pr in projects" value="{{pr.ProjectID}}">{{pr.Name}}</option>
+    </select>
+
+    
+</div>
+
+<div class="form-group">
+    <label>Address</label>
+    <input type="text" class="form-control" placeholder="Address" data-ng-model="Asset.Address" required>
+</div>
 
 
 <form class="form-login" role="form">
-    <h2 class="form-login-heading">Create Asset</h2>
-    <input type="text" class="form-control" placeholder="Name" data-ng-model="Asset.Name" required autofocus>
-    <input type="text" class="form-control" placeholder="Contact" data-ng-model="Asset.Contact" required>
-    <input type="text" class="form-control" placeholder="Address" data-ng-model="Asset.Address" required>
-    <input type="text" class="form-control" placeholder="Business" data-ng-model="Asset.Business" required>
-    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="addAsset()">Submit</button>
-    <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
-        {{message}}
-    </div>
+
+    <button class="btn btn-primary m-1" type="submit" data-ng-click="addAsset()">Save</button>
+   
 </form>

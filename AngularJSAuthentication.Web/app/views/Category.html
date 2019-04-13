@@ -1,13 +1,25 @@
 ﻿
 
+<div class="breadcrumb">
+    <h1>Category Management</h1>
+    <ul>
+        <li><a>Dashboard</a></li>
+      
+    </ul>
+</div>
 
+<div class="separator-breadcrumb border-top"></div>
 
-<form class="form-login" role="form">
-    <h2 class="form-login-heading">Create Category</h2>
+<div class="form-group">
+    <label>Name</label>
     <input type="text" class="form-control" placeholder="Name" data-ng-model="Category.Name" required autofocus>
-    <input type="text" class="form-control" placeholder="Billing Method" data-ng-model="Category.Contact" required>
-    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="addCategory()">Submit</button>
-    <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
-        {{message}}
-    </div>
-</form>
+</div>
+
+<div class="form-group">
+    <label>Contact</label>
+    <input type="text" class="form-control" placeholder="Contact" data-ng-model="Category.Contact" required autofocus>
+</div>
+
+<button class="btn btn-primary m-1" type="submit" data-ng-click="addCategory()">Save</button>
+
+

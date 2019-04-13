@@ -23,6 +23,8 @@ namespace AngularJSAuthentication.API
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Expense> Expense { get; set; }
         public virtual DbSet<Incoming> Incoming { get; set; }
+
+      
         public virtual DbSet<Project> Project { get; set; }       
         public virtual DbSet<User> User { get; set; }
     }

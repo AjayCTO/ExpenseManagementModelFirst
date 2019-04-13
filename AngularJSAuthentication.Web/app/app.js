@@ -44,8 +44,8 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/assets", {
-        controller: "assetsController",
-        templateUrl: "/app/views/assets.html"
+        controller: "AssetsController",
+        templateUrl: "/app/views/Asset.html"
     });
 
     $routeProvider.when("/category", {

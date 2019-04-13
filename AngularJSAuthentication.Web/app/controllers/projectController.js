@@ -10,6 +10,8 @@ app.controller('projectController', ['$scope', 'ordersService', function ($scope
     };
     $scope.savedSuccessfully = false;
 
+    $scope.showlist = true;
+
   
     $scope.ListOfOrders = [];
 
@@ -17,7 +19,6 @@ app.controller('projectController', ['$scope', 'ordersService', function ($scope
         $scope.ListOfOrders = results.data;
 
     }, function (error) {
-        //alert(error.data.message);
     });
 
 
@@ -32,6 +33,11 @@ app.controller('projectController', ['$scope', 'ordersService', function ($scope
         });
     }
 
+
+    $scope.addnewproject = function () {
+        $scope.showlist = false;
+    }
+
     
 
 
@@ -40,7 +46,9 @@ app.controller('projectController', ['$scope', 'ordersService', function ($scope
         ordersService.saveProject($scope.project).then(function (response) {
 
             $scope.savedSuccessfully = true;
-            $scope.message = "Project has been added successfully";           
+            $scope.message = "Project has been added successfully";
+
+            $scope.showlist = true;
 
         },
          function (response) {
