@@ -17,7 +17,7 @@ namespace AngularJSAuthentication.API.Models
         public string Address { get; set; }
         public string Role { get; set; }
         public Nullable<System.DateTime> LastLogin { get; set; }       
-        public virtual Project Project { get; set; }
+        public virtual ICollection<Project>  Project { get; set; }
         public virtual ICollection<Asset> Asset { get; set; }
 
     }

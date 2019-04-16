@@ -21,9 +21,9 @@ namespace AngularJSAuthentication.API.Controllers
         // GET api/Category
         [Authorize]
         [Route("")]
-        public IQueryable<Category> GetCategory()
+        public IEnumerable<Category> GetCategory()
         {
-            return db.Category;
+            return db.Category.ToList();
         }
 
         // GET api/Category/5

@@ -79,7 +79,9 @@ namespace AngularJSAuthentication.API.Controllers
         [ResponseType(typeof(Expense))]
         [Route("PostExpense")]
         public IHttpActionResult PostExpense(Expense expense)
+
         {
+            expense.Date = DateTime.Now;
             if (!ModelState.IsValid)
             {
                 //return BadRequest(ModelState);
