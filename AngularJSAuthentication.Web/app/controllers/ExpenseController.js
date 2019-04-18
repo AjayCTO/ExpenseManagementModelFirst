@@ -1,6 +1,8 @@
 ﻿'use strict';
 app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope, ordersService) {
 
+   
+ 
     $scope.Expense = {
         ExpenseID: null,
         ProjectID: null,
@@ -29,6 +31,36 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
         //alert(error.data.message);
     });
 
+    ordersService.getProjects().then(function (results) {
+        $scope.projects = results.data;
+
+    }, function (error) {
+    });
+
+
+    ordersService.getAssets().then(function (results) {
+
+        $scope.assets = results.data;
+
+    }, function (error) {
+
+        //alert(error.data.message);
+    });
+
+    ordersService.getCategory().then(function (results) {
+
+      
+
+        $scope.categories = results.data;
+
+    }, function (error) {
+
+     
+       
+        //alert(error.data.message);
+    });
+
+
    
 
 
@@ -46,13 +78,20 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
 
     $scope.addExpense = function () {
 
+        alert("In");
+
         ordersService.saveExpense($scope.Expense).then(function (response) {
+
+            alert("ssss");
 
             $scope.savedSuccessfully = true;
             $scope.message = "Expense has been added successfully";
 
         },
-         function (response) {
+         function (error) {
+
+             alert("eerrrr");
+             debugger;
              var errors = [];
              for (var key in response.data.modelState) {
                  for (var i = 0; i < response.data.modelState[key].length; i++) {

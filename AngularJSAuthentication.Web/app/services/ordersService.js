@@ -81,7 +81,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     var _saveExpense = function (Expense) {
       
-
+        alert("In Service");
         return $http.post(serviceBase + 'api/Expense/PostExpense', Expense).then(function (response) {
             return response;
         });

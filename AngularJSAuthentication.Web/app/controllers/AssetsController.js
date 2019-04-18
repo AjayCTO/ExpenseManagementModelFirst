@@ -13,18 +13,28 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
         ApplicationUser_Id:null
     };
 
-
+    $scope.showlist = true;
 
 
     $scope.ListOfAssets = [];
 
     $scope.savedSuccessfully = false;
 
+    $scope.addnewasset = function () {
+        $scope.showlist = false;
+    }
+
   
 
     ordersService.getAssets().then(function (results) {
 
         $scope.ListOfAssets = results.data;
+
+        console.log("rrrr");
+
+        console.log($scope.ListOfAssets);
+
+
 
 
     }, function (error) {
@@ -62,16 +72,19 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
 
         ordersService.saveAsset($scope.Asset).then(function (response) {
 
-            alert("Successs");
 
             $scope.savedSuccessfully = true;
             $scope.message = "Asset has been added successfully";
+
+            $scope.showlist = true;
 
         },
          function (error) {
              alert("Err");
 
              debugger;
+
+             $scope.showlist = true;
 
              var errors = [];
              for (var key in response.data.modelState) {

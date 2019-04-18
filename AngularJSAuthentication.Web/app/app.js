@@ -54,7 +54,7 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/expense", {
-        controller: "expenseController",
+        controller: "ExpenseController",
         templateUrl: "/app/views/expense.html"
     });
 
@@ -63,11 +63,25 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/incoming.html"
     });
 
-    $routeProvider.otherwise({ redirectTo: "/home" });
+    $routeProvider.when("/supplier", {
+        controller: "SupplierController",
+        templateUrl: "/app/views/Supplier.html"
+    });
+
+    $routeProvider.when("/manufacturer", {
+        controller: "ManufacturerController",
+        templateUrl: "/app/views/Manufacturer.html"
+    });
+
+    $routeProvider.otherwise({ redirectTo: "/login" });
 
 });
 
 var serviceBase = 'http://localhost:26264/';
+
+//var serviceBase = 'http://hms.shivamitconsultancy.com/';
+
+
 //var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
