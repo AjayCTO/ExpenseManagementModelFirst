@@ -76,7 +76,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
 
 
 
-    $scope.addExpense = function () {
+    $scope.saveExpense = function () {
 
         alert("In");
 

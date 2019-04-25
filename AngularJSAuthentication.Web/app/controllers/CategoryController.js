@@ -25,7 +25,7 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
 
 
     $scope.getCategoryByID = function (id) {
-        ordersService.getCategory(id).then(function (results) {
+        ordersService.getCategoryByID(id).then(function (results) {
 
             $scope.Category = results.data;
 
@@ -37,7 +37,7 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
 
 
 
-    $scope.addCategory = function () {
+    $scope.saveCategory = function () {
 
         ordersService.saveCategory($scope.Category).then(function (response) {
 

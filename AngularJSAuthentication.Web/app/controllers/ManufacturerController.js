@@ -65,7 +65,7 @@ app.controller('ManufacturerController', ['$scope', 'ordersService', function ($
 
 
 
-    $scope.addManufacturer = function () {
+    $scope.saveManufacturer = function () {
 
         ordersService.saveManufacturer($scope.Manufacturer).then(function (response) {
 

@@ -19,7 +19,7 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET api/Project
-        [Authorize]
+       
         [Route("")]
         public IEnumerable<Project> GetProject()
         {

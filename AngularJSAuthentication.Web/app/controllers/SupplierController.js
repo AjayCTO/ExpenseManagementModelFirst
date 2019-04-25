@@ -43,7 +43,7 @@ app.controller('SupplierController', ['$scope', 'ordersService', function ($scop
 
 
 
-    $scope.addSupplier = function () {
+    $scope.saveSupplier = function () {
 
         ordersService.saveSupplier($scope.Supplier).then(function (response) {
 

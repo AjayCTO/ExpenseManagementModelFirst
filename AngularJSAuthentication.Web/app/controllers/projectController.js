@@ -22,9 +22,9 @@ app.controller('projectController', ['$scope', 'ordersService', function ($scope
     });
 
 
-    $scope.getProjectsByID = function (id) {
+    $scope.getProjectByID = function (id) {
 
-        ordersService.getProjectsByID(id).then(function (results) {
+        ordersService.getProjectByID(id).then(function (results) {
 
             $scope.project = results.data;
 
@@ -41,7 +41,7 @@ app.controller('projectController', ['$scope', 'ordersService', function ($scope
     
 
 
-    $scope.addProject = function () {
+    $scope.saveProject = function () {
 
         ordersService.saveProject($scope.project).then(function (response) {
 

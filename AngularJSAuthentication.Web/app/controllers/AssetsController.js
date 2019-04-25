@@ -27,29 +27,22 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
   
 
     ordersService.getAssets().then(function (results) {
-
         $scope.ListOfAssets = results.data;
 
         console.log("rrrr");
 
         console.log($scope.ListOfAssets);
 
-
-
-
-    }, function (error) {
-
-      
+    }, function (error) {      
         //alert(error.data.message);
     });
 
 
-    ordersService.getProjects().then(function (results) {
-        $scope.projects = results.data;
+    //ordersService.getProjects().then(function (results) {
+    //    $scope.projects = results.data;
      
-    }, function (error) {
-    });
-
+    //}, function (error) {
+    //});
 
 
     $scope.getAssetsByID = function (id) {
@@ -61,14 +54,9 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
             //alert(error.data.message);
         });
 
-    }
+    }    
 
-
-
-
-    
-
-    $scope.addAsset = function () {
+    $scope.saveAsset = function () {
 
         ordersService.saveAsset($scope.Asset).then(function (response) {
 

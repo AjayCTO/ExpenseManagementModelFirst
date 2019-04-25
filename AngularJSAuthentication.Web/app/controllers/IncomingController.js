@@ -32,7 +32,7 @@ app.controller('IncomingController', ['$scope', 'ordersService', function ($scop
         });
     }
 
-    $scope.addIncome = function () {
+    $scope.saveIncoming = function () {
 
         ordersService.saveIncoming($scope.Incoming).then(function (response) {
 
@@ -52,9 +52,9 @@ app.controller('IncomingController', ['$scope', 'ordersService', function ($scop
     };
 
 
-    $scope.updateIncome = function () {
+    $scope.updateIncomeing = function () {
 
-        ordersService.updateIncome($scope.Incoming).then(function (response) {
+        ordersService.updateIncomeing($scope.Incoming).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Incoming has been updated successfully";

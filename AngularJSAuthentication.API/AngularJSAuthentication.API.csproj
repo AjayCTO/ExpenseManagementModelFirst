@@ -138,9 +138,11 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\IncomingController.cs" />
+    <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\RefreshTokensController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\RefreshToken.cs" />
@@ -164,6 +166,10 @@
     <Compile Include="Migrations\201904161221402_Fourth.cs" />
     <Compile Include="Migrations\201904161221402_Fourth.Designer.cs">
       <DependentUpon>201904161221402_Fourth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904251009097_my.cs" />
+    <Compile Include="Migrations\201904251009097_my.Designer.cs">
+      <DependentUpon>201904251009097_my.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -215,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904161221402_Fourth.resx">
       <DependentUpon>201904161221402_Fourth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904251009097_my.resx">
+      <DependentUpon>201904251009097_my.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
