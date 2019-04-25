@@ -93,8 +93,4 @@ app.controller('SupplierController', ['$scope', 'ordersService', function ($scop
         });
     };
 
-
-
-
-
 }]);
