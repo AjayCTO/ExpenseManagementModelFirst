@@ -8,9 +8,10 @@ namespace AngularJSAuthentication.API.Models
     public class Transaction
     {
         public short TransactionID { get; set; }
-        public short ProjectID { get; set; }
-        public short AssetID { get; set; }
-        public short SupplierID { get; set; }
+        public Nullable<short> ProjectID { get; set; }
+        public Nullable<short> AssetID { get; set; }
+        public Nullable<int> SupplierID { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; } 
 
         public virtual Project Project { get; set; }
         public virtual Asset Asset { get; set; }

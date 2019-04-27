@@ -77,7 +77,7 @@ app.config(function ($routeProvider) {
 
 });
 
-var serviceBase = 'http://localhost:26264/';
+var serviceBase = 'http://localhost:26265/';
 
 //var serviceBase = 'http://hms.shivamitconsultancy.com/';
 

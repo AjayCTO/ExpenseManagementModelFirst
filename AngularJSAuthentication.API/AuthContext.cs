@@ -27,6 +27,10 @@ namespace AngularJSAuthentication.API
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public virtual DbSet<Transaction> Transaction { get; set; }    
+
+        
     }
 
 }

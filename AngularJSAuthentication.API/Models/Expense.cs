@@ -7,6 +7,7 @@ namespace AngularJSAuthentication.API.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Expense
     {
@@ -21,8 +22,16 @@ namespace AngularJSAuthentication.API.Models
         public Nullable<bool> IsApproved { get; set; }
         public string ReceiptPath { get; set; }
 
+        [ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
+
+        [ForeignKey("Supplier")]
+        public int SupplierID { get; set; }
         public virtual Project Project { get; set; }
         public virtual Asset Asset { get; set; }
         public virtual Category Category { get; set; }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

@@ -78,19 +78,28 @@ namespace AngularJSAuthentication.API.Controllers
         // POST api/Expense
         [ResponseType(typeof(Expense))]
         [Route("PostExpense")]
-        public IHttpActionResult PostExpense(Expense expense)
+       public IHttpActionResult PostExpense(expenseUserModel expenseUserModel)
+       {
+            var UserId = db.Users.FirstOrDefault(x => x.UserName == expenseUserModel.userName).Id;
 
-        {
-            expense.Date = DateTime.Now;
+
+            Transaction transaction = new Transaction();
+
+            transaction.ProjectID = expenseUserModel.Expense.ProjectID;
+            transaction.AssetID = expenseUserModel.Expense.AssetID;
+            transaction.SupplierID = expenseUserModel.Expense.SupplierID;
+            transaction.TotalAmount = expenseUserModel.Expense.Amount;
+
+            expenseUserModel.Expense.Date = DateTime.Now;
+            expenseUserModel.Expense.UserId = UserId;            
             if (!ModelState.IsValid)
             {
                 //return BadRequest(ModelState);
             }
-
-            db.Expense.Add(expense);
+            db.Expense.Add(expenseUserModel.Expense);
+            db.Transaction.Add(transaction);
             db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = expense.ExpenseID }, expense);
+            return Ok(expenseUserModel.Expense);
         }
 
         // DELETE api/Expense/5

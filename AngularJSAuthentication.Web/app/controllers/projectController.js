@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('projectController', ['$scope', 'ordersService', function ($scope, ordersService) {
+app.controller('projectController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.project = {
         ProjectID:null,
@@ -43,7 +43,12 @@ app.controller('projectController', ['$scope', 'ordersService', function ($scope
 
     $scope.saveProject = function () {
 
-        ordersService.saveProject($scope.project).then(function (response) {
+
+        var userName = localStorageService.get('authorizationData').userName;
+
+       
+
+        ordersService.saveProject($scope.project, userName).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Project has been added successfully";

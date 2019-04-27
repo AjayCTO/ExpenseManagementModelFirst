@@ -30,9 +30,6 @@ namespace AngularJSAuthentication.API.Models
 
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
-
-
-
         public virtual ICollection<Asset> Asset { get; set; }
         public virtual ICollection<Category> Category { get; set; }
         public virtual ICollection<Expense> Expense { get; set; }

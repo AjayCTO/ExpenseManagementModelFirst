@@ -171,16 +171,34 @@
     <Compile Include="Migrations\201904251009097_my.Designer.cs">
       <DependentUpon>201904251009097_my.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904270512322_transaction.cs" />
+    <Compile Include="Migrations\201904270512322_transaction.Designer.cs">
+      <DependentUpon>201904270512322_transaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904270535286_transactionAmount.cs" />
+    <Compile Include="Migrations\201904270535286_transactionAmount.Designer.cs">
+      <DependentUpon>201904270535286_transactionAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904270540576_supplierID.cs" />
+    <Compile Include="Migrations\201904270540576_supplierID.Designer.cs">
+      <DependentUpon>201904270540576_supplierID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904270616518_Supply.cs" />
+    <Compile Include="Migrations\201904270616518_Supply.Designer.cs">
+      <DependentUpon>201904270616518_Supply.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Assets.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\expenseUserModel.cs" />
     <Compile Include="Models\ExternalLoginModels.cs" />
     <Compile Include="Models\Incoming.cs" />
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectUserModel.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
@@ -225,6 +243,18 @@
     <EmbeddedResource Include="Migrations\201904251009097_my.resx">
       <DependentUpon>201904251009097_my.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904270512322_transaction.resx">
+      <DependentUpon>201904270512322_transaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904270535286_transactionAmount.resx">
+      <DependentUpon>201904270535286_transactionAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904270540576_supplierID.resx">
+      <DependentUpon>201904270540576_supplierID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904270616518_Supply.resx">
+      <DependentUpon>201904270616518_Supply.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -241,7 +271,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>26264</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:26264/</IISUrl>
+          <IISUrl>http://localhost:26265/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

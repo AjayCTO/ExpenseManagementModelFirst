@@ -83,10 +83,12 @@
     <Content Include="app\views\home.html" />
     <Content Include="app\views\Incoming.html" />
     <Content Include="app\views\login.html" />
+    <Content Include="app\views\Manufacturer.html" />
     <Content Include="app\views\orders.html" />
     <Content Include="app\views\project.html" />
     <Content Include="app\views\refresh.html" />
     <Content Include="app\views\signup.html" />
+    <Content Include="app\views\Supplier.html" />
     <Content Include="app\views\tokens.html" />
     <Content Include="authComplete.html" />
     <Content Include="content\css\font-awesome.min.css" />
@@ -142,7 +144,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>32176</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:32150/</IISUrl>
+          <IISUrl>http://localhost:32151/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

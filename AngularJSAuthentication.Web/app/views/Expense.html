@@ -73,7 +73,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label>select Asset</label>
+                <label>select Asset <a data-ng-click="newasset()" style="float:right">New</a></label>
 
                 <select class="form-control" data-ng-model="Expense.AssetID">
                     <option selected value="">- Select Asset -</option>
@@ -83,7 +83,7 @@
               
             </div>
             <div class="form-group">
-                <label> Select Category</label>
+                <label> Select Category <a data-ng-click="newcategory()" style="float:right">New</a></label>
 
                 <select class="form-control" data-ng-model="Expense.CategoryID">
                     <option selected value="">- Select Category -</option>
@@ -99,7 +99,7 @@
             </div>
             
         </div>
-        <div class="col-md-6">
+        <div style="display:none;" class="col-md-6">
             <label>Receipt</label>
             <form action="#" class="dropzone" id="single-file-upload">
                 <div class="fallback">
@@ -111,5 +111,63 @@
     
     <button class="btn btn-primary m-1" type="submit" data-ng-click="saveExpense()">Save</button>
 <button  type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+
+
+  <!-- Modal -->
+<div class="modal fade" id="categorymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle-2">Add Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Type Your category</label>
+                    <input data-ng-model="Categoryobject.Name" type="text" class="form-control" name="name" value="" />   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-ng-click="saveNewCategory()" data-ng-disabled="Categoryobject.Name==''" type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="assetmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Asset</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Type Your Asset Name</label>
+                    <input data-ng-model="Assetobject.Name" type="text" class="form-control" name="name" value="" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-ng-click="saveNewAsset()" data-ng-disabled="Assetobject.Name==''" type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    label
+    {
+        width:100%;
+    }
+</style>
   
 

@@ -77,17 +77,25 @@ namespace AngularJSAuthentication.API.Controllers
 
         // POST api/Project
         [ResponseType(typeof(Project))]
-        public IHttpActionResult PostProject(Project project)
-        {
+          public IHttpActionResult PostProject(ProjectUserModel projectUserModel)
+        {          
+
+            var UserId = db.Users.FirstOrDefault(x => x.UserName == projectUserModel.userName).Id;
+            
             if (!ModelState.IsValid)
             {
                 //return BadRequest(ModelState);
             }
 
-            db.Project.Add(project);
+
+            projectUserModel.project.UserId = UserId;
+
+            db.Project.Add(projectUserModel.project);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = project.ProjectID }, project);
+            return CreatedAtRoute("DefaultApi", new { id = projectUserModel.project.ProjectID }, projectUserModel.project);
+
+           
         }
 
         // DELETE api/Project/5

@@ -27,8 +27,10 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
         });
     };
 
-    var _saveProject = function (project) {  
-        return $http.post(serviceBase + 'api/Project/PostProject', project).then(function (response) {
+    var _saveProject = function (project1, Name) {
+
+        var projectUserModel = { project: project1, userName: Name };
+        return $http.post(serviceBase + 'api/Project/PostProject', projectUserModel).then(function (response) {
             return response;
         });
     };
@@ -134,8 +136,11 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
         });
     };
 
-    var _saveExpense = function (Expense) {      
-        return $http.post(serviceBase + 'api/Expense/PostExpense', Expense).then(function (response) {
+    var _saveExpense = function (Expense, userName) {
+
+        var expenseUserModel = { Expense: Expense, userName: userName };
+
+        return $http.post(serviceBase + 'api/Expense/PostExpense', expenseUserModel).then(function (response) {
             return response;
         });
     };
