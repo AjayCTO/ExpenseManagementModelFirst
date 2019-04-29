@@ -11,6 +11,7 @@ namespace AngularJSAuthentication.API.Controllers
     [RoutePrefix("api/Orders")]
     public class OrdersController : ApiController
     {
+        AuthContext db = new AuthContext();
         [Authorize]
         [Route("")]
         public IHttpActionResult Get()
@@ -21,6 +22,7 @@ namespace AngularJSAuthentication.API.Controllers
             //var Name1 = User.Identity.Name;
 
             //var userName = principal.Claims.Where(c => c.Type == "sub").Single().Value;
+
 
             return Ok(Order.CreateOrders());
         }

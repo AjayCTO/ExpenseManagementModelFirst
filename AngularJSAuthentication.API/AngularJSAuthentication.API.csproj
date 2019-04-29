@@ -19,8 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -134,16 +133,17 @@
     <Compile Include="AuthContext.cs" />
     <Compile Include="AuthRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AssetController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\ExpenseController.cs" />
-    <Compile Include="Controllers\IncomingController.cs" />
-    <Compile Include="Controllers\ManufacturerController.cs" />
+    <Compile Include="Controllers\AssetsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
+    <Compile Include="Controllers\IncomingsController.cs" />
+    <Compile Include="Controllers\ManufacturersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RefreshTokensController.cs" />
-    <Compile Include="Controllers\SupplierController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\SuppliersController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\RefreshToken.cs" />
     <Compile Include="Helper.cs" />
@@ -151,57 +151,61 @@
     <Compile Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.Designer.cs">
       <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904111111426_new.cs" />
-    <Compile Include="Migrations\201904111111426_new.Designer.cs">
-      <DependentUpon>201904111111426_new.cs</DependentUpon>
+    <Compile Include="Migrations\201904280525196_ApplicationUser.cs" />
+    <Compile Include="Migrations\201904280525196_ApplicationUser.Designer.cs">
+      <DependentUpon>201904280525196_ApplicationUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904161123177_userideee.cs" />
-    <Compile Include="Migrations\201904161123177_userideee.Designer.cs">
-      <DependentUpon>201904161123177_userideee.cs</DependentUpon>
+    <Compile Include="Migrations\201904280531073_Person.cs" />
+    <Compile Include="Migrations\201904280531073_Person.Designer.cs">
+      <DependentUpon>201904280531073_Person.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904161151441_third.cs" />
-    <Compile Include="Migrations\201904161151441_third.Designer.cs">
-      <DependentUpon>201904161151441_third.cs</DependentUpon>
+    <Compile Include="Migrations\201904280534098_Supplier.cs" />
+    <Compile Include="Migrations\201904280534098_Supplier.Designer.cs">
+      <DependentUpon>201904280534098_Supplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904161221402_Fourth.cs" />
-    <Compile Include="Migrations\201904161221402_Fourth.Designer.cs">
-      <DependentUpon>201904161221402_Fourth.cs</DependentUpon>
+    <Compile Include="Migrations\201904280538087_AllPerson3.cs" />
+    <Compile Include="Migrations\201904280538087_AllPerson3.Designer.cs">
+      <DependentUpon>201904280538087_AllPerson3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904251009097_my.cs" />
-    <Compile Include="Migrations\201904251009097_my.Designer.cs">
-      <DependentUpon>201904251009097_my.cs</DependentUpon>
+    <Compile Include="Migrations\201904280557426_Project.cs" />
+    <Compile Include="Migrations\201904280557426_Project.Designer.cs">
+      <DependentUpon>201904280557426_Project.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904270512322_transaction.cs" />
-    <Compile Include="Migrations\201904270512322_transaction.Designer.cs">
-      <DependentUpon>201904270512322_transaction.cs</DependentUpon>
+    <Compile Include="Migrations\201904290425221_Incoming.cs" />
+    <Compile Include="Migrations\201904290425221_Incoming.Designer.cs">
+      <DependentUpon>201904290425221_Incoming.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904270535286_transactionAmount.cs" />
-    <Compile Include="Migrations\201904270535286_transactionAmount.Designer.cs">
-      <DependentUpon>201904270535286_transactionAmount.cs</DependentUpon>
+    <Compile Include="Migrations\201904290451392_Expesne.cs" />
+    <Compile Include="Migrations\201904290451392_Expesne.Designer.cs">
+      <DependentUpon>201904290451392_Expesne.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904270540576_supplierID.cs" />
-    <Compile Include="Migrations\201904270540576_supplierID.Designer.cs">
-      <DependentUpon>201904270540576_supplierID.cs</DependentUpon>
+    <Compile Include="Migrations\201904290523189_Transaction.cs" />
+    <Compile Include="Migrations\201904290523189_Transaction.Designer.cs">
+      <DependentUpon>201904290523189_Transaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904270616518_Supply.cs" />
-    <Compile Include="Migrations\201904270616518_Supply.Designer.cs">
-      <DependentUpon>201904270616518_Supply.cs</DependentUpon>
+    <Compile Include="Migrations\201904290524230_Transaction2.cs" />
+    <Compile Include="Migrations\201904290524230_Transaction2.Designer.cs">
+      <DependentUpon>201904290524230_Transaction2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904290725303_add2.cs" />
+    <Compile Include="Migrations\201904290725303_add2.Designer.cs">
+      <DependentUpon>201904290725303_add2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Assets.cs" />
+    <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Expense.cs" />
-    <Compile Include="Models\expenseUserModel.cs" />
     <Compile Include="Models\ExternalLoginModels.cs" />
     <Compile Include="Models\Incoming.cs" />
     <Compile Include="Models\Manufacturer.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\ProjectUserModel.cs" />
+    <Compile Include="Models\ProjectUser.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\Transaction.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\FacebookAuthProvider.cs" />
@@ -228,32 +232,35 @@
     <EmbeddedResource Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.resx">
       <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904111111426_new.resx">
-      <DependentUpon>201904111111426_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904280525196_ApplicationUser.resx">
+      <DependentUpon>201904280525196_ApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904161123177_userideee.resx">
-      <DependentUpon>201904161123177_userideee.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904280531073_Person.resx">
+      <DependentUpon>201904280531073_Person.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904161151441_third.resx">
-      <DependentUpon>201904161151441_third.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904280534098_Supplier.resx">
+      <DependentUpon>201904280534098_Supplier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904161221402_Fourth.resx">
-      <DependentUpon>201904161221402_Fourth.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904280538087_AllPerson3.resx">
+      <DependentUpon>201904280538087_AllPerson3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904251009097_my.resx">
-      <DependentUpon>201904251009097_my.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904280557426_Project.resx">
+      <DependentUpon>201904280557426_Project.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904270512322_transaction.resx">
-      <DependentUpon>201904270512322_transaction.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904290425221_Incoming.resx">
+      <DependentUpon>201904290425221_Incoming.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904270535286_transactionAmount.resx">
-      <DependentUpon>201904270535286_transactionAmount.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904290451392_Expesne.resx">
+      <DependentUpon>201904290451392_Expesne.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904270540576_supplierID.resx">
-      <DependentUpon>201904270540576_supplierID.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904290523189_Transaction.resx">
+      <DependentUpon>201904290523189_Transaction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904270616518_Supply.resx">
-      <DependentUpon>201904270616518_Supply.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904290524230_Transaction2.resx">
+      <DependentUpon>201904290524230_Transaction2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904290725303_add2.resx">
+      <DependentUpon>201904290725303_add2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -271,7 +278,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>26264</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:26265/</IISUrl>
+          <IISUrl>http://localhost:26264/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -281,13 +288,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,41 +1,50 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace AngularJSAuthentication.API.Models
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
-    public partial class Project
+    public class Project
     {
         public Project()
         {
             this.Asset = new HashSet<Asset>();
+            this.Supplier = new HashSet<Supplier>();
+            this.Manufacturer = new HashSet<Manufacturer>();
             this.Category = new HashSet<Category>();
-            this.Expense = new HashSet<Expense>();
             this.Incoming = new HashSet<Incoming>();
-            this.User = new HashSet<User>();
+            this.Expense = new HashSet<Expense>();
+            this.Transaction = new HashSet<Transaction>();
         }
 
-        public short ProjectID { get; set; }
+
+        public int ProjectID { get; set; }
         public string Name { get; set; }
         public string BillingMethod { get; set; }
-        public string CustomerName { get; set; }
-        public Nullable<decimal> TotalCost { get; set; }
+        public decimal TotalCost { get; set; }
+
+
+        public virtual ICollection<Asset> Asset { get; set; }
+        public virtual ICollection<Supplier> Supplier { get; set; }
+        public virtual ICollection<Manufacturer> Manufacturer { get; set; }
+        public virtual ICollection<Category> Category { get; set; }
+        public virtual ICollection<Incoming> Incoming { get; set; }
+        public virtual ICollection<Expense> Expense { get; set; }
+        public virtual ICollection<Transaction> Transaction { get; set; }
+
+        [ForeignKey("Customer")]
+        public int CustomerID { get; set; }
+        public Customer Customer { get; set; }
+
 
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
-        public virtual ICollection<Asset> Asset { get; set; }
-        public virtual ICollection<Category> Category { get; set; }
-        public virtual ICollection<Expense> Expense { get; set; }
-        public virtual ICollection<Incoming> Incoming { get; set; }
-        public virtual ICollection<User> User { get; set; }
-
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+
+
     }
 }

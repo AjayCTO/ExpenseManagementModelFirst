@@ -15,35 +15,35 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ///////////////////////////////////////////////////////////////////////////////
 
     var _getProjects = function () {
-        return $http.get(serviceBase + 'api/Project').then(function (results) {          
+        return $http.get(serviceBase + 'api/Projects').then(function (results) {          
             return results;
         });
     };
 
 
     var _getProjectByID = function (id) {
-        return $http.get(serviceBase + 'api/Project/GetProject', { params: { id: id } }).then(function (results) {
+        return $http.get(serviceBase + 'api/Projects/GetProject', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
 
     var _saveProject = function (project1, Name) {
 
-        var projectUserModel = { project: project1, userName: Name };
-        return $http.post(serviceBase + 'api/Project/PostProject', projectUserModel).then(function (response) {
+        var projectUserModel = { Project: project1, UserName: Name };
+        return $http.post(serviceBase + 'api/Projects/PostProject', projectUserModel).then(function (response) {
             return response;
         });
     };
 
     var _updateProject = function (project) {
-        return $http.put(serviceBase + 'api/Project/PutProject', project).then(function (response) {
+        return $http.put(serviceBase + 'api/Projects/PutProject', project).then(function (response) {
             return response;
         });
     };
 
 
     var _deleteProject = function (id) {
-        return $http.delete(serviceBase + 'api/Project/DeleteProject', { params: { id: id } }).then(function (results) {
+        return $http.delete(serviceBase + 'api/Projects/DeleteProject', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
@@ -52,20 +52,20 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     var _getAssets = function () { 
-        return $http.get(serviceBase + 'api/Asset').then(function (results) {
+        return $http.get(serviceBase + 'api/Assets').then(function (results) {
             return results;
         });
     };
 
 
     var _getAssetsByID = function (id) {
-        return $http.get(serviceBase + 'api/Asset/GetAsset', { params: { id: id } }).then(function (results) {
+        return $http.get(serviceBase + 'api/Assets/GetAsset', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
 
     var _deleteAsset = function (id) {
-        return $http.get(serviceBase + 'api/Asset/DeleteAsset', { params: { id: id } }).then(function (results) {
+        return $http.get(serviceBase + 'api/Assets/DeleteAsset', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
@@ -73,14 +73,14 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
     var _saveAsset = function (Asset) {     
-        return $http.post(serviceBase + 'api/Asset/PostAsset', Asset).then(function (response) {
+        return $http.post(serviceBase + 'api/Assets/PostAsset', Asset).then(function (response) {
             return response;
         });
     };
 
 
     var _updateAsset = function (Asset) {
-        return $http.put(serviceBase + 'api/Asset/PutAsset', Asset).then(function (response) {
+        return $http.put(serviceBase + 'api/Assets/PutAsset', Asset).then(function (response) {
             return response;
         });
     };
@@ -88,33 +88,33 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     /////////////////////////////////////////////////////////////////////
 
     var _getCategory = function () {
-        return $http.get(serviceBase + 'api/Category').then(function (results) {
+        return $http.get(serviceBase + 'api/Categories').then(function (results) {
             return results;
         });
     };
 
     var _getCategoryByID = function (id) {
-        return $http.get(serviceBase + 'api/Category/GetCategory', { params: { id: id } }).then(function (results) {
+        return $http.get(serviceBase + 'api/Categories/GetCategory', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
 
     var _deleteCategory = function (id) {
-        return $http.delete(serviceBase + 'api/Category/DeleteCategory', { params: { id: id } }).then(function (results) {
+        return $http.delete(serviceBase + 'api/Categories/DeleteCategory', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
 
 
     var _saveCategory = function (Category) {
-        return $http.post(serviceBase + 'api/Category/PostCategory', Category).then(function (response) {
+        return $http.post(serviceBase + 'api/Categories/PostCategory', Category).then(function (response) {
             return response;
         });
     };
 
 
     var _updateCategory = function (Category) {
-        return $http.put(serviceBase + 'api/Category/PutCategory', Category).then(function (response) {
+        return $http.put(serviceBase + 'api/Categories/PutCategory', Category).then(function (response) {
             return response;
         });
     };
@@ -124,14 +124,14 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
     var _getExpense = function () {
-        return $http.get(serviceBase + 'api/Expense').then(function (results) {
+        return $http.get(serviceBase + 'api/Expenses').then(function (results) {
             return results;
         });
     };
 
 
     var _getExpenseByID = function (id) {
-        return $http.get(serviceBase + 'api/Expense/GetExpense', { params: { id: id } }).then(function (results) {
+        return $http.get(serviceBase + 'api/Expenses/GetExpense', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
@@ -140,20 +140,20 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
         var expenseUserModel = { Expense: Expense, userName: userName };
 
-        return $http.post(serviceBase + 'api/Expense/PostExpense', expenseUserModel).then(function (response) {
+        return $http.post(serviceBase + 'api/Expenses/PostExpense', expenseUserModel).then(function (response) {
             return response;
         });
     };
 
 
     var _updateExpense = function (Expense) {
-        return $http.put(serviceBase + 'api/Expense/PutExpense', Expense).then(function (response) {
+        return $http.put(serviceBase + 'api/Expenses/PutExpense', Expense).then(function (response) {
             return response;
         });
     };
 
     var _deleteExpense = function (id) {
-        return $http.delete(serviceBase + 'api/Expense/deleteExpense', { params: { id: id } }).then(function (results) {
+        return $http.delete(serviceBase + 'api/Expenses/deleteExpense', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
@@ -163,34 +163,34 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     //////////////////////////////////////////////////////////////////////////////////////////
 
     var _getIncoming = function () {
-        return $http.get(serviceBase + 'api/Incoming').then(function (results) {
+        return $http.get(serviceBase + 'api/Incomings').then(function (results) {
             return results;
         });
     };
 
   
     var _getIncomingByID = function (id) {
-        return $http.get(serviceBase + 'api/Incoming/GetIncoming', { params: { id: id } }).then(function (results) {
+        return $http.get(serviceBase + 'api/Incomings/GetIncoming', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
 
     var _saveIncoming = function (Incoming) {
-        return $http.post(serviceBase + 'api/Incoming/PostIncoming', Incoming).then(function (response) {
+        return $http.post(serviceBase + 'api/Incomings/PostIncoming', Incoming).then(function (response) {
             return response;
         });
     };
 
 
     var _updateIncoming = function (Incoming) {
-        return $http.put(serviceBase + 'api/Incoming/PutIncoming', Incoming).then(function (response) {
+        return $http.put(serviceBase + 'api/Incomings/PutIncoming', Incoming).then(function (response) {
             return response;
         });
     };
 
 
     var _deleteIncoming = function (id) {
-        return $http.delete(serviceBase + 'api/Incoming/DeleteIncoming', { params: { id: id } }).then(function (response) {
+        return $http.delete(serviceBase + 'api/Incomings/DeleteIncoming', { params: { id: id } }).then(function (response) {
             return response;
         });
     };
@@ -198,34 +198,34 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ////////////////////////////////////////////////////////////////////
 
     var _getSupplier = function () {
-        return $http.get(serviceBase + 'api/Supplier').then(function (results) {
+        return $http.get(serviceBase + 'api/Suppliers').then(function (results) {
             return results;
         });
     };
 
 
     var _getSupplierByID = function (id) {
-        return $http.get(serviceBase + 'api/Supplier/GetSupplier', { params: { id: id } }).then(function (results) {
+        return $http.get(serviceBase + 'api/Suppliers/GetSupplier', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
 
     var _saveSupplier = function (Supplier) {
-        return $http.post(serviceBase + 'api/Supplier/PostSupplier', Supplier).then(function (response) {
+        return $http.post(serviceBase + 'api/Suppliers/PostSupplier', Supplier).then(function (response) {
             return response;
         });
     };
 
 
     var _updateSupplier = function (Supplier) {
-        return $http.put(serviceBase + 'api/Supplier/PutSupplier', Supplier).then(function (response) {
+        return $http.put(serviceBase + 'api/Suppliers/PutSupplier', Supplier).then(function (response) {
             return response;
         });
     };
 
 
     var _deleteSupplier = function (id) {
-        return $http.delete(serviceBase + 'api/Supplier/DeleteSupplier', { params: { id: id } }).then(function (response) {
+        return $http.delete(serviceBase + 'api/Suppliers/DeleteSupplier', { params: { id: id } }).then(function (response) {
             return response;
         });
     };
@@ -234,34 +234,34 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     /////////////////////////////////////////////////////////////////////////////
 
     var _getManufacturer = function () {
-        return $http.get(serviceBase + 'api/Manufacturer').then(function (results) {
+        return $http.get(serviceBase + 'api/Manufacturers').then(function (results) {
             return results;
         });
     };
 
 
     var _getManufacturerByID = function (id) {
-        return $http.get(serviceBase + 'api/Manufacturer/GetManufacturer', { params: { id: id } }).then(function (results) {
+        return $http.get(serviceBase + 'api/Manufacturers/GetManufacturer', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
 
     var _saveManufacturer = function (Manufacturer) {
-        return $http.post(serviceBase + 'api/Manufacturer/PostManufacturer', Manufacturer).then(function (response) {
+        return $http.post(serviceBase + 'api/Manufacturers/PostManufacturer', Manufacturer).then(function (response) {
             return response;
         });
     };
 
 
     var _updateManufacturer = function (Manufacturer) {
-        return $http.put(serviceBase + 'api/Manufacturer/PutManufacturer', Manufacturer).then(function (response) {
+        return $http.put(serviceBase + 'api/Manufacturers/PutManufacturer', Manufacturer).then(function (response) {
             return response;
         });
     };
 
 
     var _deleteManufacturer = function (id) {
-        return $http.delete(serviceBase + 'api/Manufacturer/DeleteManufacturer', { params: { id: id } }).then(function (response) {
+        return $http.delete(serviceBase + 'api/Manufacturers/DeleteManufacturer', { params: { id: id } }).then(function (response) {
             return response;
         });
     };

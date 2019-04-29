@@ -8,17 +8,21 @@ namespace AngularJSAuthentication.API.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public ApplicationUser()
-        {
-            this.Asset = new HashSet<Asset>();
-        }     
-        public Nullable<short> ProjectID { get; set; }       
+        //public ApplicationUser()
+        //{
+
+        //    this.Expense = new HashSet<Expense>();
+        //}
+
+
         public string Contact { get; set; }
         public string Address { get; set; }
         public string Role { get; set; }
-        public Nullable<System.DateTime> LastLogin { get; set; }       
-        public virtual ICollection<Project>  Project { get; set; }
-        public virtual ICollection<Asset> Asset { get; set; }
+        public Nullable<System.DateTime> LastLogin { get; set; }
+
+
+        //public virtual ICollection<Expense> Expense { get; set; }
+
 
     }
 }

@@ -14,23 +14,25 @@ namespace AngularJSAuthentication.API
         public AuthContext()
             : base("AuthContext")
         {
-     
+
         }
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public virtual DbSet<Asset> Asset { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Expense> Expense { get; set; }
-        public virtual DbSet<Incoming> Incoming { get; set; }      
-        public virtual DbSet<Project> Project { get; set; }
-        public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Manufacturer> Manufacturers { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
-        public virtual DbSet<Transaction> Transaction { get; set; }    
+        public DbSet<Asset> Assets { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Incoming> Incomings { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
 
+        //    public System.Data.Entity.DbSet<AngularJSAuthentication.API.Models.Expense> Expenses { get; set; }
+
+        //    public System.Data.Entity.DbSet<AngularJSAuthentication.API.Models.ApplicationUser> IdentityUsers { get; set; }
         
-    }
 
+    }
 }

@@ -6,24 +6,23 @@ using System.Web;
 
 namespace AngularJSAuthentication.API.Models
 {
-    public class Category
+    public class Asset : Person
     {
-        public Category()
+        public Asset()
         {
-            
+
             this.Expense = new HashSet<Expense>();
+            this.Transaction = new HashSet<Transaction>();
         }
 
-        public int CategoryID { get; set; }
-        public string  Name { get; set; }
-        public string Description { get; set; }
-
+        public int AssetID { get; set; }
 
         [ForeignKey("Project")]
         public int ProjectID { get; set; }
         public Project Project { get; set; }
 
         public virtual ICollection<Expense> Expense { get; set; }
+        public virtual ICollection<Transaction> Transaction { get; set; }
 
     }
 }
