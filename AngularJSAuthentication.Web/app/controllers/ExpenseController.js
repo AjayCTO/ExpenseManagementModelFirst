@@ -17,14 +17,14 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
     $scope.Categoryobject = {
         CategoryID: null,
-        ProjectID: 3,
+        ProjectID: 0,
         Name: "",
         Description: ""
     };
 
     $scope.Assetobject = {
         AssetID: null,
-        ProjectID: 3,
+        ProjectID: 0;,
         Name: "",
         Contact: "",
         Address: "",
@@ -38,7 +38,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         Name: "",
         Address: "",
         Contact: "",
-        ProjectID:3
+        ProjectID:0;
       
     };
 
@@ -68,7 +68,10 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
     $scope.getdatabyid = function (id) {
 
-     
+        $scope.Expense.ProjectID = id;
+        $scope.Categoryobject.ProjectID = id;
+        $scope.Assetobject.ProjectID = id;
+        $scope.Supplierobject.ProjectID = id;
             ordersService.getCategoryByID(id).then(function (results) {
 
                 $scope.categories = results.data;

@@ -57,7 +57,7 @@ namespace AngularJSAuthentication.API.Controllers
                 ExpenseModel.projectName = expense.Project.Name;
                 ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
                 ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
-                ExpenseModel.TotalAmount = 500;
+                ExpenseModel.TotalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
                 ExpenseModel.description = expense.Description;
                 ExpenseModelList.Add(ExpenseModel);
             }
