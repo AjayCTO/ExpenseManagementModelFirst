@@ -7,6 +7,7 @@ namespace AngularJSAuthentication.API.Models
 {
     public class ExpenseModel
     {
+        public int expenseID { get; set; }
         public string projectName { get; set; }
         public string assetName { get; set; }
         public string categoryName { get; set; }

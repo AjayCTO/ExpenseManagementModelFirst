@@ -15,10 +15,11 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
   
     $scope.ListOfProjects = [];
 
-    ordersService.getProjects().then(function (results) {
-        console.log("List of projects");
-        console.log(results.data);
+    $scope.userName = localStorageService.get('authorizationData').userName;
 
+
+    ordersService.getProjects($scope.userName).then(function (results) {
+      
         $scope.ListOfProjects = results.data;
     }, function (error) {
     });

@@ -19,25 +19,44 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET: api/Projects
-        [Route("")]
-        public List<Project> GetProjects()
+        [Route("GetProjects")]
+        public List<ProjectModel> GetProjects(string userName)
         {
-            return db.Projects.ToList();
+            List<ProjectModel> projectModalList = new List<ProjectModel>();
+
+            var userID = db.Users.FirstOrDefault(x => x.UserName == userName).Id;
+
+            var projectList = db.Projects.Where(x=> x.UserId == userID).ToList();
+
+
+            foreach (var project in projectList)
+            {
+                ProjectModel projectModel = new ProjectModel();
+
+                projectModel.projectID = project.ProjectID;
+                projectModel.name = project.Name;
+                projectModel.billingMethod = project.BillingMethod;
+                projectModel.toalCost = project.TotalCost;
+
+                projectModalList.Add(projectModel);
+            }
+
+            return projectModalList;
         }
 
         // GET: api/Projects/5
         [ResponseType(typeof(Project))]
         [Route("GetProject")]
-        public IHttpActionResult GetProject(int id)
-        {
-            Project project = db.Projects.Find(id);
-            if (project == null)
-            {
-                return NotFound();
-            }
+        //public IHttpActionResult GetProject(int id)
+        //{
+        //    Project project = db.Projects.Find(id);
+        //    if (project == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(project);
-        }
+        //    return Ok(project);
+        //}
 
         // PUT: api/Projects/5
         [ResponseType(typeof(void))]

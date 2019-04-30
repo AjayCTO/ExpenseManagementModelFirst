@@ -14,8 +14,8 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     ///////////////////////////////////////////////////////////////////////////////
 
-    var _getProjects = function () {
-        return $http.get(serviceBase + 'api/Projects').then(function (results) {         
+    var _getProjects = function (userName) {
+        return $http.get(serviceBase + 'api/Projects/GetProjects', { params: { userName: userName } }).then(function (results) {
 
             return results;
         });
@@ -129,8 +129,8 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     //////////////////////////////////////////////////////////////////////////////
 
 
-    var _getExpense = function () {
-        return $http.get(serviceBase + 'api/Expenses').then(function (results) {
+    var _getExpense = function (userName) {
+        return $http.get(serviceBase + 'api/Expenses/GetExpense', { params: { userName: userName } }).then(function (results) {
             return results;
         });
     };

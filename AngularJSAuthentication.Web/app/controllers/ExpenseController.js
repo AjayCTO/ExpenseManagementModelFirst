@@ -24,7 +24,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
     $scope.Assetobject = {
         AssetID: null,
-        ProjectID: 0;,
+        ProjectID: 0,
         Name: "",
         Contact: "",
         Address: "",
@@ -38,7 +38,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         Name: "",
         Address: "",
         Contact: "",
-        ProjectID:0;
+        ProjectID:0
       
     };
 
@@ -55,7 +55,9 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
     $scope.ListOfExpenses = [];
 
-    ordersService.getExpense().then(function (results) {
+    $scope.userName = localStorageService.get('authorizationData').userName;
+
+    ordersService.getExpense($scope.userName).then(function (results) {
 
         $scope.ListOfExpenses = results.data;
         console.log($scope.ListOfExpenses);

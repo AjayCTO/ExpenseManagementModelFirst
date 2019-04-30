@@ -45,15 +45,18 @@ namespace AngularJSAuthentication.API.Controllers
         // GET: api/Expenses
 
 
-        public List<ExpenseModel> GetExpenses()
+        public List<ExpenseModel> GetExpenses( string userName)
         {
+            var userID = db.Users.FirstOrDefault(x => x.UserName == userName).Id;
+
             List<ExpenseModel> ExpenseModelList = new List<ExpenseModel>();
             
-            var expenses = db.Expenses.ToList();
+            var expenses = db.Expenses.Where(x => x.UserId == userID).ToList();
 
             foreach (var expense in expenses)
             {
                 ExpenseModel ExpenseModel = new Models.ExpenseModel();
+                ExpenseModel.expenseID = expense.ExpenseID;
                 ExpenseModel.projectName = expense.Project.Name;
                 ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
                 ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
@@ -66,16 +69,16 @@ namespace AngularJSAuthentication.API.Controllers
 
         // GET: api/Expenses/5
         [ResponseType(typeof(Expense))]
-        public IHttpActionResult GetExpense(short id)
-        {
-            Expense expense = db.Expenses.Find(id);
-            if (expense == null)
-            {
-                return NotFound();
-            }
+        //public IHttpActionResult GetExpense(short id)
+        //{
+        //    Expense expense = db.Expenses.Find(id);
+        //    if (expense == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(expense);
-        }
+        //    return Ok(expense);
+        //}
 
         // PUT: api/Expenses/5
         [ResponseType(typeof(void))]

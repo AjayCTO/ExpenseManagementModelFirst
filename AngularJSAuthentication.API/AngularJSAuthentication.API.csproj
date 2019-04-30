@@ -200,12 +200,14 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\ExpenseModel.cs" />
     <Compile Include="Models\ExpenseUserModel.cs" />
     <Compile Include="Models\ExternalLoginModels.cs" />
     <Compile Include="Models\Incoming.cs" />
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\ProjectUser.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\Transaction.cs" />
