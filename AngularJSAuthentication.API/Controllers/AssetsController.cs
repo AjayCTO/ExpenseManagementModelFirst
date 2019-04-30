@@ -18,9 +18,9 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET: api/Assets
-        public IQueryable<Asset> GetAssets()
+        public List<Asset> GetAssets()
         {
-            return db.Assets;
+            return db.Assets.ToList();
         }
 
         // GET: api/Assets/5
@@ -77,13 +77,13 @@ namespace AngularJSAuthentication.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                //return BadRequest(ModelState);
             }
 
             db.Assets.Add(asset);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = asset.AssetID }, asset);
+            return Ok(asset);
         }
 
         // DELETE: api/Assets/5

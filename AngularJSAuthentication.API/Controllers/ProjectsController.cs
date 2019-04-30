@@ -13,18 +13,21 @@ using AngularJSAuthentication.API.Models;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+    [RoutePrefix("api/Projects")]
     public class ProjectsController : ApiController
     {
         private AuthContext db = new AuthContext();
 
         // GET: api/Projects
-        public IEnumerable<Project> GetProjects()
+        [Route("")]
+        public List<Project> GetProjects()
         {
             return db.Projects.ToList();
         }
 
         // GET: api/Projects/5
         [ResponseType(typeof(Project))]
+        [Route("GetProject")]
         public IHttpActionResult GetProject(int id)
         {
             Project project = db.Projects.Find(id);
@@ -38,8 +41,12 @@ namespace AngularJSAuthentication.API.Controllers
 
         // PUT: api/Projects/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutProject(int id, Project project)
+        [Route("PutProject")]
+        public IHttpActionResult PutProject(Project project)
         {
+
+            var id = project.ProjectID;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -73,6 +80,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // POST: api/Projects
         [ResponseType(typeof(Project))]
+        [Route("PostProject")]
         public IHttpActionResult PostProject(ProjectUser project)
         {
 
@@ -104,6 +112,7 @@ namespace AngularJSAuthentication.API.Controllers
 
         // DELETE: api/Projects/5
         [ResponseType(typeof(Project))]
+        [Route("DeleteProject")]
         public IHttpActionResult DeleteProject(int id)
         {
             Project project = db.Projects.Find(id);

@@ -16,14 +16,14 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
 
     $scope.Categoryobject = {
         CategoryID: null,
-        ProjectID: 1,
+        ProjectID: 2,
         Name: "",
         Description: ""
     };
 
     $scope.Assetobject = {
         AssetID: null,
-        ProjectID: 1,
+        ProjectID: 2,
         Name: "",
         Contact: "",
         Address: "",
@@ -126,23 +126,10 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
     });
 
 
-    ordersService.getCategory().then(function (results) {
-        console.log("ddd")
-        console.log(results)
-
-        $scope.categories = results.data;
-
-        alert("All cat");
-        debugger;
-
+    ordersService.getCategory().then(function (results) {     
+        $scope.categories = results.data;      
 
     }, function (error) {
-
-  
-
-     
-       
-        //alert(error.data.message);
     });
 
     $scope.newcategory = function () {

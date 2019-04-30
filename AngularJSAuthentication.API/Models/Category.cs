@@ -10,8 +10,8 @@ namespace AngularJSAuthentication.API.Models
     {
         public Category()
         {
-            
-            this.Expense = new HashSet<Expense>();
+
+            this.Expense = new List<Expense>();
         }
 
         public int CategoryID { get; set; }

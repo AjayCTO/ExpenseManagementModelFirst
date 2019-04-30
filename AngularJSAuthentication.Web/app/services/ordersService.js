@@ -15,7 +15,8 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ///////////////////////////////////////////////////////////////////////////////
 
     var _getProjects = function () {
-        return $http.get(serviceBase + 'api/Projects').then(function (results) {          
+        return $http.get(serviceBase + 'api/Projects').then(function (results) {         
+
             return results;
         });
     };
@@ -36,6 +37,10 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     };
 
     var _updateProject = function (project) {
+
+        console.log("Update Project");
+        console.log(project);
+
         return $http.put(serviceBase + 'api/Projects/PutProject', project).then(function (response) {
             return response;
         });
@@ -43,6 +48,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
     var _deleteProject = function (id) {
+        alert(id);
         return $http.delete(serviceBase + 'api/Projects/DeleteProject', { params: { id: id } }).then(function (results) {
             return results;
         });
@@ -153,7 +159,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     };
 
     var _deleteExpense = function (id) {
-        return $http.delete(serviceBase + 'api/Expenses/deleteExpense', { params: { id: id } }).then(function (results) {
+        return $http.delete(serviceBase + 'api/Expenses/DeleteExpense', { params: { id: id } }).then(function (results) {
             return results;
         });
     };

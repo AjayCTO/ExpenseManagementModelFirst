@@ -11,12 +11,13 @@ namespace AngularJSAuthentication.API.Models
         public Asset()
         {
 
-            this.Expense = new HashSet<Expense>();
-            this.Transaction = new HashSet<Transaction>();
+            this.Expense = new List<Expense>();
+            this.Transaction = new List<Transaction>();
         }
 
         public int AssetID { get; set; }
 
+    
         [ForeignKey("Project")]
         public int ProjectID { get; set; }
         public Project Project { get; set; }

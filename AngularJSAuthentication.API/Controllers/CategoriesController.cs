@@ -18,9 +18,9 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET: api/Categories
-        public IQueryable<Category> GetCategories()
+        public List<Category> GetCategories()
         {
-            return db.Categories;
+            return db.Categories.ToList();
         }
 
         // GET: api/Categories/5
@@ -77,13 +77,13 @@ namespace AngularJSAuthentication.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                //return BadRequest(ModelState);
             }
 
             db.Categories.Add(category);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = category.CategoryID }, category);
+            return Ok(category);
         }
 
         // DELETE: api/Categories/5

@@ -2,9 +2,9 @@
 app.controller('projectController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.project = {
-        ProjectID:null,
-        Name: "",
-        BillingMethod: "",
+        projectID:null,
+        name: "",
+        billingMethod: "",
         CustomerName: "",
         TotalCost: ""
     };
@@ -13,11 +13,13 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
     $scope.showlist = true;
 
   
-    $scope.ListOfOrders = [];
+    $scope.ListOfProjects = [];
 
     ordersService.getProjects().then(function (results) {
-        $scope.ListOfOrders = results.data;
+        console.log("List of projects");
+        console.log(results.data);
 
+        $scope.ListOfProjects = results.data;
     }, function (error) {
     });
 
@@ -27,6 +29,9 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
         ordersService.getProjectByID(id).then(function (results) {
 
             $scope.project = results.data;
+
+            console.log("Get By id working");
+            console.log($scope.project);
 
         }, function (error) {
             //alert(error.data.message);
@@ -68,9 +73,9 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
     };
 
 
-    $scope.updateProject = function () {
+    $scope.updateProject = function (project) {
 
-        ordersService.updateProject($scope.project).then(function (response) {
+        ordersService.updateProject(project).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Project has been updated successfully";

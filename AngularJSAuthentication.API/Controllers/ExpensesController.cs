@@ -18,7 +18,7 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET: api/Expenses
-        public IQueryable<Expense> GetExpenses()
+        public IEnumerable<Expense> GetExpenses()
         {
             return db.Expenses;
         }
@@ -73,17 +73,20 @@ namespace AngularJSAuthentication.API.Controllers
 
         // POST: api/Expenses
         [ResponseType(typeof(Expense))]
-        public IHttpActionResult PostExpense(Expense expense)
+        public IHttpActionResult PostExpense(ExpenseUserModel expense)
         {
+
+            var userID = db.Users.FirstOrDefault(x => x.UserName == expense.UserName).Id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            expense.Expense.UserId = userID;
 
-            db.Expenses.Add(expense);
+            db.Expenses.Add(expense.Expense);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = expense.ExpenseID }, expense);
+            return Ok(expense);
         }
 
         // DELETE: api/Expenses/5

@@ -5,10 +5,9 @@ using System.Web;
 
 namespace AngularJSAuthentication.API.Models
 {
-    public class expenseUserModel
+    public class ExpenseUserModel
     {
-        public Expense Expense { get; set; }
-
-        public String userName { get; set; }
+        public Expense  Expense { get; set; }
+        public string UserName { get; set; }
     }
 }

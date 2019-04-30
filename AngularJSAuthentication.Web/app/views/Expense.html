@@ -21,7 +21,7 @@
 
                 <select ng-model="Expense.ProjectID" class="form-control">
                     <option selected value="">- Select Project -</option>
-                    <option ng-repeat="pr in projects" value="{{pr.ProjectID}}">{{pr.Name}}</option>
+                    <option ng-repeat="pr in projects" value="{{pr.projectID}}">{{pr.name}}</option>
                 </select>
 
 
@@ -77,7 +77,7 @@
 
                 <select class="form-control" data-ng-model="Expense.AssetID">
                     <option selected value="">- Select Asset -</option>
-                    <option data-ng-repeat="as in assets" value="{{as.AssetID}}">{{as.Name}}</option>
+                    <option data-ng-repeat="as in assets" value="{{as.AssetID}}">{{as.name}}</option>
                 </select>
 
               
@@ -87,7 +87,7 @@
 
                 <select class="form-control" data-ng-model="Expense.CategoryID">
                     <option selected value="">- Select Category -</option>
-                    <option data-ng-repeat="cat in categories" value="{{cat.CategoryID}}">{{cat.Name}}</option>
+                    <option data-ng-repeat="cat in categories" value="{{cat.CategoryID}}">{{cat.name}}</option>
                 </select>
 
             

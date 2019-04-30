@@ -11,13 +11,13 @@ namespace AngularJSAuthentication.API.Models
     {
         public Project()
         {
-            this.Asset = new HashSet<Asset>();
-            this.Supplier = new HashSet<Supplier>();
-            this.Manufacturer = new HashSet<Manufacturer>();
-            this.Category = new HashSet<Category>();
-            this.Incoming = new HashSet<Incoming>();
-            this.Expense = new HashSet<Expense>();
-            this.Transaction = new HashSet<Transaction>();
+            this.Asset = new List<Asset>();
+            this.Supplier = new List<Supplier>();
+            this.Manufacturer = new List<Manufacturer>();
+            this.Category = new List<Category>();
+            this.Incoming = new List<Incoming>();
+            this.Expense = new List<Expense>();
+            this.Transaction = new List<Transaction>();
         }
 
 
