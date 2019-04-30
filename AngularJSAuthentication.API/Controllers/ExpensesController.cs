@@ -22,32 +22,46 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
     
-         [Route("GetData")]
-        public IHttpActionResult GetData()
-        {
-            try
-            {
-                List<Expense> productList = db.Expenses.ToList<Expense>();
-                return Json(new { success = true, sensorsdata = new { data = productList } });
-            }
-            catch(SyntaxErrorException)
-            {
+        // [Route("GetData")]
+        //public IHttpActionResult GetData()
+        //{
+        //    try
+        //    {
+        //        List<Expense> productList = db.Expenses.ToList<Expense>();
+        //        return Json(new { success = true, sensorsdata = new { data = productList } });
+        //    }
+        //    catch(SyntaxErrorException)
+        //    {
 
-            }
+        //    }
 
            
-            return Json((object)new { success = false });
+        //    return Json((object)new { success = false });
 
-        }  
+        //}  
 
 
 
         // GET: api/Expenses
 
-      
-        public List<Expense> GetExpenses()
+
+        public List<ExpenseModel> GetExpenses()
         {
-            return db.Expenses.ToList();
+            List<ExpenseModel> ExpenseModelList = new List<ExpenseModel>();
+            
+            var expenses = db.Expenses.ToList();
+
+            foreach (var expense in expenses)
+            {
+                ExpenseModel ExpenseModel = new Models.ExpenseModel();
+                ExpenseModel.projectName = expense.Project.Name;
+                ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
+                ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
+                ExpenseModel.TotalAmount = 500;
+                ExpenseModel.description = expense.Description;
+                ExpenseModelList.Add(ExpenseModel);
+            }
+            return ExpenseModelList;
         }
 
         // GET: api/Expenses/5
@@ -111,6 +125,18 @@ namespace AngularJSAuthentication.API.Controllers
             expense.Expense.UserId = userID;
 
             db.Expenses.Add(expense.Expense);
+            db.SaveChanges();
+
+
+            var transaction = new Transaction();
+
+            transaction.ProjectID = (short?)expense.Expense.ProjectID;
+            transaction.AssetID = (short?)expense.Expense.AssetID;
+            transaction.SupplierID = (int?)expense.Expense.SupplierID;
+            transaction.ExpenseID = (int?)expense.Expense.ExpenseID;
+            transaction.TotalAmount = (int?)expense.Expense.Amount;
+
+            db.Transaction.Add(transaction);
             db.SaveChanges();
 
             return Ok(expense);

@@ -18,9 +18,9 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET: api/Customers
-        public IQueryable<Customer> GetCustomers()
+        public List<Customer> GetCustomers()
         {
-            return db.Customers;
+            return db.Customers.ToList();
         }
 
         // GET: api/Customers/5

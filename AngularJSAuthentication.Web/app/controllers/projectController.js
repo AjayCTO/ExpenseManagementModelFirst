@@ -5,7 +5,7 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
         projectID:null,
         name: "",
         billingMethod: "",
-        CustomerName: "",
+        CustomerID: null,
         TotalCost: ""
     };
     $scope.savedSuccessfully = false;
@@ -22,6 +22,20 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
         $scope.ListOfProjects = results.data;
     }, function (error) {
     });
+
+
+    ordersService.getCustomer().then(function (results) {
+        $scope.ListOfcustomer = results.data;
+
+        console.log($scope.ListOfcustomer);
+
+    }, function (error) {
+    });
+
+    $scope.newcustomer = function () {
+        $("#customermodal").modal("show");
+    }
+
 
 
     $scope.getProjectByID = function (id) {

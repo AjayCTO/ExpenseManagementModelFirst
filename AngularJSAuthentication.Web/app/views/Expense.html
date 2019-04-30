@@ -17,11 +17,11 @@
             <tr>
 
                 <th>
-                    Name
+                    Name 
                 </th>
 
                 <th>
-                    Category
+                    Assets
                 </th>
 
                 <th>
@@ -39,15 +39,15 @@
 
         <tr ng-repeat="obj in ListOfExpenses">
             <td>
-                {{obj.project.name}}
+                {{obj.projectName}}
             </td>
 
             <td>
-                {{obj.Category.name}}
+                {{obj.assetName}}
             </td>
 
             <td>
-                {{obj.amount}}
+                {{obj.totalAmount}}
             </td>
 
             <td>

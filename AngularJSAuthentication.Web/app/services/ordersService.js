@@ -201,6 +201,20 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
         });
     };
 
+
+
+
+
+    var _getCustomer = function () {
+
+        alert("Service");
+        return $http.get(serviceBase + 'api/Customers').then(function (results) {
+            return results;
+        });
+    };
+
+
+
     ////////////////////////////////////////////////////////////////////
 
     var _getSupplier = function () {
@@ -323,6 +337,8 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ordersServiceFactory.getSupplierByID = _getSupplierByID;
     ordersServiceFactory.updateSupplier = _updateSupplier;
     ordersServiceFactory.deleteSupplier = _deleteSupplier;
+
+    ordersServiceFactory.getCustomer = _getCustomer;
 
 
     return ordersServiceFactory;
