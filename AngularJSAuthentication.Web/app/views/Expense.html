@@ -73,9 +73,9 @@
 
         <div class="col-md-6">
             <div class="form-group">
-                <label>Project Name</label>
+                <label>Project Name </label>
 
-                <select ng-model="Expense.ProjectID" class="form-control">
+                <select ng-change="getdatabyid(Expense.ProjectID)" ng-model="Expense.ProjectID" class="form-control">
                     <option selected value="">- Select Project -</option>
                     <option ng-repeat="pr in projects" value="{{pr.projectID}}">{{pr.name}}</option>
                 </select>
@@ -101,8 +101,12 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label>ReceiptPath</label>
-                <input type="text" class="form-control" placeholder="ReceiptPath" data-ng-model="Expense.ReceiptPath" required>
+                <label> Select Supplier -- {{Expense.SupplierID}} <a data-ng-click="newsupplier()" style="float:right">New</a></label>
+
+                <select class="form-control" data-ng-model="Expense.SupplierID">
+                    <option selected value="">- Select Supplier -</option>
+                    <option data-ng-repeat="supp in suppliers" value="{{supp.supplierID}}">{{supp.name}}</option>
+                </select>
             </div>
         </div>
     </div>
@@ -129,21 +133,21 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label>select Asset <a data-ng-click="newasset()" style="float:right">New</a></label>
+                <label>select Asset -- {{Expense.AssetID}} <a data-ng-click="newasset()" style="float:right">New</a></label>
 
                 <select class="form-control" data-ng-model="Expense.AssetID">
                     <option selected value="">- Select Asset -</option>
-                    <option data-ng-repeat="as in assets" value="{{as.AssetID}}">{{as.name}}</option>
+                    <option data-ng-repeat="as in assets" value="{{as.assetID}}">{{as.name}}</option>
                 </select>
 
 
             </div>
             <div class="form-group">
-                <label> Select Category <a data-ng-click="newcategory()" style="float:right">New</a></label>
+                <label> Select Category -- {{Expense.CategoryID}} <a data-ng-click="newcategory()" style="float:right">New</a></label>
 
                 <select class="form-control" data-ng-model="Expense.CategoryID">
                     <option selected value="">- Select Category -</option>
-                    <option data-ng-repeat="cat in categories" value="{{cat.CategoryID}}">{{cat.name}}</option>
+                    <option data-ng-repeat="cat in categories" value="{{cat.categoryID}}">{{cat.name}}</option>
                 </select>
 
 
@@ -214,6 +218,30 @@
             </div>
             <div class="modal-footer">
                 <button data-ng-click="saveNewAsset()" data-ng-disabled="Assetobject.Name==''" type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="suppliermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle-2">Add Supplier</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Type Your Supplier</label>
+                    <input data-ng-model="Supplierobject.Name" type="text" class="form-control" name="name" value="" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-ng-click="saveNewSupplier()" data-ng-disabled="Supplierobject.Name==''" type="button" class="btn btn-primary">Save</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

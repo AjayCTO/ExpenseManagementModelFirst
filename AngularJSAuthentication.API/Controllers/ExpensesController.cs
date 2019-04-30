@@ -10,14 +10,41 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using AngularJSAuthentication.API;
 using AngularJSAuthentication.API.Models;
+using System.Web.Services;
+using System.Web.Script.Services;
+using System.Web.Http.Results;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+       [RoutePrefix("api/Expenses")]
     public class ExpensesController : ApiController
     {
         private AuthContext db = new AuthContext();
 
+    
+         [Route("GetData")]
+        public IHttpActionResult GetData()
+        {
+            try
+            {
+                List<Expense> productList = db.Expenses.ToList<Expense>();
+                return Json(new { success = true, sensorsdata = new { data = productList } });
+            }
+            catch(SyntaxErrorException)
+            {
+
+            }
+
+           
+            return Json((object)new { success = false });
+
+        }  
+
+
+
         // GET: api/Expenses
+
+      
         public List<Expense> GetExpenses()
         {
             return db.Expenses.ToList();

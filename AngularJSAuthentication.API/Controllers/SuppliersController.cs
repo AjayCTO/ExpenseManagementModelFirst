@@ -18,22 +18,19 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET: api/Suppliers
-        public IQueryable<Supplier> GetSuppliers()
+        public List<Supplier> GetSuppliers()
         {
-            return db.Suppliers;
+            return db.Suppliers.ToList();
         }
 
         // GET: api/Suppliers/5
         [ResponseType(typeof(Supplier))]
-        public IHttpActionResult GetSupplier(int id)
+        public List<Supplier> GetSupplier(int id)
         {
-            Supplier supplier = db.Suppliers.Find(id);
-            if (supplier == null)
-            {
-                return NotFound();
-            }
+            List<Supplier> listOfSupplier = db.Suppliers.Where(x => x.ProjectID == id).ToList();
 
-            return Ok(supplier);
+
+            return listOfSupplier;
         }
 
         // PUT: api/Suppliers/5
@@ -75,10 +72,10 @@ namespace AngularJSAuthentication.API.Controllers
         [ResponseType(typeof(Supplier))]
         public IHttpActionResult PostSupplier(Supplier supplier)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             db.Suppliers.Add(supplier);
             db.SaveChanges();

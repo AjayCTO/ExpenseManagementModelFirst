@@ -25,15 +25,17 @@ namespace AngularJSAuthentication.API.Controllers
 
         // GET: api/Categories/5
         [ResponseType(typeof(Category))]
-        public IHttpActionResult GetCategory(int id)
+        public List<Category> GetCategory(int id)
         {
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
+            //Return list of categories related to the project id
 
-            return Ok(category);
+            List<Category> listOfCategory = db.Categories.Where(x => x.ProjectID == id).ToList();
+            //if (category == null)
+            //{
+            //    return NotFound();
+            //}
+
+            return listOfCategory;
         }
 
         // PUT: api/Categories/5

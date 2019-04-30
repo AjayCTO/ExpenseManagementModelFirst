@@ -19,16 +19,22 @@ namespace AngularJSAuthentication.API.Models
         public string ReceiptPath { get; set; }
 
 
-        [ForeignKey("Project")]
+       
         public Nullable<int> ProjectID { get; set; }
+
+         [ForeignKey("ProjectID")]
         public virtual Project Project { get; set; }
 
-        [ForeignKey("Asset")]
+     
         public Nullable<int> AssetID { get; set; }
+
+           [ForeignKey("AssetID")]
         public virtual Asset Asset { get; set; }
 
         [ForeignKey("Category")]
         public Nullable<int> CategoryID { get; set; }
+
+          [ForeignKey("CategoryID")]
         public virtual Category Category { get; set; }
 
         [ForeignKey("ApplicationUser")]
@@ -37,6 +43,7 @@ namespace AngularJSAuthentication.API.Models
 
         [ForeignKey("Supplier")]
         public Nullable<int> SupplierID { get; set; }
+     
         public virtual Supplier Supplier { get; set; }
         
     }

@@ -25,15 +25,12 @@ namespace AngularJSAuthentication.API.Controllers
 
         // GET: api/Assets/5
         [ResponseType(typeof(Asset))]
-        public IHttpActionResult GetAsset(int id)
+        public List<Asset> GetAsset(int id)
         {
-            Asset asset = db.Assets.Find(id);
-            if (asset == null)
-            {
-                return NotFound();
-            }
+               List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
 
-            return Ok(asset);
+
+               return listOfAsset;
         }
 
         // PUT: api/Assets/5

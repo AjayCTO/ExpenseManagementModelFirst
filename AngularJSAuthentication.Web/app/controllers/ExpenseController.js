@@ -5,7 +5,8 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         ExpenseID: null,
         ProjectID: null,
         AssetID: null,
-        CategoryID:null,
+        CategoryID: null,
+        SupplierID:null,
         Date: "",
         Amount: "",
         Refrense: "",
@@ -32,6 +33,15 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         ApplicationUser_Id: null
     };
 
+    $scope.Supplierobject = {
+      
+        Name: "",
+        Address: "",
+        Contact: "",
+        ProjectID:3
+      
+    };
+
 
     $scope.addnewexpense = function () {
         $scope.showlist = false;
@@ -47,10 +57,6 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
     ordersService.getExpense().then(function (results) {
 
-        alert("success");
-
-        debugger;
-      
         $scope.ListOfExpenses = results.data;
         console.log($scope.ListOfExpenses);
 
@@ -60,7 +66,57 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     });
 
 
+    $scope.getdatabyid = function (id) {
 
+     
+            ordersService.getCategoryByID(id).then(function (results) {
+
+                $scope.categories = results.data;
+
+            }, function (error) {
+                debugger;
+                //alert(error.data.message);
+            });
+
+            ordersService.getSupplierByID(id).then(function (results) {
+
+                $scope.suppliers = results.data;
+
+            }, function (error) {
+                //alert(error.data.message);
+            });
+
+            ordersService.getAssetsByID(id).then(function (results) {
+
+                $scope.assets = results.data;
+
+            }, function (error) {
+                //alert(error.data.message);
+            });
+      
+
+
+   
+    }
+
+
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json",
+        url: "http://localhost:26264/api/Expenses/GetData",
+      
+        success: function (data) {
+          
+        },
+        error: function (error) {
+
+          
+        }
+    });
+
+
+    
 
 
 
@@ -73,6 +129,17 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
             $("#categorymodal").modal("hide");
 
             debugger;
+
+            $scope.getcategoryagain()
+
+            setTimeout(function () {
+
+                debugger;
+
+                $scope.Expense.CategoryID = response.data.categoryID;
+                $scope.$apply();
+
+            }, 1500)
 
             $scope.savedSuccessfully = true;
             $scope.message = "Category has been added successfully";
@@ -99,6 +166,54 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
             $("#assetmodal").modal("hide");
 
             debugger;
+
+            $scope.getassetsagain();
+
+            setTimeout(function () {
+
+                debugger;
+
+                $scope.Expense.AssetID = response.data.assetID;
+                $scope.$apply();
+
+            },1500)
+
+            $scope.savedSuccessfully = true;
+            $scope.message = "Category has been added successfully";
+
+        },
+         function (response) {
+             var errors = [];
+             for (var key in response.data.modelState) {
+                 for (var i = 0; i < response.data.modelState[key].length; i++) {
+                     errors.push(response.data.modelState[key][i]);
+                 }
+             }
+             $scope.message = "Failed to add Category due to:" + errors.join(' ');
+         });
+    };
+
+
+    $scope.saveNewSupplier = function () {
+
+
+
+        ordersService.saveSupplier($scope.Supplierobject).then(function (response) {
+
+            $("#suppliermodal").modal("hide");
+
+            debugger;
+
+            $scope.getsupplieragain();
+
+            setTimeout(function () {
+
+                debugger;
+
+                $scope.Expense.SupplierID = response.data.supplierID;
+                $scope.$apply();
+
+            }, 1500)
 
             $scope.savedSuccessfully = true;
             $scope.message = "Category has been added successfully";
@@ -128,6 +243,20 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     });
 
 
+    $scope.getassetsagain = function () {
+        ordersService.getAssets().then(function (results) {
+
+            $scope.assets = results.data;
+
+
+        }, function (error) {
+
+            //alert(error.data.message);
+        });
+    }
+
+
+
     ordersService.getAssets().then(function (results) {
 
         $scope.assets = results.data;
@@ -138,11 +267,41 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     });
 
 
+    $scope.getcategoryagain = function () {
+        ordersService.getCategory().then(function (results) {
+            $scope.categories = results.data;
+
+        }, function (error) {
+        });
+    }
+
+
     ordersService.getCategory().then(function (results) {     
         $scope.categories = results.data;      
 
     }, function (error) {
     });
+
+
+    $scope.getsupplieragain = function () {
+        ordersService.getSupplier().then(function (results) {
+
+            debugger;
+            $scope.suppliers = results.data;
+
+        }, function (error) {
+        });
+    }
+
+
+    ordersService.getSupplier().then(function (results) {
+
+        debugger;
+        $scope.suppliers = results.data;
+
+    }, function (error) {
+    });
+
 
     $scope.newcategory = function () {
      
@@ -155,6 +314,15 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
         $("#assetmodal").modal("show");
     }
+
+
+    $scope.newsupplier = function () {
+
+
+        $("#suppliermodal").modal("show");
+    }
+
+    
 
 
     
