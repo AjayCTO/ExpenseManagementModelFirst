@@ -10,10 +10,66 @@
 
 <div class="separator-breadcrumb border-top"></div>
 
+<div ng-if="showlist==true">
+    <button data-ng-click="addnewexpense()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Expense</button>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+
+                <th>
+                    Name
+                </th>
+
+                <th>
+                    Category
+                </th>
+
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Description
+                </th>
+
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+
+        <tr ng-repeat="obj in ListOfExpenses">
+            <td>
+                {{obj.project.name}}
+            </td>
+
+            <td>
+                {{obj.Category.name}}
+            </td>
+
+            <td>
+                {{obj.amount}}
+            </td>
+
+            <td>
+                {{obj.description}}
+            </td>
+
+            <td>
+                <!--<button ng-click="getProjectByID(obj.ProjectID)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> GetByID</button>
+                <button ng-click="updateProject(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>-->
+                <button ng-click="deleteProject(obj.ProjectID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>
+            </td>
 
 
+        </tr>
+    </table>
+</div>
+
+
+
+<div ng-if="showlist==false">
     <div class="row">
-        
+
 
         <div class="col-md-6">
             <div class="form-group">
@@ -35,7 +91,7 @@
         </div>
     </div>
 
-    
+
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -50,7 +106,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <div class="row">
         <div class="col-md-6">
@@ -80,7 +136,7 @@
                     <option data-ng-repeat="as in assets" value="{{as.AssetID}}">{{as.name}}</option>
                 </select>
 
-              
+
             </div>
             <div class="form-group">
                 <label> Select Category <a data-ng-click="newcategory()" style="float:right">New</a></label>
@@ -90,14 +146,14 @@
                     <option data-ng-repeat="cat in categories" value="{{cat.CategoryID}}">{{cat.name}}</option>
                 </select>
 
-            
+
             </div>
 
             <div class="form-group">
                 <label>Description</label>
                 <input type="text" class="form-control" placeholder="Description" data-ng-model="Expense.Description" required>
             </div>
-            
+
         </div>
         <div style="display:none;" class="col-md-6">
             <label>Receipt</label>
@@ -108,9 +164,12 @@
             </form>
         </div>
     </div>
-    
+
     <button class="btn btn-primary m-1" type="submit" data-ng-click="saveExpense()">Save</button>
-<button  type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+    <button type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+</div>
+
+   
 
 
   <!-- Modal -->

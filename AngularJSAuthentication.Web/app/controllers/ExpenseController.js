@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope, ordersService) {
+app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
         
     $scope.Expense = {
         ExpenseID: null,
@@ -16,14 +16,14 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
 
     $scope.Categoryobject = {
         CategoryID: null,
-        ProjectID: 2,
+        ProjectID: 3,
         Name: "",
         Description: ""
     };
 
     $scope.Assetobject = {
         AssetID: null,
-        ProjectID: 2,
+        ProjectID: 3,
         Name: "",
         Contact: "",
         Address: "",
@@ -32,6 +32,13 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
         ApplicationUser_Id: null
     };
 
+
+    $scope.addnewexpense = function () {
+        $scope.showlist = false;
+    }
+
+    $scope.showlist = true;
+
     $scope.newcategoryname = "";
 
     $scope.savedSuccessfully = false;
@@ -39,8 +46,13 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
     $scope.ListOfExpenses = [];
 
     ordersService.getExpense().then(function (results) {
+
+        alert("success");
+
+        debugger;
       
         $scope.ListOfExpenses = results.data;
+        console.log($scope.ListOfExpenses);
 
     }, function (error) {
       
@@ -54,7 +66,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', function ($scope
 
     $scope.saveNewCategory = function () {
 
-        var userName = localStorageService.get('authorizationData').userName;
+    
        
         ordersService.saveCategory($scope.Categoryobject).then(function (response) {
 

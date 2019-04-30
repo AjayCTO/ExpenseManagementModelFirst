@@ -18,9 +18,9 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET: api/Expenses
-        public IEnumerable<Expense> GetExpenses()
+        public List<Expense> GetExpenses()
         {
-            return db.Expenses;
+            return db.Expenses.ToList();
         }
 
         // GET: api/Expenses/5
@@ -79,7 +79,7 @@ namespace AngularJSAuthentication.API.Controllers
             var userID = db.Users.FirstOrDefault(x => x.UserName == expense.UserName).Id;
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                //return BadRequest(ModelState);
             }
             expense.Expense.UserId = userID;
 
