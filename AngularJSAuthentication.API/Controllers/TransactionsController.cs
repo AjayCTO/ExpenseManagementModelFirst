@@ -34,7 +34,7 @@ namespace AngularJSAuthentication.API.Controllers
 
             foreach (var expense in expenses)
             {
-                DashboardProjectModel.totalExpense = (decimal)(DashboardProjectModel.totalExpense + expense.Amount);
+                DashboardProjectModel.totalExpense = (decimal)(DashboardProjectModel.totalExpense + (expense.Amount != null ? expense.Amount : 0));
             }
 
 
