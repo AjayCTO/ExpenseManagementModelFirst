@@ -146,6 +146,12 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
         });
     };
 
+    var _getExpenseByProjectID = function (id) {
+        return $http.get(serviceBase + 'api/Expenses/GetExpenseByProjectID', { params: { id: id } }).then(function (results) {
+            return results;
+        });
+    };
+
     var _saveExpense = function (Expense, userName) {
 
         var expenseUserModel = { Expense: Expense, userName: userName };
@@ -325,6 +331,13 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     }
 
+    var _getTransactionByID = function (id) {
+        return $http.get(serviceBase + 'api/Transactions/GetTransaction', { params: { id: id } }).then(function (results) {
+            return results;
+        });
+    };
+
+
 
 
     ordersServiceFactory.getOrders = _getOrders;
@@ -357,6 +370,8 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ordersServiceFactory.updateExpense = _updateExpense;
     ordersServiceFactory.deleteExpense = _deleteExpense;
 
+    ordersServiceFactory.getExpenseByProjectID = _getExpenseByProjectID;
+
 
     ordersServiceFactory.getIncoming = _getIncoming; 
     ordersServiceFactory.saveIncoming = _saveIncoming;
@@ -382,7 +397,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     
     ordersServiceFactory.customMethod = _customMethod;
-
+    ordersServiceFactory.getTransactionByID = _getTransactionByID;
 
     return ordersServiceFactory;
 

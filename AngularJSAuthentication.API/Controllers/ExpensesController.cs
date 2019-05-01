@@ -67,18 +67,31 @@ namespace AngularJSAuthentication.API.Controllers
             return ExpenseModelList;
         }
 
-        // GET: api/Expenses/5
-        [ResponseType(typeof(Expense))]
-        //public IHttpActionResult GetExpense(short id)
-        //{
-        //    Expense expense = db.Expenses.Find(id);
-        //    if (expense == null)
-        //    {
-        //        return NotFound();
-        //    }
+         //GET: api/Expenses/5
+        [HttpGet]
+        [Route("GetExpenseByProjectID")]
+        [ActionName("GetExpenseByProjectID")]
+        public List<ExpenseModel> GetExpenseByProjectID(short id)
+        {
+            List<ExpenseModel> ExpenseModelList = new List<ExpenseModel>();
 
-        //    return Ok(expense);
-        //}
+            var expenses = db.Expenses.Where(x => x.ProjectID == id).ToList();
+
+            foreach (var expense in expenses)
+            {
+                ExpenseModel ExpenseModel = new Models.ExpenseModel();
+                ExpenseModel.expenseID = expense.ExpenseID;
+                ExpenseModel.projectName = expense.Project.Name;
+                ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
+                ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
+                ExpenseModel.TotalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
+                ExpenseModel.description = expense.Description;
+                ExpenseModelList.Add(ExpenseModel);
+            }
+
+
+            return ExpenseModelList;
+        }
 
         // PUT: api/Expenses/5
         [ResponseType(typeof(void))]
