@@ -4,17 +4,33 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
     $scope.Category = {
         CategoryID:null,
         ProjectID:null,
-        Name: "",
-        Description: ""
+        name: "",
+        description: ""
     };
 
     $scope.ListOfCategories = [];
 
     $scope.savedSuccessfully = false; 
 
+    $scope.openEditModal = function(category) {
+        $scope.Category = {
+            categoryID: category.categoryID,
+            projectID: category.projectID,
+            name: category.name,
+            description: category.description
+        };
 
+        $scope.showlist = false;
+    }
     
 
+    $scope.showcategorylist = function () {
+        $scope.showlist = true;
+    }
+
+
+
+    $scope.showlist = true;
     ordersService.getCategory().then(function (results) {
 
         $scope.ListOfCategories = results.data;
@@ -35,7 +51,22 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
 
     }
 
+    $scope.addnewcategory = function () {
 
+        $scope.Category = {
+            CategoryID: null,
+            ProjectID: null,
+            name: "",
+            description: ""
+        };
+
+        $scope.showlist = false;
+    }
+
+    
+    $scope.showprojectlist = function () {
+        $scope.showlist = true;
+    }
 
     $scope.saveCategory = function () {
 

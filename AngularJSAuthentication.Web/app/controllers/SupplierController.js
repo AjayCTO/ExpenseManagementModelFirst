@@ -97,6 +97,17 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.addnewsupplier = function () {
+        $scope.Supplier = {
+            SupplierID: "",
+            Name: "",
+            Address: "",
+            Contact: "",
+            AmountPaid: "",
+            Category: "",
+            TotalAmount: "",
+            ProjectID: 0
+        };
+
         $scope.showlist = false;
     }
 

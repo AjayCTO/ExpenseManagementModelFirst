@@ -49,8 +49,8 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/category", {
-        controller: "categoryController",
-        templateUrl: "/app/views/category.html"
+        controller: "CategoryController",
+        templateUrl: "/app/views/Category.html"
     });
 
     $routeProvider.when("/expense", {

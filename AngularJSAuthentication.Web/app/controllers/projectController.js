@@ -131,6 +131,15 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
 
 
     $scope.addnewproject = function () {
+        $scope.project = {
+            projectID: null,
+            name: "",
+            billingMethod: "",
+            customerID: null,
+            TotalCost: ""
+        };
+
+
         $scope.showlist = false;
     }
 

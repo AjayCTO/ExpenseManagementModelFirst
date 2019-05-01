@@ -21,6 +21,17 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
     $scope.savedSuccessfully = false;
 
     $scope.addnewasset = function () {
+        $scope.Asset = {
+            assetID: null,
+            projectID: null,
+            name: "",
+            contact: "",
+            address: "",
+            business: "",
+            userID: null,
+            applicationUser_Id: null
+        };
+
         $scope.showlist = false;
     }    
   

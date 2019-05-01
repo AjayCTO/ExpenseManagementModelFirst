@@ -40,8 +40,10 @@ namespace AngularJSAuthentication.API.Controllers
 
         // PUT: api/Categories/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCategory(int id, Category category)
+        public IHttpActionResult PutCategory(Category category)
         {
+            var id = category.CategoryID;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
