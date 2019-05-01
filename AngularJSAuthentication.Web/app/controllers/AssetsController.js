@@ -3,14 +3,14 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
 
     $scope.Asset = {
-        AssetID: null,
-        ProjectID:null,
-        Name: "",
-        Contact: "",
-        Address: "",
-        Business: "",
-        UserID: null,
-        ApplicationUser_Id:null
+        assetID: null,
+        projectID:null,
+        name: "",
+        contact: "",
+        address: "",
+        business: "",
+        userID: null,
+        applicationUser_Id:null
     };
 
     $scope.showlist = true;
@@ -89,6 +89,27 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
              $scope.message = "Failed to add Asset due to:" + errors.join(' ');
          });
     };
+
+
+
+    $scope.openEditModal = function (Asset) {
+
+       
+        $scope.Asset = {
+            assetID: Asset.assetID,
+            projectID: Asset.projectID,
+            name: Asset.name,
+            contact: Asset.contact,
+            address: Asset.address,
+            business: Asset.business,
+            userID: Asset.userID,
+            applicationUser_Id: Asset.applicationUser_Id
+        };
+
+        $scope.showlist = false;
+    }
+
+
 
     $scope.updateAsset = function () {
 

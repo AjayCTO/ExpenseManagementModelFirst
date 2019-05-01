@@ -57,12 +57,14 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
             AmountPaid: obj.amountPaid,
             Category: obj.category,
             TotalAmount: obj.totalAmount,
-            ProjectID: 0
+            ProjectID: obj.projectID
         };
 
 
         console.log("Edit");
         console.log($scope.Supplier);
+
+        $scope.showlist = false;
 
     }
 

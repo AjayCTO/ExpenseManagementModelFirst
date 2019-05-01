@@ -51,8 +51,10 @@ namespace AngularJSAuthentication.API.Controllers
 
         // PUT: api/Suppliers/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSupplier(int id, Supplier supplier)
+        public IHttpActionResult PutSupplier(Supplier supplier)
         {
+            var id = supplier.SupplierID;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

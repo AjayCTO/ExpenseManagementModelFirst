@@ -44,8 +44,8 @@
             </td>
 
             <td>
-                <button type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
-                <button ng-click="deleteAsset(obj.ProjectID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>
+                <button ng-click="openEditModal(obj)"  type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
+                <button ng-click="deleteAsset(obj.assetID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>
 
             </td>
 
@@ -59,23 +59,23 @@
 
     <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control" placeholder="Name" data-ng-model="Asset.Name" required autofocus>
+        <input type="text" class="form-control" placeholder="Name" data-ng-model="Asset.name" required autofocus>
     </div>
 
     <div class="form-group">
         <label>Contact</label>
-        <input type="text" class="form-control" placeholder="Contact" data-ng-model="Asset.Contact" required>
+        <input type="text" class="form-control" placeholder="Contact" data-ng-model="Asset.contact" required>
     </div>
 
     <div class="form-group">
         <label>Business</label>
-        <input type="text" class="form-control" placeholder="Business" data-ng-model="Asset.Business" required>
+        <input type="text" class="form-control" placeholder="Business" data-ng-model="Asset.nusiness" required>
     </div>
 
     <div class="form-group">
         <label>Project Name</label>
 
-        <select ng-model="Asset.ProjectID" class="form-control">
+        <select ng-model="Asset.projectID" class="form-control">
             <option selected value="">- Select Project -</option>
             <option ng-repeat="pr in ListOfProjects" value="{{pr.ProjectID}}">{{pr.name}}</option>
         </select>
@@ -92,6 +92,7 @@
     <form class="form-login" role="form">
 
         <button class="btn btn-primary m-1" type="submit" data-ng-click="saveAsset()">Save</button>
+        <button class="btn btn-primary m-1" type="submit" data-ng-click="updateAsset()">Update</button>
         <button data-ng-click="showlistofassets()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
 
     </form>
