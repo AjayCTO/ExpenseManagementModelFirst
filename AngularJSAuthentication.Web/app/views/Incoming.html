@@ -1,8 +1,89 @@
 ﻿
 
+<div class="breadcrumb">
+    <h1>Money for Projects</h1>
+    <ul>
+        <li><a href="">Dashboard</a></li>
+        <li>Version 1</li>
+    </ul>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
 
 
-<form class="form-login" role="form">
+<div ng-if="showlist==true">
+    <button data-ng-click="addnewincoming()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Money</button>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Amount
+                </th>
+                <th>
+                   Source Name
+                </th>
+               
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+
+        <tr ng-repeat="obj in ListOfIncoming">
+            <td>
+                {{obj.amount}}
+            </td>
+            <td>
+                {{obj.sourceName}}
+            </td>
+
+            <td>
+                <button ng-click="getIncomingByIDdForEdit(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
+                <button ng-click="deleteSupplier(obj.supplierID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<form ng-if="showlist==false" class="form-login" role="form">
+   
+
+    <div class="form-group">
+        <label> Source Name -- {{Incoming.SourceName}}</label>
+        <input type="text" class="form-control" placeholder="Name" data-ng-model="Incoming.SourceName" required autofocus>
+    </div>
+
+   
+
+    <div class="form-group">
+        <label> Select Project  </label>
+
+        <select class="form-control" data-ng-model="Incoming.ProjectID">
+            <option selected value="">- Select Project -</option>
+            <option data-ng-repeat="cat in ListOfProjects" value="{{cat.projectID}}">{{cat.name}}</option>
+        </select>
+
+
+    </div>
+
+    <div class="form-group">
+        <label>Total Amount</label>
+        <input type="text" class="form-control" placeholder="Total Cost" data-ng-model="Incoming.Amount" required>
+    </div>
+
+   
+
+
+    <button class="btn btn-primary m-1" type="submit" data-ng-click="saveIncoming()"> <i class="fa fa-check"></i> Save</button>
+    <button class="btn btn-primary m-1" type="submit" data-ng-click="updateIncoming()"> <i class="fa fa-check"></i> Update</button>
+    <button data-ng-click="showlistofsuppliers()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+
+</form>
+
+
+
+<!--<form class="form-login" role="form">
     <h2 class="form-login-heading">Create Incoming</h2>
     <input type="text" class="form-control" placeholder="Date" data-ng-model="Incoming.Date" required autofocus>
     <input type="text" class="form-control" placeholder="Amount" data-ng-model="Incoming.Amount" required>
@@ -11,4 +92,4 @@
     <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
         {{message}}
     </div>
-</form>
+</form>-->

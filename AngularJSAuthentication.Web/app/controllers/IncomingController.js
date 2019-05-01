@@ -1,5 +1,7 @@
 ﻿'use strict';
-app.controller('IncomingController', ['$scope', 'ordersService', function ($scope, ordersService) {
+app.controller('incomingController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
+
+   
 
     $scope.Incoming = {
         IncomingID: null,
@@ -12,13 +14,38 @@ app.controller('IncomingController', ['$scope', 'ordersService', function ($scop
 
     $scope.ListOfIncoming = [];
 
-    ordersService.getIncoming().then(function (results) {      
+    $scope.userName = localStorageService.get('authorizationData').userName;
+
+    ordersService.getIncoming().then(function (results) {
+
+       
 
         $scope.ListOfIncoming = results.data;
+        console.log("Incoming");
+        console.log($scope.ListOfIncoming);
 
     }, function (error) {
         //alert(error.data.message);
     });
+
+
+    ordersService.getProjects($scope.userName).then(function (results) {
+
+        alert("Success");
+        debugger;
+
+        $scope.ListOfProjects = results.data;
+    }, function (error) {
+    });
+
+
+
+    $scope.showlist = true;
+
+    $scope.addnewincoming = function () {
+        $scope.showlist = false;
+    }
+
 
 
     $scope.getIncomingByID = function (id) {
@@ -34,7 +61,12 @@ app.controller('IncomingController', ['$scope', 'ordersService', function ($scop
 
     $scope.saveIncoming = function () {
 
+        debugger;
+
+
         ordersService.saveIncoming($scope.Incoming).then(function (response) {
+
+            $scope.showlist = true;
 
             $scope.savedSuccessfully = true;
             $scope.message = "Incoming has been added successfully";

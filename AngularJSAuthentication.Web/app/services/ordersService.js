@@ -15,6 +15,10 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ///////////////////////////////////////////////////////////////////////////////
 
     var _getProjects = function (userName) {
+
+        alert("Get");
+
+        debugger;
         return $http.get(serviceBase + 'api/Projects/GetProjects', { params: { userName: userName } }).then(function (results) {
 
             return results;
@@ -169,6 +173,8 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     //////////////////////////////////////////////////////////////////////////////////////////
 
     var _getIncoming = function () {
+
+
         return $http.get(serviceBase + 'api/Incomings').then(function (results) {
             return results;
         });

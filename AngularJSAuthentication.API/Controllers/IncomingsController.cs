@@ -18,9 +18,9 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET: api/Incomings
-        public IQueryable<Incoming> GetIncomings()
+        public List<Incoming> GetIncomings()
         {
-            return db.Incomings;
+            return db.Incomings.ToList();
         }
 
         // GET: api/Incomings/5
@@ -75,10 +75,10 @@ namespace AngularJSAuthentication.API.Controllers
         [ResponseType(typeof(Incoming))]
         public IHttpActionResult PostIncoming(Incoming incoming)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             db.Incomings.Add(incoming);
             db.SaveChanges();

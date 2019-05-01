@@ -47,11 +47,9 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         $scope.showlist = false;
     }
 
-    
     $scope.showexpenselist = function () {
         $scope.showlist = true;
     }
-
 
     $scope.showlist = true;
 
