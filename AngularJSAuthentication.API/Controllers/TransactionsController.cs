@@ -24,16 +24,33 @@ namespace AngularJSAuthentication.API.Controllers
         }
 
         // GET: api/Transactions/5
-        [ResponseType(typeof(Transaction))]
-        public IHttpActionResult GetTransaction(short id)
+        [ResponseType(typeof(DashboardProjectModel))]
+        public DashboardProjectModel GetTransaction(short id)
         {
-            Transaction transaction = db.Transaction.Find(id);
-            if (transaction == null)
+            DashboardProjectModel DashboardProjectModel = new DashboardProjectModel();
+
+            var expenses = db.Expenses.Where(x => x.ProjectID == id).ToList();
+            DashboardProjectModel.Expenses = expenses;
+
+            foreach (var expense in expenses)
             {
-                return NotFound();
+                DashboardProjectModel.totalExpense = (decimal)(DashboardProjectModel.totalExpense + expense.Amount);
             }
 
-            return Ok(transaction);
+
+
+            var project = db.Projects.FirstOrDefault(x => x.ProjectID == id);
+            DashboardProjectModel.totalCost = project.TotalCost;
+            DashboardProjectModel.projectName = project.Name;
+
+            var Incomings = db.Incomings.Where(x => x.ProjectID == id);
+            foreach (var income in Incomings)
+            {
+                DashboardProjectModel.totalIncoming = (decimal)(DashboardProjectModel.totalIncoming + income.Amount);
+            }
+
+
+            return DashboardProjectModel;
         }
 
         // PUT: api/Transactions/5

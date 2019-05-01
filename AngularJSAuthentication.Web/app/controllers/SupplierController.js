@@ -69,6 +69,16 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
     }
 
 
+    $scope.customMethod = function (obj) {
+        ordersService.customMethod(obj).then(function (results) {
+
+            $scope.ListOfProjects = results.data;
+        }, function (error) {
+        });
+    }
+
+
+
     $scope.userName = localStorageService.get('authorizationData').userName;
 
 

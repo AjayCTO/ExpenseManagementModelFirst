@@ -314,6 +314,17 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     };
 
 
+    var _customMethod = function (obj)
+    {
+        console.log("Custom Method");
+        console.log(obj);
+
+        return $http.get(serviceBase + 'api/Suppliers/SupplierByID', { params: { id: obj.supplierID } }).then(function (response) {
+            return response;
+        });
+
+    }
+
 
 
     ordersServiceFactory.getOrders = _getOrders;
@@ -368,6 +379,9 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     ordersServiceFactory.getCustomer = _getCustomer;
     ordersServiceFactory.saveCustomer = _saveCustomer;
+
+    
+    ordersServiceFactory.customMethod = _customMethod;
 
 
     return ordersServiceFactory;
