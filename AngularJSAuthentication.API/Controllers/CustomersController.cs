@@ -77,7 +77,7 @@ namespace AngularJSAuthentication.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                //return BadRequest(ModelState);
             }
 
             db.Customers.Add(customer);

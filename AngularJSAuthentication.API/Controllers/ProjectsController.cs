@@ -109,9 +109,6 @@ namespace AngularJSAuthentication.API.Controllers
             }
             var userID = db.Users.FirstOrDefault(x => x.UserName == project.UserName).Id;
 
-            //Dummy Customer
-            project.Project.CustomerID = 1;
-
             try
             {
                 project.Project.UserId = userID;

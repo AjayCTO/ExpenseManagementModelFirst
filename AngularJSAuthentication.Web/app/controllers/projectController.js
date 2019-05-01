@@ -5,9 +5,85 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
         projectID:null,
         name: "",
         billingMethod: "",
-        CustomerID: null,
+        customerID: null,
         TotalCost: ""
     };
+
+
+    $scope.Customerobject = {
+
+        Name: "",
+        Address: "",
+        Contact: "",
+        CustomerID: 0
+
+    };
+
+
+    $scope.openEditModal = function (project) {
+
+
+
+        $scope.project = {
+            projectID: project.projectID,
+            name: project.name,
+            billingMethod: project.billingMethod,
+            customerID: project.customerID,
+            totalCost: project.totalCost
+        };
+
+        $scope.showlist = false;
+    }
+
+
+
+    $scope.saveNewCustomer = function () {
+
+
+
+        ordersService.saveCustomer($scope.Customerobject).then(function (response) {
+
+            $("#customermodal").modal("hide");
+
+            debugger;
+
+            $scope.getcustomeragain();
+
+            setTimeout(function () {
+
+                debugger;
+
+                $scope.project.CustomerID = response.data.customerID;
+                $scope.$apply();
+
+            }, 1500)
+
+            $scope.savedSuccessfully = true;
+            $scope.message = "Category has been added successfully";
+
+        },
+         function (response) {
+             var errors = [];
+             for (var key in response.data.modelState) {
+                 for (var i = 0; i < response.data.modelState[key].length; i++) {
+                     errors.push(response.data.modelState[key][i]);
+                 }
+             }
+             $scope.message = "Failed to add Category due to:" + errors.join(' ');
+         });
+    };
+
+    $scope.getcustomeragain = function () {
+        ordersService.getCustomer().then(function (results) {
+
+            debugger;
+            $scope.ListOfcustomer = results.data;
+
+        }, function (error) {
+        });
+    }
+
+
     $scope.savedSuccessfully = false;
 
     $scope.showlist = true;
