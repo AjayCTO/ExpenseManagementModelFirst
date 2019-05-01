@@ -58,8 +58,10 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
         $scope.showlist = false;
     }
 
+    $scope.showprojectlist = function () {
+        $scope.showlist = true;
+    }
     
-
 
     $scope.saveProject = function () {
 

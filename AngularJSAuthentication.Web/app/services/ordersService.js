@@ -219,6 +219,8 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     var _getSupplier = function () {
         return $http.get(serviceBase + 'api/Suppliers').then(function (results) {
+            console.log("Supplier");
+            console.log(results);
             return results;
         });
     };
@@ -226,6 +228,16 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     var _getSupplierByID = function (id) {
         return $http.get(serviceBase + 'api/Suppliers/GetSupplier', { params: { id: id } }).then(function (results) {
+            return results;
+        });
+    };
+
+
+    var _getSupplierByIDdForEdit = function (id) {
+
+        alert(id);
+
+        return $http.get(serviceBase + 'api/Suppliers/SupplierByID', { params: { id: id } }).then(function (results) {
             return results;
         });
     };
@@ -334,6 +346,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     ordersServiceFactory.getSupplier = _getSupplier;
     ordersServiceFactory.saveSupplier = _saveSupplier;
+    ordersServiceFactory.getSupplierByIDdForEdit = _getSupplierByIDdForEdit;
     ordersServiceFactory.getSupplierByID = _getSupplierByID;
     ordersServiceFactory.updateSupplier = _updateSupplier;
     ordersServiceFactory.deleteSupplier = _deleteSupplier;

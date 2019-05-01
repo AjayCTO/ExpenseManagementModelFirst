@@ -140,6 +140,13 @@ namespace AngularJSAuthentication.API.Controllers
             transaction.TotalAmount = (int?)expense.Expense.Amount;
 
             db.Transaction.Add(transaction);
+
+
+            var supplier = db.Suppliers.FirstOrDefault(x => x.SupplierID == expense.Expense.SupplierID);
+
+            supplier.AmountPaid = supplier.AmountPaid +expense.Expense.Amount;
+
+
             db.SaveChanges();
 
             return Ok(expense);

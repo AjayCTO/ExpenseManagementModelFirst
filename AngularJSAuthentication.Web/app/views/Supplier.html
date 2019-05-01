@@ -11,12 +11,12 @@
 
 
 <div ng-if="showlist==true">
-    <button data-ng-click="addnewproject()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Project</button>
+    <button data-ng-click="addnewsupplier()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Supplier</button>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>
-                    Supplier Name
+                    Supplier Nameee
                 </th>
                 <th>
                     Supplier Address
@@ -24,55 +24,59 @@
                 <th>
                     Supplier Contact
                 </th>
-
-                <th>
-                    Supplier Category
-                </th>
-
                 <th>
                     Supplier Total Amount
                 </th>
-
                 <th>
                     Supplier Amount Paid
+                </th>
+                <th>
+                    Amount Due
+                </th>
+                <th>
+                    Action
                 </th>
             </tr>
         </thead>
 
-        <tr ng-repeat="obj in ListOfOrders">
+        <tr ng-repeat="obj in ListOfSupplier">
             <td>
-                {{obj.Name}}
-            </td>
-
-            <td>
-                {{obj.Address}}
-            </td>
-
-            <td>
-                {{obj.Contact}}
+                {{obj.name}}
             </td>
             <td>
-                {{obj.Category}}
+                {{obj.address}}
             </td>
             <td>
-                {{obj.TotalAmount}}
+                {{obj.contact}}
+            </td>            
+            <td>
+                {{obj.totalAmount}}
             </td>
             <td>
-                {{obj.AmountPaid}}
+                {{obj.amountPaid}}
             </td>
             <td>
-                <button type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
-                <button ng-click="deleteSupplier(obj.SupplierID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>
-
+                {{obj.totalAmount - obj.amountPaid}}
             </td>
-
-
+            <td>
+                <button ng-click="getSupplierByIDdForEdit(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
+                <button ng-click="deleteSupplier(obj.supplierID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>
+            </td>
         </tr>
     </table>
 </div>
 
 
 <form ng-if="showlist==false" class="form-login" role="form">
+    <div class="form-group">
+        <label>Project Name </label>
+        <select ng-change="getdatabyid(Supplier.ProjectID)" ng-model="Supplier.ProjectID" class="form-control">
+            <option selected value="">- Select Project -</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}">{{pr.name}}</option>
+        </select>
+
+
+    </div>
 
 
     <div class="form-group">
@@ -91,8 +95,14 @@
     </div>
 
     <div class="form-group">
-        <label>Category</label>
-        <input type="text" class="form-control" placeholder="Total Cost" data-ng-model="Supplier.Category" required>
+        <label> Select Category -- {{Expense.CategoryID}} <a data-ng-click="newcategory()" style="float:right">New</a></label>
+
+        <select class="form-control" data-ng-model="Expense.CategoryID">
+            <option selected value="">- Select Category -</option>
+            <option data-ng-repeat="cat in categories" value="{{cat.categoryID}}">{{cat.name}}</option>
+        </select>
+
+
     </div>
 
     <div class="form-group">
@@ -107,6 +117,6 @@
 
 
     <button class="btn btn-primary m-1" type="submit" data-ng-click="saveSupplier()"> <i class="fa fa-check"></i> Save</button>
-    <button data-ng-click="showlist=true;" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+    <button data-ng-click="showlistofsuppliers()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
 
 </form>

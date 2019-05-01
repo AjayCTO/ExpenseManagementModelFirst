@@ -32,15 +32,15 @@
 
         <tr ng-repeat="obj in ListOfAssets">
             <td>
-                {{obj.Name}}
+                {{obj.name}}
             </td>
 
             <td>
-                {{obj.Contact}}
+                {{obj.contact}}
             </td>
 
             <td>
-                {{obj.Address}}
+                {{obj.address}}
             </td>
 
             <td>
@@ -77,7 +77,7 @@
 
         <select ng-model="Asset.ProjectID" class="form-control">
             <option selected value="">- Select Project -</option>
-            <option ng-repeat="pr in projects" value="{{pr.ProjectID}}">{{pr.Name}}</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.ProjectID}}">{{pr.name}}</option>
         </select>
 
 
@@ -92,6 +92,7 @@
     <form class="form-login" role="form">
 
         <button class="btn btn-primary m-1" type="submit" data-ng-click="saveAsset()">Save</button>
+        <button data-ng-click="showlistofassets()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
 
     </form>
 </div>

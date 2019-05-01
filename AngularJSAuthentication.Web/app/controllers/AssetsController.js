@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('AssetsController', ['$scope', 'ordersService', function ($scope, ordersService) {
+app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
 
     $scope.Asset = {
@@ -22,14 +22,17 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
 
     $scope.addnewasset = function () {
         $scope.showlist = false;
-    }
-
+    }    
   
+    $scope.showlistofassets = function () {
+        $scope.showlist = true;
+    }
 
     ordersService.getAssets().then(function (results) {
         $scope.ListOfAssets = results.data;
 
         console.log("rrrr");
+        console.log($scope.ListOfAssets);
 
         console.log($scope.ListOfAssets);
 
@@ -38,11 +41,14 @@ app.controller('AssetsController', ['$scope', 'ordersService', function ($scope,
     });
 
 
-    //ordersService.getProjects().then(function (results) {
-    //    $scope.projects = results.data;
-     
-    //}, function (error) {
-    //});
+    $scope.userName = localStorageService.get('authorizationData').userName;
+
+
+    ordersService.getProjects($scope.userName).then(function (results) {
+
+        $scope.ListOfProjects = results.data;
+    }, function (error) {
+    });
 
 
     $scope.getAssetsByID = function (id) {

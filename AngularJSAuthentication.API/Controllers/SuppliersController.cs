@@ -13,6 +13,7 @@ using AngularJSAuthentication.API.Models;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+    [RoutePrefix("api/Projects")]
     public class SuppliersController : ApiController
     {
         private AuthContext db = new AuthContext();
@@ -23,6 +24,10 @@ namespace AngularJSAuthentication.API.Controllers
             return db.Suppliers.ToList();
         }
 
+
+        [HttpGet]
+        [Route("GetSupplier")]
+        [ActionName("GetSupplier")]
         // GET: api/Suppliers/5
         [ResponseType(typeof(Supplier))]
         public List<Supplier> GetSupplier(int id)
@@ -32,6 +37,17 @@ namespace AngularJSAuthentication.API.Controllers
 
             return listOfSupplier;
         }
+
+        // [HttpGet]
+        //[Route("SupplierByID")]
+        // [ActionName("SupplierByID")]
+        //public Supplier SupplierByID(int id)
+        //{
+        //    Supplier Supplier = new Supplier();
+        //    Supplier = db.Suppliers.FirstOrDefault(x => x.SupplierID == id);
+
+        //    return Supplier;
+        //}
 
         // PUT: api/Suppliers/5
         [ResponseType(typeof(void))]

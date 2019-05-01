@@ -47,6 +47,12 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         $scope.showlist = false;
     }
 
+    
+    $scope.showexpenselist = function () {
+        $scope.showlist = true;
+    }
+
+
     $scope.showlist = true;
 
     $scope.newcategoryname = "";
@@ -239,7 +245,11 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
 
   
+    ordersService.getProjects($scope.userName).then(function (results) {
 
+        $scope.ListOfProjects = results.data;
+    }, function (error) {
+    });
 
     ordersService.getProjects().then(function (results) {
         $scope.projects = results.data;

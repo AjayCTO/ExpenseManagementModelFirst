@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('SupplierController', ['$scope', 'ordersService', function ($scope, ordersService) {
+app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.Supplier = {
         SupplierID:"",
@@ -8,7 +8,8 @@ app.controller('SupplierController', ['$scope', 'ordersService', function ($scop
         Contact: "",
         AmountPaid: "",
         Category: "",
-        TotalAmount: ""
+        TotalAmount: "",
+        ProjectID:0
     };
     $scope.savedSuccessfully = false;
 
@@ -17,9 +18,61 @@ app.controller('SupplierController', ['$scope', 'ordersService', function ($scop
 
     $scope.ListOfSupplier = [];
 
-    ordersService.getSupplier().then(function (results) {
+    ordersService.getSupplier().then(function (results) {       
         $scope.ListOfSupplier = results.data;
+    }, function (error) {
+    });
 
+
+
+
+
+    $scope.getdatabyid = function (id) {
+
+        alert(id);
+
+        $scope.Supplier.ProjectID = id;
+      
+        ordersService.getCategoryByID(id).then(function (results) {
+
+            $scope.categories = results.data;
+
+        }, function (error) {
+            debugger;
+            //alert(error.data.message);
+        });
+
+        
+
+       
+    }
+
+
+    $scope.getSupplierByIDdForEdit = function (obj) {
+        $scope.Supplier = {
+            SupplierID: obj.supplierID,
+            Name: obj.name,
+            Address: obj.address,
+            Contact: obj.contact,
+            AmountPaid: obj.amountPaid,
+            Category: obj.category,
+            TotalAmount: obj.totalAmount,
+            ProjectID: 0
+        };
+
+
+        console.log("Edit");
+        console.log($scope.Supplier);
+
+    }
+
+
+    $scope.userName = localStorageService.get('authorizationData').userName;
+
+
+    ordersService.getProjects($scope.userName).then(function (results) {
+
+        $scope.ListOfProjects = results.data;
     }, function (error) {
     });
 
@@ -36,12 +89,14 @@ app.controller('SupplierController', ['$scope', 'ordersService', function ($scop
     }
 
 
-    $scope.addnewSupplier = function () {
-        $scope.showlist = false;
+    $scope.showlistofsuppliers = function () {
+        $scope.showlist = true;
     }
 
 
-
+    $scope.addnewsupplier = function () {
+        $scope.showlist = false;
+    }
 
     $scope.saveSupplier = function () {
 
