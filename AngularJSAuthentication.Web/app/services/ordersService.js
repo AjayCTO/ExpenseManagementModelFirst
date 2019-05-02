@@ -16,8 +16,6 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     var _getProjects = function (userName) {
 
-        alert("Get");
-
         debugger;
         return $http.get(serviceBase + 'api/Projects/GetProjects', { params: { userName: userName } }).then(function (results) {
 
@@ -40,12 +38,10 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
         });
     };
 
-    var _updateProject = function (project) {
-
-        console.log("Update Project");
-        console.log(project);
-
-        return $http.put(serviceBase + 'api/Projects/PutProject', project).then(function (response) {
+    var _updateProject = function (project, Name) {
+     
+        var projectUserModel = { Project: project, UserName: Name };
+        return $http.put(serviceBase + 'api/Projects/PutProject', projectUserModel).then(function (response) {
             return response;
         });
     };
@@ -73,6 +69,16 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
             return results;
         });
     };
+
+
+    var _getAssetsByProjectID = function (id) {
+        return $http.get(serviceBase + 'api/Assets/GetAssetByProjectID', { params: { id: id } }).then(function (results) {
+            return results;
+        });
+    };
+
+
+
 
     var _deleteAsset = function (id) {
         return $http.get(serviceBase + 'api/Assets/DeleteAsset', { params: { id: id } }).then(function (results) {
@@ -162,8 +168,11 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     };
 
 
-    var _updateExpense = function (Expense) {
-        return $http.put(serviceBase + 'api/Expenses/PutExpense', Expense).then(function (response) {
+    var _updateExpense = function (Expense, userName) {
+
+        var expenseUserModel = { Expense: Expense, userName: userName };
+
+        return $http.put(serviceBase + 'api/Expenses/PutExpense', expenseUserModel).then(function (response) {
             return response;
         });
     };
@@ -192,6 +201,14 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
             return results;
         });
     };
+
+
+    var _getIncomingByProjectID = function (id) {
+        return $http.get(serviceBase + 'api/Incomings/GetIncomingByProjectID', { params: { id: id } }).then(function (results) {
+            return results;
+        });
+    };
+
 
     var _saveIncoming = function (Incoming) {
         return $http.post(serviceBase + 'api/Incomings/PostIncoming', Incoming).then(function (response) {
@@ -254,10 +271,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     };
 
 
-    var _getSupplierByIDdForEdit = function (id) {
-
-        alert(id);
-
+    var _getSupplierByIDdForEdit = function (id) {   
         return $http.get(serviceBase + 'api/Suppliers/SupplierByID', { params: { id: id } }).then(function (results) {
             return results;
         });
@@ -351,8 +365,9 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
     ordersServiceFactory.getAssets = _getAssets;
-    ordersServiceFactory.saveAsset = _saveAsset;
+    ordersServiceFactory.saveAsset = _saveAsset; 
     ordersServiceFactory.getAssetsByID = _getAssetsByID;
+    ordersServiceFactory.getAssetsByProjectID = _getAssetsByProjectID;
     ordersServiceFactory.updateAsset = _updateAsset;
     ordersServiceFactory.deleteAsset = _deleteAsset;
 
@@ -376,6 +391,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ordersServiceFactory.getIncoming = _getIncoming; 
     ordersServiceFactory.saveIncoming = _saveIncoming;
     ordersServiceFactory.getIncomingByID = _getIncomingByID;
+    ordersServiceFactory.getIncomingByProjectID = _getIncomingByProjectID;
     ordersServiceFactory.updateIncomeing = _updateIncoming;
     ordersServiceFactory.deleteIncoming = _deleteIncoming;
 

@@ -57,10 +57,17 @@ namespace AngularJSAuthentication.API.Controllers
             {
                 ExpenseModel ExpenseModel = new Models.ExpenseModel();
                 ExpenseModel.expenseID = expense.ExpenseID;
+                ExpenseModel.projectID = (int)expense.ProjectID;
+                ExpenseModel.assetID = (int)expense.AssetID;
+                ExpenseModel.categoryID = (int)expense.CategoryID;
+                ExpenseModel.supplierID = (int)expense.SupplierID;
                 ExpenseModel.projectName = expense.Project.Name;
                 ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
                 ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
-                ExpenseModel.TotalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
+                ExpenseModel.totalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
+                ExpenseModel.refrence = expense.Refrence;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModel.isApproved = expense.IsApproved;
                 ExpenseModel.description = expense.Description;
                 ExpenseModelList.Add(ExpenseModel);
             }
@@ -84,7 +91,7 @@ namespace AngularJSAuthentication.API.Controllers
                 ExpenseModel.projectName = expense.Project.Name;
                 ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
                 ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
-                ExpenseModel.TotalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
+                ExpenseModel.totalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
                 ExpenseModel.description = expense.Description;
                 ExpenseModelList.Add(ExpenseModel);
             }
@@ -95,19 +102,24 @@ namespace AngularJSAuthentication.API.Controllers
 
         // PUT: api/Expenses/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutExpense(short id, Expense expense)
+        public IHttpActionResult PutExpense(ExpenseUserModel expense)
         {
+            var userID = db.Users.FirstOrDefault(x => x.UserName == expense.UserName).Id;
+            expense.Expense.UserId = userID;
+
+            var id = expense.Expense.ExpenseID;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != expense.ExpenseID)
+            if (id != expense.Expense.ExpenseID)
             {
                 return BadRequest();
             }
 
-            db.Entry(expense).State = EntityState.Modified;
+            db.Entry(expense.Expense).State = EntityState.Modified;
 
             try
             {

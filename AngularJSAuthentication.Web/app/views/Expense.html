@@ -11,6 +11,14 @@
 <div class="separator-breadcrumb border-top"></div>
 
 <div ng-if="showlist==true">
+
+    <div style="text-align:right" class="col-md-4">
+        <select ng-model="projectid" data-ng-change="getExpenseByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+            <option selected value="0">- Select Project -</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+        </select>
+    </div>
+
     <button data-ng-click="addnewexpense()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Expense</button>
     <table class="table table-bordered">
         <thead>
@@ -31,9 +39,9 @@
                     Description
                 </th>
 
-                <!--<th>
+                <th>
                     Action
-                </th>-->
+                </th>
             </tr>
         </thead>
 
@@ -54,11 +62,11 @@
                 {{obj.description}}
             </td>
 
-            <!--<td>-->
-                <!--<button ng-click="getProjectByID(obj.ProjectID)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> GetByID</button>
-                <button ng-click="updateProject(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>-->
+          <td>
+                <!--<button ng-click="getProjectByID(obj.ProjectID)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> GetByID</button>-->
+              <button ng-click="openEditModal(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
                 <!--<button ng-click="deleteProject(obj.ProjectID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>-->
-            <!--</td>-->
+           </td>
         </tr>
     </table>
 </div>
@@ -75,7 +83,7 @@
 
                 <select ng-change="getdatabyid(Expense.ProjectID)" ng-model="Expense.ProjectID" class="form-control">
                     <option selected value="">- Select Project -</option>
-                    <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}">{{pr.name}}</option>
+                    <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
                 </select>
 
 
@@ -99,11 +107,11 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label> Select Supplier -- {{Expense.SupplierID}} <a data-ng-click="newsupplier()" style="float:right">New</a></label>
+                <label> Select Supplier <a data-ng-click="newsupplier()" style="float:right">New</a></label>
 
                 <select class="form-control" data-ng-model="Expense.SupplierID">
                     <option selected value="">- Select Supplier -</option>
-                    <option data-ng-repeat="supp in suppliers" value="{{supp.supplierID}}">{{supp.name}}</option>
+                    <option data-ng-repeat="supp in suppliers" value="{{supp.supplierID}}" ng-selected="supp.supplierID == Expense.SupplierID">{{supp.name}}</option>
                 </select>
             </div>
         </div>
@@ -111,12 +119,7 @@
 
 
     <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Contact</label>
-                <input type="text" class="form-control" placeholder="Contact" data-ng-model="Expense.Contact" required>
-            </div>
-        </div>
+        
         <div class="col-md-6">
             <div class="form-group">
                 <label>IsApproved</label>
@@ -131,21 +134,21 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label>select Asset -- {{Expense.AssetID}} <a data-ng-click="newasset()" style="float:right">New</a></label>
+                <label>select Asset <a data-ng-click="newasset()" style="float:right">New</a></label>
 
                 <select class="form-control" data-ng-model="Expense.AssetID">
                     <option selected value="">- Select Asset -</option>
-                    <option data-ng-repeat="as in assets" value="{{as.assetID}}">{{as.name}}</option>
+                    <option data-ng-repeat="as in assets" value="{{as.assetID}}" ng-selected="as.assetID == Expense.AssetID">{{as.name}}</option>
                 </select>
 
 
             </div>
             <div class="form-group">
-                <label> Select Category -- {{Expense.CategoryID}} <a data-ng-click="newcategory()" style="float:right">New</a></label>
+                <label> Select Category  <a data-ng-click="newcategory()" style="float:right">New</a></label>
 
                 <select class="form-control" data-ng-model="Expense.CategoryID">
                     <option selected value="">- Select Category -</option>
-                    <option data-ng-repeat="cat in categories" value="{{cat.categoryID}}">{{cat.name}}</option>
+                    <option data-ng-repeat="cat in categories" value="{{cat.categoryID}}" ng-selected="cat.categoryID == Expense.CategoryID">{{cat.name}}</option>
                 </select>
 
 
@@ -157,7 +160,7 @@
             </div>
 
         </div>
-        <div style="display:none;" class="col-md-6">
+        <div  class="col-md-6">
             <label>Receipt</label>
             <form action="#" class="dropzone" id="single-file-upload">
                 <div class="fallback">
@@ -167,7 +170,8 @@
         </div>
     </div>
 
-    <button class="btn btn-primary m-1" type="submit" data-ng-click="saveExpense()">Save</button>
+    <button ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveExpense()">Save</button>
+    <button ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateExpense()">Update</button>
     <button type="button" data-ng-click="showexpenselist()" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
 </div>
 

@@ -8,5 +8,7 @@ namespace AngularJSAuthentication.API.Models
     public class Customer : Person
     {
         public int CustomerID { get; set; }
+
+
     }
 }

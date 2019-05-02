@@ -16,7 +16,7 @@
                         <i class="fa fa-user"></i>
                         <div class="content">
                             <p class="text-muted mt-2 mb-0">Projects</p>
-                            <p class="text-primary text-24 line-height-1 mb-2">205</p>
+                            <p class="text-primary text-24 line-height-1 mb-2">{{ListOfProjects.length}}</p>
                         </div>
                     </div>
                 </div>
@@ -126,12 +126,8 @@
                             <div class="row">
 
                                 <div class="col-md-12">
-                                    <a class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">Assets <span>35</span> </a>
-                                    <a class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">Assets <span>35</span> </a>
-                                    <a class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">Assets <span>35</span> </a>
-                                    <a class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">Assets <span>35</span> </a>
-                                    <a class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">Assets <span>35</span> </a>
-                                    <a class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">Assets <span>35</span> </a>
+                                    <a ng-repeat="obj in ListOfAssets" class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">{{obj.name}} <span>{{obj.totalAmount}}</span> </a>
+                                   
                                 </div>
 
                             </div>
@@ -159,61 +155,12 @@
                     <div class="flex-grow-1">
                         <h5 class=""><a href="">{{obj.description}}</a></h5>
                         <h5 class=""><a href="">{{obj.projectName}}</a></h5>
-                        <p class="m-0 text-small text-muted">{{obj.totalAmount}}</p>
-                        <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del></p>
+                        <p class="text-small text-danger m-0">${{obj.totalAmount}}</p>
                     </div>
                     <div>
                         <button class="btn btn-outline-primary btn-rounded btn-sm">View details</button>
                     </div>
                 </div>
-
-
-
-
-                <!--<div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
-                    <div class="flex-grow-1">
-                        <h5 class=""><a href="">Wireless Headphone E23</a></h5>
-                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                        <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-primary btn-rounded btn-sm">View details</button>
-                    </div>
-                </div>
-                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-2.jpg" alt="">
-                    <div class="flex-grow-1">
-                        <h5 class=""><a href="">Wireless Headphone Y902</a></h5>
-                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                        <p class="text-small text-danger m-0">$550 <del class="text-muted">$600</del></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">View details</button>
-                    </div>
-                </div>
-                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-3.jpg" alt="">
-                    <div class="flex-grow-1">
-                        <h5 class=""><a href="">Wireless Headphone E09</a></h5>
-                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                        <p class="text-small text-danger m-0">$250 <del class="text-muted">$300</del></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">View details</button>
-                    </div>
-                </div>
-                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
-                    <div class="flex-grow-1">
-                        <h5 class=""><a href="">Wireless Headphone X89</a></h5>
-                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                        <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">View details</button>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>
@@ -221,50 +168,17 @@
         <div class="card mb-4">
             <div class="card-body">
                 <div class="card-title">Last 5 Incoming</div>
-                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
+                <div class="d-flex flex-column flex-sm-row align-items-center mb-3" ng-repeat="obj in ListOfIncomings">
                     <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
                     <div class="flex-grow-1">
-                        <h5 class=""><a href="">Wireless Headphone E23</a></h5>
-                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                        <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del></p>
+                        <h5 class=""><a href="">{{obj.sourceName}}</a></h5>
+                        <p class="m-0 text-small text-muted">{{obj.description}}</p>
+                        <p class="text-small text-danger m-0">${{obj.amount}} </p>
                     </div>
                     <div>
                         <button class="btn btn-outline-primary btn-rounded btn-sm">View details</button>
                     </div>
-                </div>
-                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-2.jpg" alt="">
-                    <div class="flex-grow-1">
-                        <h5 class=""><a href="">Wireless Headphone Y902</a></h5>
-                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                        <p class="text-small text-danger m-0">$550 <del class="text-muted">$600</del></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">View details</button>
-                    </div>
-                </div>
-                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-3.jpg" alt="">
-                    <div class="flex-grow-1">
-                        <h5 class=""><a href="">Wireless Headphone E09</a></h5>
-                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                        <p class="text-small text-danger m-0">$250 <del class="text-muted">$300</del></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">View details</button>
-                    </div>
-                </div>
-                <div class="d-flex flex-column flex-sm-row align-items-center mb-3">
-                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
-                    <div class="flex-grow-1">
-                        <h5 class=""><a href="">Wireless Headphone X89</a></h5>
-                        <p class="m-0 text-small text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                        <p class="text-small text-danger m-0">$450 <del class="text-muted">$500</del></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-primary btn-sm btn-rounded m-3 m-sm-0">View details</button>
-                    </div>
-                </div>
+                </div>             
             </div>
         </div>
     </div>

@@ -11,6 +11,15 @@
 
 
 <div ng-if="showlist==true">
+
+    <div style="text-align:right" class="col-md-4">
+        <select ng-model="projectid" data-ng-change="getSuppliersByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+            <option selected value="0">- Select Project -</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+        </select>
+    </div>
+
+
     <button data-ng-click="addnewsupplier()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Supplier</button>
     <table class="table table-bordered">
         <thead>
@@ -59,8 +68,8 @@
                 {{obj.totalAmount - obj.amountPaid}}
             </td>
             <td>
-                <button ng-click="getSupplierByIDdForEdit(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
-                <button ng-click="customMethod(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Custom</button>
+                <button ng-click="openEditModal(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
+                <!--<button ng-click="customMethod(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Custom</button>-->
                 <!--<button ng-click="deleteSupplier(obj.supplierID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>-->
             </td>
         </tr>
@@ -73,7 +82,7 @@
         <label>Project Name </label>
         <select ng-change="getdatabyid(Supplier.ProjectID)" ng-model="Supplier.ProjectID" class="form-control">
             <option selected value="">- Select Project -</option>
-            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}">{{pr.name}}</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
         </select>
 
 
@@ -117,8 +126,8 @@
     </div>
 
 
-    <button class="btn btn-primary m-1" type="submit" data-ng-click="saveSupplier()"> <i class="fa fa-check"></i> Save</button>
-    <button class="btn btn-primary m-1" type="submit" data-ng-click="updateSupplier()"> <i class="fa fa-check"></i> Update</button>
+    <button ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveSupplier()"> <i class="fa fa-check"></i> Save</button>
+    <button ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateSupplier()"> <i class="fa fa-check"></i> Update</button>
     <button data-ng-click="showlistofsuppliers()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
 
 </form>

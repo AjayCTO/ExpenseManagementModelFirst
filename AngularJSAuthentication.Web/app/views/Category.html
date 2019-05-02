@@ -11,6 +11,14 @@
 
 
 <div ng-if="showlist==true">
+    <div style="text-align:right" class="col-md-4">
+        <select ng-model="projectid" data-ng-change="getCategoryByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+            <option selected value="0">- Select Project -</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+        </select>
+    </div>
+
+
     <button data-ng-click="addnewcategory()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Category</button>
     <table class="table table-bordered">
         <thead>
@@ -20,6 +28,9 @@
                 </th>
                 <th>
                     Category Description
+                </th> 
+                <th>
+                    Action
                 </th>               
             </tr>
         </thead>
@@ -54,15 +65,22 @@
     </div>
 
     <div class="form-group">
-        <label>Billing Method</label>
-        <input type="text" class="form-control" placeholder="Billing Method" data-ng-model="Category.description" required>
+        <label>Description</label>
+        <input type="text" class="form-control" placeholder="Description" data-ng-model="Category.description" required>
     </div>  
 
+    <div class="form-group">
+        <label>Project</label>
+        <select ng-model="projectid" data-ng-change="getCategoryByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+            <option selected value="0">- Select Project -</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+        </select>
+    </div> 
    
 
-    <button class="btn btn-primary m-1" type="submit" data-ng-click="saveCategory()"> <i class="fa fa-check"></i> Save</button>
+    <button ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveCategory()"> <i class="fa fa-check"></i> Save</button>
 
-    <button class="btn btn-primary m-1" type="submit" data-ng-click="updateCategory()"> <i class="fa fa-check"></i> Update</button>
+    <button ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateCategory()"> <i class="fa fa-check"></i> Update</button>
 
     <button data-ng-click="showcategorylist()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
 

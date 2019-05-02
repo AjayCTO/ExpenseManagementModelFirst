@@ -196,7 +196,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\AssetModel.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DashboardProjectModel.cs" />
     <Compile Include="Models\Enums.cs" />
@@ -205,12 +207,14 @@
     <Compile Include="Models\ExpenseUserModel.cs" />
     <Compile Include="Models\ExternalLoginModels.cs" />
     <Compile Include="Models\Incoming.cs" />
+    <Compile Include="Models\IncomingModal.cs" />
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\ProjectUser.cs" />
     <Compile Include="Models\Supplier.cs" />
+    <Compile Include="Models\SupplierModel.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

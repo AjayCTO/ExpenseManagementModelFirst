@@ -13,6 +13,7 @@ using AngularJSAuthentication.API.Models;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+     [RoutePrefix("api/Incomings")]
     public class IncomingsController : ApiController
     {
         private AuthContext db = new AuthContext();
@@ -35,6 +36,38 @@ namespace AngularJSAuthentication.API.Controllers
 
             return Ok(incoming);
         }
+
+
+        [HttpGet]
+        [Route("GetIncomingByProjectID")]
+        [ActionName("GetIncomingByProjectID")]
+        public List<IncomingModal> GetIncomingByProjectID(short id)
+        {
+            List<IncomingModal> incomings = new List<IncomingModal>();
+            var listOfIncoming =  db.Incomings.Where(x => x.ProjectID == id).ToList();
+
+            foreach (Incoming income in listOfIncoming)
+            {
+                IncomingModal singleIncome = new IncomingModal();
+
+                singleIncome.projectID = income.ProjectID;
+                singleIncome.projectName = income.Project.Name;
+                singleIncome.sourceName = income.SourceName;
+                singleIncome.amount = income.Amount;
+                singleIncome.date = income.Date;
+                singleIncome.incomingID = income.IncomingID;
+
+
+
+                incomings.Add(singleIncome);
+            }
+
+
+            return incomings;
+        }
+
+
+
 
         // PUT: api/Incomings/5
         [ResponseType(typeof(void))]

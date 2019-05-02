@@ -1,39 +1,74 @@
 ﻿'use strict';
 app.controller('incomingController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
-   
+    $scope.isEditing = false;
+  
+    $scope.projectID = null;
 
     $scope.Incoming = {
         IncomingID: null,
-        ProjectID:null,
+        ProjectID: $scope.projectID,
         Date: "",
         Amount: "",
         SourceName:""
     };
+
+
+    $scope.setProjectID = function (id) {
+        $scope.projectID = id;
+    }
+
+    
+
     $scope.savedSuccessfully = false;
 
     $scope.ListOfIncoming = [];
 
     $scope.userName = localStorageService.get('authorizationData').userName;
 
-    ordersService.getIncoming().then(function (results) {
+    ordersService.getIncoming().then(function (results) {     
 
-       
-
-        $scope.ListOfIncoming = results.data;
-        console.log("Incoming");
-        console.log($scope.ListOfIncoming);
-
+        $scope.ListOfIncoming = results.data;       
     }, function (error) {
         //alert(error.data.message);
     });
 
 
-    ordersService.getProjects($scope.userName).then(function (results) {
+    $scope.openEditModal = function (obj) {
+        $scope.Incoming = {
+            IncomingID: obj.incomingID,
+            ProjectID: obj.projectID,
+            Date: obj.date,
+            Amount: obj.amount,
+            SourceName: obj.sourceName
+        };
+        $scope.isEditing = true;
+        $scope.showlist = false;
+    }
 
-        alert("Success");
-        debugger;
 
+    $scope.getIncomingsByProjectID = function (id) {
+
+        $scope.Incoming.projectID = id;
+
+        $scope.projectID = id;
+
+        ordersService.getIncomingByProjectID(id).then(function (results) {
+
+            $scope.ListOfIncoming = results.data;
+
+            console.log("lit of incoming");
+            console.log($scope.ListOfIncoming);
+
+
+        }, function (error) {
+            //alert(error.data.message);
+        });
+    }
+
+
+
+    ordersService.getProjects($scope.userName).then(function (results) {      
         $scope.ListOfProjects = results.data;
     }, function (error) {
     });
@@ -42,8 +77,26 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.showlist = true;
 
+
+    $scope.showlistofincomings = function () {
+        $scope.isEditing = false;
+        $scope.showlist = true;
+    }
+
+
+
     $scope.addnewincoming = function () {
+        $scope.Incoming = {
+            IncomingID: null,
+            ProjectID: null,
+            Date: "",
+            Amount: "",
+            SourceName: ""
+        };
+
+
         $scope.showlist = false;
+        $scope.isEditing = false;
     }
 
 
@@ -61,8 +114,11 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.saveIncoming = function () {
 
-        debugger;
+        $scope.Incoming.projectID = $scope.projectID;
 
+
+        console.log("Save Incoming");
+        console.log($scope.Incoming);
 
         ordersService.saveIncoming($scope.Incoming).then(function (response) {
 
@@ -71,6 +127,9 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
             $scope.savedSuccessfully = true;
             $scope.message = "Incoming has been added successfully";
 
+            $scope.getIncomingsByProjectID($scope.projectID);
+            $scope.isEditing = false;
+            $scope.showlist = true;
         },
          function (response) {
              var errors = [];
@@ -85,12 +144,15 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.updateIncomeing = function () {
-
+        $scope.Incoming.projectID = $scope.projectID;
         ordersService.updateIncomeing($scope.Incoming).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Incoming has been updated successfully";
 
+            $scope.getIncomingsByProjectID($scope.projectID);
+            $scope.isEditing = false;
+            $scope.showlist = true;
         },
          function (response) {
              var errors = [];

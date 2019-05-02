@@ -25,17 +25,26 @@ namespace AngularJSAuthentication.API.Controllers
 
         // GET: api/Categories/5
         [ResponseType(typeof(Category))]
-        public List<Category> GetCategory(int id)
+        public List<CategoryModel> GetCategory(int id)
         {
             //Return list of categories related to the project id
+            List<CategoryModel> ListCategoryModel = new List<CategoryModel>();
 
             List<Category> listOfCategory = db.Categories.Where(x => x.ProjectID == id).ToList();
-            //if (category == null)
-            //{
-            //    return NotFound();
-            //}
+        
+            foreach(var category in listOfCategory)
+            {
+                CategoryModel CategoryModel = new CategoryModel();
+                CategoryModel.name = category.Name;
+                CategoryModel.description = category.Description;
+                CategoryModel.categoryID = category.CategoryID;
+                CategoryModel.projectID = category.ProjectID;
 
-            return listOfCategory;
+                ListCategoryModel.Add(CategoryModel);
+            }
+
+
+            return ListCategoryModel;
         }
 
         // PUT: api/Categories/5

@@ -27,15 +27,38 @@ app.controller('homeController', ['$scope', 'ordersService', 'localStorageServic
 
         ordersService.getExpenseByProjectID(id).then(function (results) {
 
-            $scope.ListOfExpenses = results.data;
-           
-            console.log("List of expenses")
-            console.log($scope.ListOfExpenses)
+            $scope.ListOfExpenses = results.data;         
+        
 
         }, function (error) {
 
             //alert(error.data.message);
         });
+
+
+        ordersService.getIncomingByProjectID(id).then(function (results) {
+
+            $scope.ListOfIncomings = results.data;
+
+
+        }, function (error) {
+
+            //alert(error.data.message);
+        });
+
+
+        ordersService.getAssetsByProjectID(id).then(function (results) {
+
+            $scope.ListOfAssets = results.data;
+
+            console.log("list of ass");
+            console.log($scope.ListOfAssets);
+        }, function (error) {
+
+            //alert(error.data.message);
+        });
+        
+
     }
 
 

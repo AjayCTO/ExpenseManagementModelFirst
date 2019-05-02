@@ -1,6 +1,10 @@
 ﻿'use strict';
 app.controller('projectController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
+    $scope.userName = localStorageService.get('authorizationData').userName;
+
+
+
     $scope.project = {
         projectID:null,
         name: "",
@@ -19,10 +23,43 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
 
     };
 
+    $scope.isEditing = false;
+    $scope.savedSuccessfully = false;
+    $scope.showlist = true;
+    $scope.ListOfProjects = [];
 
-    $scope.openEditModal = function (project) {
+    $scope.getAll = function () {
+        ordersService.getProjects($scope.userName).then(function (results) {
+
+            $scope.ListOfProjects = results.data;
+
+        }, function (error) {
+        });
+    }
 
 
+    $scope.getAll();
+    
+    $scope.addnewproject = function () {
+        $scope.project = {
+            projectID: null,
+            name: "",
+            billingMethod: "",
+            customerID: null,
+            totalCost: ""
+        };
+
+
+        $scope.showlist = false;
+        $scope.isEditing = false;
+    }
+
+    $scope.showprojectlist = function () {
+        $scope.showlist = true;
+        $scope.isEditing = false;
+    }
+
+    $scope.openEditModal = function (project) {      
 
         $scope.project = {
             projectID: project.projectID,
@@ -31,16 +68,14 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
             customerID: project.customerID,
             totalCost: project.totalCost
         };
-
+        $scope.isEditing = true;
         $scope.showlist = false;
+       
     }
 
 
 
     $scope.saveNewCustomer = function () {
-
-
-
         ordersService.saveCustomer($scope.Customerobject).then(function (response) {
 
             $("#customermodal").modal("hide");
@@ -82,25 +117,7 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
         }, function (error) {
         });
     }
-
-
-    $scope.savedSuccessfully = false;
-
-    $scope.showlist = true;
-
   
-    $scope.ListOfProjects = [];
-
-    $scope.userName = localStorageService.get('authorizationData').userName;
-
-
-    ordersService.getProjects($scope.userName).then(function (results) {
-      
-        $scope.ListOfProjects = results.data;
-    }, function (error) {
-    });
-
-
     ordersService.getCustomer().then(function (results) {
         $scope.ListOfcustomer = results.data;
 
@@ -112,7 +129,6 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
     $scope.newcustomer = function () {
         $("#customermodal").modal("show");
     }
-
 
 
     $scope.getProjectByID = function (id) {
@@ -127,41 +143,19 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
         }, function (error) {
             //alert(error.data.message);
         });
-    }
-
-
-    $scope.addnewproject = function () {
-        $scope.project = {
-            projectID: null,
-            name: "",
-            billingMethod: "",
-            customerID: null,
-            TotalCost: ""
-        };
-
-
-        $scope.showlist = false;
-    }
-
-    $scope.showprojectlist = function () {
-        $scope.showlist = true;
-    }
+    }    
     
 
     $scope.saveProject = function () {
 
-
-        var userName = localStorageService.get('authorizationData').userName;
-
-       
-
-        ordersService.saveProject($scope.project, userName).then(function (response) {
+        ordersService.saveProject($scope.project, $scope.userName).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Project has been added successfully";
 
+            $scope.getAll();
             $scope.showlist = true;
-
+            $scope.isEditing = false;
         },
          function (response) {
              var errors = [];
@@ -175,13 +169,16 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
     };
 
 
-    $scope.updateProject = function (project) {
+    $scope.updateProject = function () {
 
-        ordersService.updateProject(project).then(function (response) {
+        ordersService.updateProject($scope.project, $scope.userName).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Project has been updated successfully";
 
+            $scope.getAll();
+            $scope.showlist = true;
+            $scope.isEditing = false;
         },
          function (response) {
              var errors = [];

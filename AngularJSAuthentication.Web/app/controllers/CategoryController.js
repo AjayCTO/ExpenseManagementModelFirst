@@ -1,5 +1,8 @@
 ﻿'use strict';
-app.controller('CategoryController', ['$scope', 'ordersService', function ($scope, ordersService) {
+app.controller('CategoryController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
+
+    $scope.userName = localStorageService.get('authorizationData').userName;
+    $scope.isEditing = false;
 
     $scope.Category = {
         CategoryID:null,
@@ -19,14 +22,21 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
             name: category.name,
             description: category.description
         };
-
+        $scope.isEditing = true;
         $scope.showlist = false;
     }
     
 
     $scope.showcategorylist = function () {
         $scope.showlist = true;
+        $scope.isEditing = false;
     }
+
+    ordersService.getProjects($scope.userName).then(function (results) {
+
+        $scope.ListOfProjects = results.data;
+    }, function (error) {
+    });
 
 
 
@@ -40,10 +50,13 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
     });
 
 
-    $scope.getCategoryByID = function (id) {
+    $scope.getCategoryByProjectID = function (id) {
+
+        $scope.projectID = id;
+
         ordersService.getCategoryByID(id).then(function (results) {
 
-            $scope.Category = results.data;
+            $scope.ListOfCategories = results.data;
 
         }, function (error) {
             //alert(error.data.message);
@@ -61,20 +74,25 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
         };
 
         $scope.showlist = false;
+        $scope.isEditing = false;
     }
 
     
     $scope.showprojectlist = function () {
         $scope.showlist = true;
+        $scope.isEditing = false;
     }
 
     $scope.saveCategory = function () {
-
+        $scope.Category.ProjectID = $scope.projectID;
         ordersService.saveCategory($scope.Category).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Category has been added successfully";
 
+            $scope.getCategoryByProjectID($scope.projectID);
+            $scope.isEditing = false;
+            $scope.showlist = true;
         },
          function (response) {
              var errors = [];
@@ -90,11 +108,17 @@ app.controller('CategoryController', ['$scope', 'ordersService', function ($scop
 
     $scope.updateCategory = function () {
 
+
+        $scope.Category.ProjectID = $scope.projectID;
+
         ordersService.updateCategory($scope.Category).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Category has been updated successfully";
 
+            $scope.getCategoryByProjectID($scope.projectID);
+            $scope.isEditing = false;
+            $scope.showlist = true;
         },
          function (response) {
              var errors = [];

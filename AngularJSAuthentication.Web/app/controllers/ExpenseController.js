@@ -1,6 +1,18 @@
 ﻿'use strict';
 app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
         
+    $scope.showlist = true;
+
+    $scope.newcategoryname = "";
+
+    $scope.savedSuccessfully = false;
+
+    $scope.ListOfExpenses = [];
+
+    $scope.userName = localStorageService.get('authorizationData').userName;
+
+    $scope.isEditing = false;
+
     $scope.Expense = {
         ExpenseID: null,
         ProjectID: null,
@@ -9,7 +21,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         SupplierID:null,
         Date: "",
         Amount: "",
-        Refrense: "",
+        Refrence: "",
         ReceiptPath: "",
         IsApproved: "",
         Description: "" 
@@ -43,34 +55,97 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     };
 
 
-    $scope.addnewexpense = function () {
+    $scope.openEditModal = function (obj) {
+
+        console.log("Open edit modal");
+        console.log(obj);
+
+
+        $scope.Expense = {
+            ExpenseID: obj.expenseID,
+            ProjectID: obj.projectID,
+            AssetID: obj.assetID,
+            CategoryID: obj.categoryID,
+            SupplierID: obj.supplierID,
+            Date: obj.date,
+            Amount: obj.totalAmount,
+            Refrence: obj.refrense,
+            ReceiptPath: obj.receiptPath,
+            IsApproved: obj.isApproved,
+            Description: obj.description
+        };
+
+        $scope.getdatabyid(obj.projectID);
+
+
+        $scope.isEditing = true;
         $scope.showlist = false;
+
+    }
+
+
+   
+
+    $scope.addnewexpense = function () {
+
+        $scope.Expense = {
+            ExpenseID: null,
+            ProjectID: null,
+            AssetID: null,
+            CategoryID: null,
+            SupplierID: null,
+            Date: "",
+            Amount: "",
+            Refrence: "",
+            ReceiptPath: "",
+            IsApproved: "",
+            Description: ""
+        };
+
+
+        $scope.showlist = false;
+        $scope.isEditing = false;
     }
 
     $scope.showexpenselist = function () {
         $scope.showlist = true;
+        $scope.isEditing = false;
+    }  
+
+
+    $scope.getExpenseByProjectID = function (id) {
+
+        $scope.projectID = id;
+
+        ordersService.getExpenseByProjectID(id).then(function (results) {
+
+            $scope.ListOfExpenses = results.data;         
+
+            $scope.getdatabyid(id);
+
+        }, function (error) {
+
+            //alert(error.data.message);
+        });
+    }
+    
+
+
+
+
+    $scope.getAll = function () {
+        ordersService.getExpense($scope.userName).then(function (results) {
+
+            $scope.ListOfExpenses = results.data;           
+
+        }, function (error) {
+
+            //alert(error.data.message);
+        });
     }
 
-    $scope.showlist = true;
 
-    $scope.newcategoryname = "";
-
-    $scope.savedSuccessfully = false;
-
-    $scope.ListOfExpenses = [];
-
-    $scope.userName = localStorageService.get('authorizationData').userName;
-
-    ordersService.getExpense($scope.userName).then(function (results) {
-
-        $scope.ListOfExpenses = results.data;
-        console.log($scope.ListOfExpenses);
-
-    }, function (error) {
-      
-        //alert(error.data.message);
-    });
-
+    $scope.getAll();
 
     $scope.getdatabyid = function (id) {
 
@@ -102,31 +177,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
             }, function (error) {
                 //alert(error.data.message);
             });
-      
-
-
-   
-    }
-
-
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        contentType: "application/json",
-        url: "http://localhost:26264/api/Expenses/GetData",
-      
-        success: function (data) {
-          
-        },
-        error: function (error) {
-
-          
-        }
-    });
-
-
-    
-
+    }  
 
 
     $scope.saveNewCategory = function () {
@@ -168,8 +219,6 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
 
     $scope.saveNewAsset = function () {
-
-
         ordersService.saveAsset($scope.Assetobject).then(function (response) {
 
             $("#assetmodal").modal("hide");
@@ -240,9 +289,6 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     };
 
 
-
-
-  
     ordersService.getProjects($scope.userName).then(function (results) {
 
         $scope.ListOfProjects = results.data;
@@ -337,13 +383,6 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
     
 
-
-    
-
-
-   
-
-
     $scope.getExpenseByID = function (id) {
         ordersService.getExpenseByID(id).then(function (results) {
             $scope.Expense = results.data;
@@ -355,20 +394,21 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     }
 
 
+    
 
     $scope.saveExpense = function () {
 
-        var userName = localStorageService.get('authorizationData').userName;
+        $scope.Expense.ProjectID = $scope.projectID;
+            
 
-        ordersService.saveExpense($scope.Expense, userName).then(function (response) {
+        ordersService.saveExpense($scope.Expense, $scope.userName).then(function (response) {
             $scope.savedSuccessfully = true;
             $scope.message = "Expense has been added successfully";
-
+            $scope.getExpenseByProjectID($scope.projectID);
+            $scope.showlist = true;
+            $scope.isEditing = false;
         },
          function (error) {
-
-             alert("eerrrr");
-             debugger;
              var errors = [];
              for (var key in response.data.modelState) {
                  for (var i = 0; i < response.data.modelState[key].length; i++) {
@@ -382,11 +422,15 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
     $scope.updateExpense = function () {
 
-        ordersService.updateExpense($scope.Expense).then(function (response) {
+        $scope.Expense.ProjectID = $scope.projectID;
+
+        ordersService.updateExpense($scope.Expense, $scope.userName).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Expense has been updated successfully";
-
+            $scope.getExpenseByProjectID($scope.projectID);
+            $scope.showlist = true;
+            $scope.isEditing = false;
         },
          function (response) {
              var errors = [];

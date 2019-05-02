@@ -10,6 +10,8 @@ namespace AngularJSAuthentication.API.Models
         public int projectID { get; set; }
         public string name { get; set; }
         public string billingMethod { get; set; }
-        public decimal toalCost { get; set; }
+        public decimal totalCost { get; set; }
+
+        public int customerID { get; set; }
     }
 }

@@ -1,6 +1,11 @@
 ﻿'use strict';
 app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
+    $scope.userName = localStorageService.get('authorizationData').userName;
+    $scope.showlist = true;
+    $scope.ListOfAssets = [];
+    $scope.savedSuccessfully = false;
+    $scope.isEditing = false;
 
     $scope.Asset = {
         assetID: null,
@@ -12,13 +17,7 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
         userID: null,
         applicationUser_Id:null
     };
-
-    $scope.showlist = true;
-
-
-    $scope.ListOfAssets = [];
-
-    $scope.savedSuccessfully = false;
+ 
 
     $scope.addnewasset = function () {
         $scope.Asset = {
@@ -33,26 +32,43 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
         };
 
         $scope.showlist = false;
+        $scope.isEditing = false;
     }    
   
     $scope.showlistofassets = function () {
         $scope.showlist = true;
+        $scope.isEditing = false;
     }
 
-    ordersService.getAssets().then(function (results) {
-        $scope.ListOfAssets = results.data;
+    
 
-        console.log("rrrr");
-        console.log($scope.ListOfAssets);
+    $scope.getAssetsByProjectID = function (id) {
 
-        console.log($scope.ListOfAssets);
+        $scope.projectID = id;
 
-    }, function (error) {      
-        //alert(error.data.message);
-    });
+        ordersService.getAssetsByProjectID(id).then(function (results) {
+            $scope.ListOfAssets = results.data;
+
+        }, function (error) {
+            //alert(error.data.message);
+        });
+    }
 
 
-    $scope.userName = localStorageService.get('authorizationData').userName;
+
+
+    $scope.getAll = function () {
+        ordersService.getAssets().then(function (results) {
+            $scope.ListOfAssets = results.data;
+
+        }, function (error) {
+            //alert(error.data.message);
+        });
+    }
+
+
+    $scope.getAll();
+   
 
 
     ordersService.getProjects($scope.userName).then(function (results) {
@@ -75,20 +91,22 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
     $scope.saveAsset = function () {
 
+        $scope.Asset.projectID = $scope.projectID;
+
         ordersService.saveAsset($scope.Asset).then(function (response) {
 
 
             $scope.savedSuccessfully = true;
             $scope.message = "Asset has been added successfully";
 
+           
+            $scope.getAssetsByProjectID($scope.projectID);
             $scope.showlist = true;
+            $scope.isEditing = false;
 
         },
          function (error) {
-             alert("Err");
-
-             debugger;
-
+            
              $scope.showlist = true;
 
              var errors = [];
@@ -118,17 +136,22 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
         };
 
         $scope.showlist = false;
+        $scope.isEditing = true;
     }
 
 
 
     $scope.updateAsset = function () {
 
+        $scope.Asset.projectID = $scope.projectID;
+
         ordersService.updateAsset($scope.Asset).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Asset has been updated successfully";
-
+            $scope.getAssetsByProjectID($scope.projectID);
+            $scope.showlist = true;
+            $scope.isEditing = false;
         },
          function (response) {
              var errors = [];

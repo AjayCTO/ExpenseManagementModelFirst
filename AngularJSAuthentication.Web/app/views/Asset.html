@@ -9,7 +9,17 @@
 <div class="separator-breadcrumb border-top"></div>
 
 
+
 <div ng-if="showlist==true">
+
+    <div style="text-align:right" class="col-md-4">
+        <select ng-model="projectid" data-ng-change="getAssetsByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+            <option selected value="0">- Select Project -</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+        </select>
+    </div>
+
+
     <button data-ng-click="addnewasset()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Asset</button>
     <table class="table table-bordered">
         <thead>
@@ -77,7 +87,7 @@
 
         <select ng-model="Asset.projectID" class="form-control">
             <option selected value="">- Select Project -</option>
-            <option ng-repeat="pr in ListOfProjects" value="{{pr.ProjectID}}">{{pr.name}}</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.ProjectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
         </select>
 
 
@@ -91,8 +101,8 @@
 
     <form class="form-login" role="form">
 
-        <button class="btn btn-primary m-1" type="submit" data-ng-click="saveAsset()">Save</button>
-        <button class="btn btn-primary m-1" type="submit" data-ng-click="updateAsset()">Update</button>
+        <button ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveAsset()">Save</button>
+        <button ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateAsset()">Update</button>
         <button data-ng-click="showlistofassets()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
 
     </form>

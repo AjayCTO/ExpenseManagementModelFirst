@@ -36,7 +36,8 @@ namespace AngularJSAuthentication.API.Controllers
                 projectModel.projectID = project.ProjectID;
                 projectModel.name = project.Name;
                 projectModel.billingMethod = project.BillingMethod;
-                projectModel.toalCost = project.TotalCost;
+                projectModel.totalCost = project.TotalCost;
+                projectModel.customerID = project.CustomerID;
 
                 projectModalList.Add(projectModel);
             }
@@ -61,22 +62,26 @@ namespace AngularJSAuthentication.API.Controllers
         // PUT: api/Projects/5
         [ResponseType(typeof(void))]
         [Route("PutProject")]
-        public IHttpActionResult PutProject(Project project)
+        public IHttpActionResult PutProject(ProjectUser projectUser)
         {
 
-            var id = project.ProjectID;
+            var id = projectUser.Project.ProjectID;
+
+            var userID = db.Users.FirstOrDefault(x => x.UserName == projectUser.UserName).Id;
+
+            projectUser.Project.UserId = userID;
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != project.ProjectID)
+            if (id != projectUser.Project.ProjectID)
             {
                 return BadRequest();
             }
 
-            db.Entry(project).State = EntityState.Modified;
+            db.Entry(projectUser.Project).State = EntityState.Modified;
 
             try
             {

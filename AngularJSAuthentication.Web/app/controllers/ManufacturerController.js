@@ -77,10 +77,7 @@ app.controller('ManufacturerController', ['$scope', 'ordersService', function ($
 
         },
          function (error) {
-             alert("Err");
-
-             debugger;
-
+        
              $scope.showlist = true;
 
              var errors = [];

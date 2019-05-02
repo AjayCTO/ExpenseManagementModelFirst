@@ -19,23 +19,58 @@ namespace AngularJSAuthentication.API.Controllers
         private AuthContext db = new AuthContext();
 
         // GET: api/Suppliers
-        public List<Supplier> GetSuppliers()
+        public List<SupplierModel> GetSuppliers()
         {
-            return db.Suppliers.ToList();
+
+            List<SupplierModel> ListSupplierModel = new List<SupplierModel>();
+
+            List<Supplier> listOfSupplier = db.Suppliers.ToList();
+
+            foreach (var supplier in listOfSupplier)
+            {
+                SupplierModel SupplierModel = new SupplierModel();
+
+                SupplierModel.name = supplier.Name;
+                SupplierModel.address = supplier.Address;
+                SupplierModel.contact = supplier.Contact;
+                SupplierModel.supplierID = supplier.SupplierID;
+                SupplierModel.totalAmount = supplier.TotalAmount;
+                SupplierModel.amountPaid = supplier.AmountPaid;
+                SupplierModel.projectID = supplier.ProjectID;
+
+                ListSupplierModel.Add(SupplierModel);
+            }
+
+            return ListSupplierModel;         
         }
 
 
         [HttpGet]
         [Route("GetSupplier")]
         [ActionName("GetSupplier")]
-        // GET: api/Suppliers/5
-        [ResponseType(typeof(Supplier))]
-        public List<Supplier> GetSupplier(int id)
+
+        public List<SupplierModel> GetSupplier(int id)
         {
+            List<SupplierModel> ListSupplierModel = new List<SupplierModel>();
+
             List<Supplier> listOfSupplier = db.Suppliers.Where(x => x.ProjectID == id).ToList();
 
+            foreach (var supplier in listOfSupplier)
+            { 
+                SupplierModel SupplierModel = new SupplierModel();
 
-            return listOfSupplier;
+                SupplierModel.name = supplier.Name;
+                SupplierModel.address = supplier.Address;
+                SupplierModel.contact = supplier.Contact;
+                SupplierModel.supplierID = supplier.SupplierID;
+                SupplierModel.totalAmount = supplier.TotalAmount;
+                SupplierModel.amountPaid = supplier.AmountPaid;
+                SupplierModel.projectID = supplier.ProjectID;
+
+                ListSupplierModel.Add(SupplierModel);
+            }
+
+            return ListSupplierModel;
         }
 
         [HttpGet]

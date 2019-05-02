@@ -1,6 +1,10 @@
 ﻿'use strict';
 app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
+    $scope.userName = localStorageService.get('authorizationData').userName;
+
+    $scope.projectID = 0;
+
     $scope.Supplier = {
         SupplierID:"",
         Name: "",
@@ -11,44 +15,71 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
         TotalAmount: "",
         ProjectID:0
     };
+
     $scope.savedSuccessfully = false;
-
     $scope.showlist = true;
-
-
+    $scope.isEditing = false; 
     $scope.ListOfSupplier = [];
 
-    ordersService.getSupplier().then(function (results) {       
-        $scope.ListOfSupplier = results.data;
-    }, function (error) {
-    });
+    
+
+    $scope.getSuppliersByProjectID = function (id)
+    {
+
+        $scope.projectID = id;
+
+        ordersService.getSupplierByID(id).then(function (results) {
+            $scope.ListOfSupplier = results.data;
+        }, function (error) {
+        });
+    }
 
 
 
 
+    $scope.getAll = function () {
+        ordersService.getSupplier().then(function (results) {
+            $scope.ListOfSupplier = results.data;
+        }, function (error) {
+        });
+    }
+
+    $scope.getAll();
 
     $scope.getdatabyid = function (id) {
-
-        alert(id);
-
         $scope.Supplier.ProjectID = id;
-      
         ordersService.getCategoryByID(id).then(function (results) {
-
             $scope.categories = results.data;
-
         }, function (error) {
             debugger;
             //alert(error.data.message);
         });
+    }
 
-        
-
-       
+    $scope.showlistofsuppliers = function () {
+        $scope.showlist = true;
+        $scope.isEditing = false;
     }
 
 
-    $scope.getSupplierByIDdForEdit = function (obj) {
+    $scope.addnewsupplier = function () {
+        $scope.Supplier = {
+            SupplierID: "",
+            Name: "",
+            Address: "",
+            Contact: "",
+            AmountPaid: "",
+            Category: "",
+            TotalAmount: "",
+            ProjectID: 0
+        };
+
+        $scope.showlist = false;
+        $scope.isEditing = false;
+    }
+
+
+    $scope.openEditModal = function (obj) {
         $scope.Supplier = {
             SupplierID: obj.supplierID,
             Name: obj.name,
@@ -61,9 +92,7 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
         };
 
 
-        console.log("Edit");
-        console.log($scope.Supplier);
-
+        $scope.isEditing = true;
         $scope.showlist = false;
 
     }
@@ -75,11 +104,7 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
             $scope.ListOfProjects = results.data;
         }, function (error) {
         });
-    }
-
-
-
-    $scope.userName = localStorageService.get('authorizationData').userName;
+    }  
 
 
     ordersService.getProjects($scope.userName).then(function (results) {
@@ -101,34 +126,20 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
     }
 
 
-    $scope.showlistofsuppliers = function () {
-        $scope.showlist = true;
-    }
-
-
-    $scope.addnewsupplier = function () {
-        $scope.Supplier = {
-            SupplierID: "",
-            Name: "",
-            Address: "",
-            Contact: "",
-            AmountPaid: "",
-            Category: "",
-            TotalAmount: "",
-            ProjectID: 0
-        };
-
-        $scope.showlist = false;
-    }
+    
 
     $scope.saveSupplier = function () {
+
+        $scope.Supplier.projectID = $scope.projectID;
 
         ordersService.saveSupplier($scope.Supplier).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Supplier has been added successfully";
 
+            $scope.getSuppliersByProjectID($scope.projectID);
             $scope.showlist = true;
+            $scope.isEditing = false;
 
         },
          function (response) {
@@ -145,11 +156,16 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.updateSupplier = function () {
 
+        $scope.Supplier.projectID = $scope.projectID;
+
         ordersService.updateSupplier($scope.Supplier).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Supplier has been updated successfully";
 
+            $scope.getSuppliersByProjectID($scope.projectID);
+            $scope.showlist = true;
+            $scope.isEditing = false;
         },
          function (response) {
              var errors = [];

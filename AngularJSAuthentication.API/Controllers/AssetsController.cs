@@ -13,25 +13,76 @@ using AngularJSAuthentication.API.Models;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+    [RoutePrefix("api/Assets")]
     public class AssetsController : ApiController
     {
         private AuthContext db = new AuthContext();
 
         // GET: api/Assets
-        public List<Asset> GetAssets()
+        public List<AssetModel> GetAssets()
         {
-            return db.Assets.ToList();
+            List<AssetModel> ListAssetModel = new List<AssetModel>();
+
+            List<Asset> listOfAsset = db.Assets.ToList();
+
+            foreach (Asset asset in listOfAsset)
+            {
+                AssetModel AssetModel = new AssetModel();
+                AssetModel.name = asset.Name;
+                AssetModel.address = asset.Address;
+                AssetModel.contact = asset.Contact;
+                AssetModel.assetID = asset.AssetID;
+                AssetModel.projectID = asset.ProjectID;
+
+                ListAssetModel.Add(AssetModel);
+            }
+
+
+            return ListAssetModel;
+          
         }
 
         // GET: api/Assets/5
         [ResponseType(typeof(Asset))]
         public List<Asset> GetAsset(int id)
         {
+
+
+
                List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
 
 
                return listOfAsset;
         }
+
+
+        [HttpGet]
+        [Route("GetAssetByProjectID")]
+        [ActionName("GetAssetByProjectID")]
+        public List<AssetModel> GetAssetByProjectID(int id)
+        {
+            List<AssetModel> ListAssetModel = new List<AssetModel>();
+
+            List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
+
+            foreach (Asset asset in listOfAsset)
+            {
+                AssetModel AssetModel = new AssetModel();
+                AssetModel.name = asset.Name;
+                AssetModel.address = asset.Address;
+                AssetModel.contact = asset.Contact;
+                AssetModel.assetID = asset.AssetID;
+                AssetModel.projectID = asset.ProjectID;
+
+                ListAssetModel.Add(AssetModel);
+            }
+
+
+            return ListAssetModel;
+        }    
+        
+
+
 
         // PUT: api/Assets/5
         [ResponseType(typeof(void))]
