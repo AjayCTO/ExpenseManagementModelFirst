@@ -12,26 +12,54 @@
 
 <div ng-if="showlist==true">
 
-    <div style="text-align:right" class="col-md-4">
+    <!--<div style="text-align:right" class="col-md-4">
         <select ng-model="projectid" data-ng-change="getAssetsByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
             <option selected value="0">- Select Project -</option>
             <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
         </select>
+    </div>-->
+
+    <div class="row">
+        <div class="col-md-3">
+            <button data-ng-click="addnewasset()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Asset</button>
+        </div>
+
+        <div style="text-align:center;" class="col-md-6 form-inline">
+            <div class="form-group">
+                <label style="width:auto; margin-right:7px;">Select Projects</label>
+                <select ng-model="projectid" data-ng-change="getAssetsByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+                    <option selected value="0">- Select Project -</option>
+                    <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div style="text-align:right" class="col-md-3">
+            <input class="form-control" placeholder="Type to Search" type="text" data-ng-model="search" name="name" value="" />
+        </div>
     </div>
 
 
-    <button data-ng-click="addnewasset()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Asset</button>
+
+    <!--<button data-ng-click="addnewasset()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Asset</button>-->
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>
-                  Name
+                <th ng-click="sort('name')">
+                    Name
+                    <i class="fa" ng-show="sortKey=='name'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
-                <th>
-                  Contact
+                <th ng-click="sort('contact')">
+                    Contact
+                    <i class="fa" ng-show="sortKey=='contact'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
-                <th>
-                   Address
+                <th ng-click="sort('address')">
+                    Address
+                    <i class="fa" ng-show="sortKey=='address'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
 
                 <th>
@@ -40,7 +68,7 @@
             </tr>
         </thead>
 
-        <tr ng-repeat="obj in ListOfAssets">
+        <tr ng-repeat="obj in ListOfAssets|orderBy:sortKey:reverse|filter:search">
             <td>
                 {{obj.name}}
             </td>
@@ -54,7 +82,7 @@
             </td>
 
             <td>
-                <button ng-click="openEditModal(obj)"  type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
+                <button ng-click="openEditModal(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
                 <button ng-click="deleteAsset(obj.assetID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>
 
             </td>
@@ -80,9 +108,14 @@
     <div class="form-group">
         <label>Project Name</label>
 
-        <select ng-model="Asset.projectID" class="form-control">
+        <!--<select ng-model="Asset.projectID" class="form-control">
             <option selected value="">- Select Project -</option>
             <option ng-repeat="pr in ListOfProjects" value="{{pr.ProjectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+        </select>-->
+
+        <select ng-model="projectid" data-ng-change="setProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+            <option selected value="0">- Select Project -</option>
+            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
         </select>
     </div>
 

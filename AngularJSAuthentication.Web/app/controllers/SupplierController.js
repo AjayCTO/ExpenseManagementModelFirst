@@ -51,6 +51,9 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
     //$scope.getAll();
 
     $scope.getdatabyid = function (id) {
+
+        $scope.projectID = id;
+
         $scope.Supplier.ProjectID = id;
         ordersService.getCategoryByID(id).then(function (results) {
             $scope.categories = results.data;
@@ -194,5 +197,12 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
             //alert(error.data.message);
         });
     };
+
+
+
+    $scope.sort = function (keyname) {
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 
 }]);

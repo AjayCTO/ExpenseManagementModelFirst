@@ -12,32 +12,64 @@
 
 <div ng-if="showlist==true">
 
-    <div style="text-align:right" class="col-md-4">
+    <!--<div style="text-align:right" class="col-md-4">
         <select ng-model="projectid" data-ng-change="getSuppliersByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
             <option selected value="0">- Select Project -</option>
             <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
         </select>
+    </div>-->
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <button data-ng-click="addnewsupplier()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Supplier</button>
+        </div>
+
+        <div style="text-align:center;" class="col-md-6 form-inline">
+            <div class="form-group">
+                <label style="width:auto; margin-right:7px;">Select Projects</label>
+                <select ng-model="projectid" data-ng-change="getSuppliersByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+                    <option selected value="0">- Select Project -</option>
+                    <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="text-align:right" class="col-md-3">
+            <input class="form-control" placeholder="Type to Search" type="text" data-ng-model="search" name="name" value="" />
+        </div>
     </div>
 
 
-    <button data-ng-click="addnewsupplier()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Supplier</button>
+
+    <!--<button data-ng-click="addnewsupplier()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Supplier</button>-->
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>
-                    Supplier Nameee
+                <th ng-click="sort('name')">
+                    Supplier Name
+                    <i class="fa" ng-show="sortKey=='name'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
-                <th>
+                <th ng-click="sort('address')">
                     Supplier Address
+                    <i class="fa" ng-show="sortKey=='address'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
-                <th>
+                <th ng-click="sort('contact')">
                     Supplier Contact
+                    <i class="fa" ng-show="sortKey=='contact'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
-                <th>
+                <th ng-click="sort('totalAmount')">
                     Supplier Total Amount
+                    <i class="fa" ng-show="sortKey=='totalAmount'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
-                <th>
+                <th ng-click="sort('amountPaid')">
                     Supplier Amount Paid
+                    <i class="fa" ng-show="sortKey=='amountPaid'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
                 <th>
                     Amount Due
@@ -48,7 +80,7 @@
             </tr>
         </thead>
 
-        <tr ng-repeat="obj in ListOfSupplier">
+        <tr ng-repeat="obj in ListOfSupplier|orderBy:sortKey:reverse|filter:search">
             <td>
                 {{obj.name}}
             </td>
@@ -57,7 +89,7 @@
             </td>
             <td>
                 {{obj.contact}}
-            </td>            
+            </td>
             <td>
                 {{obj.totalAmount}}
             </td>

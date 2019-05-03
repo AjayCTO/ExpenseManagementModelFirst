@@ -18,7 +18,12 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
         $scope.projectID = id;
     }
 
-    
+    $scope.setProjectID = function (id) {
+
+
+        $scope.projectID = id;
+
+    }
 
     $scope.savedSuccessfully = false;
 
@@ -190,5 +195,9 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
         });
     };
 
+    $scope.sort = function (keyname) {
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 
 }]);

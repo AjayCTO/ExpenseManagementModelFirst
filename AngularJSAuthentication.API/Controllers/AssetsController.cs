@@ -97,11 +97,13 @@ namespace AngularJSAuthentication.API.Controllers
 
         // PUT: api/Assets/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAsset(int id, Asset asset)
+        public IHttpActionResult PutAsset(Asset asset)
         {
+            var id = asset.AssetID;
+
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                //return BadRequest(ModelState);
             }
 
             if (id != asset.AssetID)

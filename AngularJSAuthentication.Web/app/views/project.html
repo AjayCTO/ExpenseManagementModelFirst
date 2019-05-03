@@ -11,18 +11,47 @@
 
 
 <div ng-if="showlist==true">
-    <button data-ng-click="addnewproject()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Project</button>
+
+    <div class="row">
+        <div class="col-md-9">
+            <button data-ng-click="addnewproject()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Project</button>
+        </div>
+
+        <!--<div style="text-align:center;" class="col-md-6 form-inline">
+            <div class="form-group">
+                <label style="width:auto; margin-right:7px;">Select Projects</label>
+                <select ng-model="projectid" data-ng-change="getIncomingsByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+                    <option selected value="0">- Select Project -</option>
+                    <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+                </select>
+            </div>
+        </div>-->
+
+        <div style="text-align:right" class="col-md-3">
+            <input class="form-control" placeholder="Type to Search" type="text" data-ng-model="search" name="name" value="" />
+        </div>
+    </div>
+
+
+
+
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>
+                <th ng-click="sort('name')">
                     Project Name
+                    <i class="fa" ng-show="sortKey=='name'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
-                <th>
+                <th ng-click="sort('totalCost')">
                     Total Cost
+                    <i class="fa" ng-show="sortKey=='totalCost'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
-                <th>
+                <th ng-click="sort('billingMethod')">
                     Billing Method
+                    <i class="fa" ng-show="sortKey=='billingMethod'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
+
                 </th>
 
                 <th>
@@ -31,7 +60,7 @@
             </tr>
         </thead>
 
-        <tr ng-repeat="obj in ListOfProjects">
+        <tr ng-repeat="obj in ListOfProjects|orderBy:sortKey:reverse|filter:search">
             <td>
                 {{obj.name}}
             </td>

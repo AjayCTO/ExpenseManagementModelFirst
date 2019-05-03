@@ -8,4 +8,10 @@ app.controller('indexController', ['$scope', '$location', 'authService', functio
 
     $scope.authentication = authService.authentication;
 
+
+
+    $scope.sort = function (keyname) {
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 }]);

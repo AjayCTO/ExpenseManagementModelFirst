@@ -61,6 +61,7 @@
     <Content Include="app\controllers\AssetsController.js" />
     <Content Include="app\controllers\associateController.js" />
     <Content Include="app\controllers\CategoryController.js" />
+    <Content Include="app\controllers\CustomercController.js" />
     <Content Include="app\controllers\ExpenseController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\IncomingController.js" />
@@ -80,6 +81,7 @@
     <Content Include="app\views\Asset.html" />
     <Content Include="app\views\associate.html" />
     <Content Include="app\views\Category.html" />
+    <Content Include="app\views\customer.html" />
     <Content Include="app\views\Expense.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\Incoming.html" />

@@ -43,7 +43,14 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
         $scope.isEditing = false;
     }
 
-    
+    $scope.setProjectID = function (id) {
+       
+
+        $scope.projectID = id;
+      
+    }
+
+
 
     $scope.getAssetsByProjectID = function (id) {
 
@@ -97,7 +104,11 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
             //alert(error.data.message);
         });
 
-    }    
+    }
+
+
+    
+
 
     $scope.saveAsset = function () {
 
@@ -159,6 +170,8 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
         $scope.Asset.projectID = $scope.projectID;
 
+        alert($scope.Asset.projectID);
+
         ordersService.updateAsset($scope.Asset).then(function (response) {
 
             $scope.savedSuccessfully = true;
@@ -186,5 +199,10 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
         });
     };
 
+
+    $scope.sort = function (keyname) {
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 
 }]);

@@ -1,7 +1,7 @@
 ﻿
 
 <div class="breadcrumb">
-    <h1>Expense Management</h1>
+    <h1>Expense Management </h1>
     <ul>
         <li><a href="">Dashboard</a></li>
       
@@ -12,34 +12,57 @@
 
 <div ng-if="showlist==true">
 
-    <div style="text-align:right" class="col-md-4">
-        <select ng-model="projectid" data-ng-change="getExpenseByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
-            <option selected value="0">- Select Project -</option>
-            <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
-        </select>
-    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <button data-ng-click="addnewexpense()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Expense</button>
+        </div>
 
-    <button data-ng-click="addnewexpense()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Expense</button>
+        <div style="text-align:center;" class="col-md-6 form-inline">
+            <div class="form-group">
+                <label style="width:auto; margin-right:7px;">Select Projects</label>
+                <select ng-model="projectid" data-ng-change="getExpenseByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
+                    <option selected value="0">- Select Project -</option>
+                    <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+                </select>
+            </div>
+            
+
+
+        </div>
+
+        <div style="text-align:right" class="col-md-3">
+            <input class="form-control" placeholder="Type to Search" type="text" data-ng-model="search" name="name" value="" /> 
+        </div>
+    </div>
+  
+
+  
     <table class="table table-bordered">
         <thead>
             <tr>
 
-                <th>
-                    Name 
+                <th ng-click="sort('projectName')">
+                    Name
+                    <i class="fa" ng-show="sortKey=='projectName'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
                 </th>
 
-                <th>
+                <th ng-click="sort('assetName')">
                     Assets
+                    <i class="fa" ng-show="sortKey=='assetName'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
                 </th>
 
-                <th>
+                <th ng-click="sort('totalAmount')">
                     Amount
+                    <i class="fa" ng-show="sortKey=='totalAmount'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
                 </th>
-                <th>
-                    Supplier
+                <th ng-click="sort('supplierName')">
+                    Supplier Name
+                    <i class="fa" ng-show="sortKey=='supplierName'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
                 </th>
-                <th>
+
+                <th ng-click="sort('description')">
                     Description
+                    <i class="fa" ng-show="sortKey=='description'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
                 </th>
 
                 <th>
@@ -48,7 +71,7 @@
             </tr>
         </thead>
 
-        <tr ng-repeat="obj in ListOfExpenses">
+        <tr ng-repeat="obj in ListOfExpenses |orderBy:sortKey:reverse|filter:search">
             <td>
                 {{obj.projectName}}
             </td>
@@ -67,11 +90,11 @@
                 {{obj.description}}
             </td>
 
-          <td>
+            <td>
                 <!--<button ng-click="getProjectByID(obj.ProjectID)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> GetByID</button>-->
-              <button ng-click="openEditModal(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
+                <button ng-click="openEditModal(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
                 <!--<button ng-click="deleteProject(obj.ProjectID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>-->
-           </td>
+            </td>
         </tr>
     </table>
 </div>

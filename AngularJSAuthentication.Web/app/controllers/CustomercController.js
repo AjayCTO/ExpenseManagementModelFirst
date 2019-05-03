@@ -1,22 +1,22 @@
 ﻿'use strict';
-app.controller('CategoryController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
+app.controller('CustomerController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.userName = localStorageService.get('authorizationData').userName;
 
-    $scope.projectID = localStorageService.get('projectID').projectID;   
+    $scope.projectID = localStorageService.get('projectID').projectID;
 
     $scope.isEditing = false;
 
     $scope.Category = {
-        CategoryID:null,
-        ProjectID:null,
+        CategoryID: null,
+        ProjectID: null,
         name: "",
         description: ""
     };
 
     $scope.ListOfCategories = [];
 
-    $scope.savedSuccessfully = false; 
+    $scope.savedSuccessfully = false;
 
     $scope.openEditModal = function (category) {
 
@@ -31,7 +31,7 @@ app.controller('CategoryController', ['$scope', 'ordersService', 'localStorageSe
         $scope.isEditing = true;
         $scope.showlist = false;
     }
-    
+
 
     $scope.showcategorylist = function () {
         $scope.showlist = true;
@@ -67,15 +67,6 @@ app.controller('CategoryController', ['$scope', 'ordersService', 'localStorageSe
     });
 
 
-
-    $scope.setProjectID = function (id) {
-
-
-        $scope.projectID = id;
-
-    }
-
-
     $scope.getCategoryByProjectID = function (id) {
 
         $scope.projectID = id;
@@ -103,7 +94,7 @@ app.controller('CategoryController', ['$scope', 'ordersService', 'localStorageSe
         $scope.isEditing = false;
     }
 
-    
+
     $scope.showprojectlist = function () {
         $scope.showlist = true;
         $scope.isEditing = false;
@@ -167,8 +158,5 @@ app.controller('CategoryController', ['$scope', 'ordersService', 'localStorageSe
     };
 
 
-    $scope.sort = function (keyname) {
-        $scope.sortKey = keyname;   //set the sortKey to the param passed
-        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
-    }
+
 }]);
