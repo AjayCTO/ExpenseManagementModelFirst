@@ -1,6 +1,11 @@
 ﻿'use strict';
-app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
-        
+app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'localStorageService', 'SweetAlert', function ($scope, $rootScope, ordersService, localStorageService, SweetAlert) {
+
+
+
+  
+
+
     $scope.showlist = true;
 
     $scope.newcategoryname = "";
@@ -87,6 +92,8 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
    
 
     $scope.addnewexpense = function () {
+
+
 
         $scope.Expense = {
             ExpenseID: null,
@@ -423,6 +430,9 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
             $scope.getExpenseByProjectID($scope.projectID);
             $scope.showlist = true;
             $scope.isEditing = false;
+
+            swal("Expense Added Successfully !!", "", "success")
+
         },
          function (error) {
              var errors = [];
@@ -447,6 +457,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
             $scope.getExpenseByProjectID($scope.projectID);
             $scope.showlist = true;
             $scope.isEditing = false;
+            swal("Expense Updated Successfully !!", "", "info")
         },
          function (response) {
              var errors = [];
@@ -481,17 +492,23 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         return bytes;
     }
 
-    $(document.body).on('change', '#fileName', function () {
-        alert('Change Happened');
 
-        alert("change");
+    $scope.makezoom = function (data) {
+        $("#imagemodal").modal("show");
+        $scope.enlargeimage = data;
+    }
+
+
+
+    $(document.body).on('change', '#fileName', function () {
+     
         var files = event.target.files; //FileList object
         var output = document.getElementById("result");
 
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
 
-            alert("change1");
+          
 
             //Only pics
             if (!file.type.match('image'))
@@ -501,13 +518,15 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
             picReader.addEventListener("load", function (event) {
 
-                alert("change2");
+             
 
                 var picFile = event.target;
 
                 $scope.Expense.ReceiptPath = picFile.result;
 
-                alert(picFile.result);
+                var output = document.getElementById("showUploaded");
+                output.src = picFile.result;
+                output.style.display = "block";
 
                 $scope.$apply();
 
@@ -524,3 +543,5 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
    
    
 }]);
+
+

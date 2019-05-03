@@ -93,7 +93,7 @@
 
 
                 <img ng-if="obj.receiptPath==''" style="height:50px; width:50px;" src="https://static.thenounproject.com/png/220984-200.png" alt="Alternate Text" />
-                <a>
+                <a data-ng-click="makezoom(obj.receiptPath)">
                     <img ng-if="obj.receiptPath!=''" style="height:50px; width:50px;" src="{{obj.receiptPath}}" alt="Alternate Text" />
                 </a>
             </td>
@@ -117,105 +117,112 @@
 
 
 <div ng-if="showlist==false">
-    <div class="row">
+    <form name="Expenceform">
+
+        <div class="row">
 
 
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Project Name </label>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Project Name </label>
 
-                <select ng-change="getdatabyid(Expense.ProjectID)" ng-model="Expense.ProjectID" class="form-control">
-                    <option selected value="">- Select Project -</option>
-                    <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
-                </select>
-
-
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Amount</label>
-                <input type="text" class="form-control" placeholder="Amount" data-ng-model="Expense.Amount" required>
-            </div>
-        </div>
-    </div>
+                    <select ng-change="getdatabyid(Expense.ProjectID)" ng-model="Expense.ProjectID" class="form-control">
+                        <option selected value="">- Select Project -</option>
+                        <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
+                    </select>
 
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Refrence</label>
-                <input type="text" class="form-control" placeholder="Refrence" data-ng-model="Expense.Refrence" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label> Select Supplier <a data-ng-click="newsupplier()" style="float:right">New</a></label>
-
-                <select class="form-control" data-ng-model="Expense.SupplierID">
-                    <option selected value="">- Select Supplier -</option>
-                    <option data-ng-repeat="supp in suppliers" value="{{supp.supplierID}}" ng-selected="supp.supplierID == Expense.SupplierID">{{supp.name}}</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>IsApproved</label>
-                <input type="text" class="form-control" placeholder="IsApproved" data-ng-model="Expense.IsApproved" required>
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>select Asset <a data-ng-click="newasset()" style="float:right">New</a></label>
-
-                <select class="form-control" data-ng-model="Expense.AssetID">
-                    <option selected value="">- Select Asset -</option>
-                    <option data-ng-repeat="as in assets" value="{{as.assetID}}" ng-selected="as.assetID == Expense.AssetID">{{as.name}}</option>
-                </select>
-
-
-            </div>
-            <div class="form-group">
-                <label> Select Category  <a data-ng-click="newcategory()" style="float:right">New</a></label>
-
-                <select class="form-control" data-ng-model="Expense.CategoryID">
-                    <option selected value="">- Select Category -</option>
-                    <option data-ng-repeat="cat in categories" value="{{cat.categoryID}}" ng-selected="cat.categoryID == Expense.CategoryID">{{cat.name}}</option>
-                </select>
-
-
-            </div>
-
-            <div class="form-group">
-                <label>Description</label>
-                <input type="text" class="form-control" placeholder="Description" data-ng-model="Expense.Description" required>
-            </div>
-
-        </div>
-        <div  class="col-md-6">
-            <label>Receipt</label>
-            <form action="#" class="dropzone" id="single-file-upload">
-                <div class="fallback">
-                    <input type="file" id="fileName" multiple name="fileName" value="" />
                 </div>
-            </form>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="text" class="form-control" placeholder="Amount" data-ng-model="Expense.Amount" required>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <button ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveExpense()">Save</button>
-    <button ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateExpense()">Update</button>
-    <button type="button" data-ng-click="showexpenselist()" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Refrence</label>
+                    <input type="text" class="form-control" placeholder="Refrence" data-ng-model="Expense.Refrence" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Select Supplier <a data-ng-click="newsupplier()" style="float:right">New</a></label>
+
+                    <select class="form-control" data-ng-model="Expense.SupplierID">
+                        <option selected value="">- Select Supplier -</option>
+                        <option data-ng-repeat="supp in suppliers" value="{{supp.supplierID}}" ng-selected="supp.supplierID == Expense.SupplierID">{{supp.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>IsApproved</label>
+                    <input type="text" class="form-control" placeholder="IsApproved" data-ng-model="Expense.IsApproved" required>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>select Asset <a data-ng-click="newasset()" style="float:right">New</a></label>
+
+                    <select class="form-control" data-ng-model="Expense.AssetID">
+                        <option selected value="">- Select Asset -</option>
+                        <option data-ng-repeat="as in assets" value="{{as.assetID}}" ng-selected="as.assetID == Expense.AssetID">{{as.name}}</option>
+                    </select>
+
+
+                </div>
+                <div class="form-group">
+                    <label> Select Category  <a data-ng-click="newcategory()" style="float:right">New</a></label>
+
+                    <select class="form-control" data-ng-model="Expense.CategoryID">
+                        <option selected value="">- Select Category -</option>
+                        <option data-ng-repeat="cat in categories" value="{{cat.categoryID}}" ng-selected="cat.categoryID == Expense.CategoryID">{{cat.name}}</option>
+                    </select>
+
+
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="form-control" placeholder="Description" data-ng-model="Expense.Description" required>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <label>Receipt</label>
+                <div class="dropzone" id="single-file-upload">
+                    <div class="fallback">
+                        <input type="file" id="fileName" multiple name="fileName" value="" />
+                        <img ng-if="Expense.ReceiptPath!=''" alt="Choose Image" id="showUploaded" style="width:89px;height:90px" src="{{Expense.ReceiptPath}}" />
+
+                        <img ng-if="Expense.ReceiptPath==''" alt="Choose Image" id="showUploaded" style="width:89px;height:90px" src="https://static.thenounproject.com/png/220984-200.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button ng-disabled="Expenceform.myInput.$valid" ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveExpense()">Save</button>
+        <button ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateExpense()">Update</button>
+        <button type="button" data-ng-click="showexpenselist()" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+
+    </form>
 </div>
 
    
@@ -287,6 +294,25 @@
             </div>
             <div class="modal-footer">
                 <button data-ng-click="saveNewSupplier()" data-ng-disabled="Supplierobject.Name==''" type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle-2">Receipt</h5>
+
+            </div>
+            <div class="modal-body">
+                <img src="{{enlargeimage}}" alt="Alternate Text" />
+            </div>
+            <div class="modal-footer">
+
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

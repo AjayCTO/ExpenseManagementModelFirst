@@ -97,3 +97,72 @@ app.run(['authService', function (authService) {
 }]);
 
 
+// factory for all messages 
+app.factory('log', function () {
+    toastr.options = {
+        closeButton: true,
+        positionClass: 'toast-top-right',
+    };
+    return {
+        success: function (text) {
+            toastr.success(text, "Success");
+        },
+        error: function (text) {
+            toastr.error(text, "Error");
+        },
+        info: function (text) {
+            toastr.info(text, "Info");
+        },
+        warning: function (text) {
+            toastr.warning(text, "Warning");
+        },
+    };
+});
+
+
+app.factory('SweetAlert', [ '$rootScope', function ( $rootScope ) {
+
+    var swal = window.swal;
+   
+    //public methods
+    var self = {
+
+        swal: function ( arg1, arg2, arg3 ) {
+            $rootScope.$evalAsync(function(){
+                if( typeof(arg2) === 'function' ) {
+                    swal( arg1, function(isConfirm){
+                        $rootScope.$evalAsync( function(){
+                            arg2(isConfirm);
+                        });
+                    }, arg3 );
+                } else {
+                    swal( arg1, arg2, arg3 );
+                }
+            });
+        },
+        success: function(title, message) {
+            $rootScope.$evalAsync(function(){
+                swal( title, message, 'success' );
+            });
+        },
+        error: function(title, message) {
+            $rootScope.$evalAsync(function(){
+                swal( title, message, 'error' );
+            });
+        },
+        warning: function(title, message) {
+            $rootScope.$evalAsync(function(){
+                swal( title, message, 'warning' );
+            });
+        },
+        info: function(title, message) {	
+            $rootScope.$evalAsync(function(){
+                swal( title, message, 'info' );
+            });
+        }
+    };
+	
+    return self;
+}]);
+
+
