@@ -149,7 +149,7 @@
                     <div style="min-height:328px;" class="card-body">
 
                         <div class="d-flex flex-column flex-sm-row align-items-center mb-3" ng-repeat="obj in ListOfExpenses">
-                            <img ng-if="obj.receiptPath!=''"  class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{obj.receiptPath}}" alt="">
+                            <a ng-click="makezoom(obj.receiptPath)">  <img style="width: 50px; height: 50px; border: 1px solid #ccc; border-radius: 100% !important;" ng-if="obj.receiptPath!=''" class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{obj.receiptPath}}" alt=""></a>
                             <img ng-if="obj.receiptPath==''" style="height:50px; width:50px;" src="https://static.thenounproject.com/png/220984-200.png" alt="Alternate Text" />
 
                             <div class="flex-grow-1">
@@ -174,7 +174,7 @@
                     <div style="min-height:328px;" class="card-body">
                        
                         <div class="d-flex flex-column flex-sm-row align-items-center mb-3" ng-repeat="obj in ListOfIncomings">
-                            <img ng-if="obj.receiptPath !=''"  class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{obj.receiptPath}}" alt="">
+                            <img style="width: 50px; height: 50px; border: 1px solid #ccc; border-radius: 100% !important;" ng-if="obj.receiptPath !=''"  class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{obj.receiptPath}}" alt="">
                             <img ng-if="obj.receiptPath ==''" style="height:50px; width:50px;" src="https://static.thenounproject.com/png/220984-200.png" alt="Alternate Text" />
 
                             <div class="flex-grow-1">
@@ -275,6 +275,24 @@
     </div>
 </div>
 
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle-2">Receipt</h5>
+
+            </div>
+            <div class="modal-body">
+                <img src="{{enlargeimage}}" alt="Alternate Text" />
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <br />
 
 
@@ -342,6 +360,11 @@
     .summarysection i
     {
         font-size:25px;
+    }
+
+    h5 {
+        font-size: 15px;
+        margin-bottom: 1px;
     }
     
     

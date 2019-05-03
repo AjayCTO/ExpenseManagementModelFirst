@@ -75,6 +75,12 @@ app.controller('homeController', ['$scope', 'ordersService', 'localStorageServic
     });
 
 
+    $scope.makezoom = function (data) {
+        $("#imagemodal").modal("show");
+        $scope.enlargeimage = data;
+    }
+
+
 
     //ordersService.getExpense($scope.userName).then(function (results) {
 
