@@ -70,6 +70,7 @@ namespace AngularJSAuthentication.API.Controllers
                 ExpenseModel.receiptPath = expense.ReceiptPath;
                 ExpenseModel.isApproved = expense.IsApproved;
                 ExpenseModel.description = expense.Description;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
                 ExpenseModelList.Add(ExpenseModel);
             }
             return ExpenseModelList;
@@ -102,6 +103,7 @@ namespace AngularJSAuthentication.API.Controllers
                 ExpenseModel.receiptPath = expense.ReceiptPath;
                 ExpenseModel.isApproved = expense.IsApproved;
                 ExpenseModel.description = expense.Description;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
                 ExpenseModelList.Add(ExpenseModel);
             }
 

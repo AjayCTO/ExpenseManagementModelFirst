@@ -472,5 +472,55 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         $scope.sortKey = keyname;   //set the sortKey to the param passed
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     }
+
+
+
+    function removePaddingCharacters(bytes) {
+        bytes = bytes.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
+
+        return bytes;
+    }
+
+    $(document.body).on('change', '#fileName', function () {
+        alert('Change Happened');
+
+        alert("change");
+        var files = event.target.files; //FileList object
+        var output = document.getElementById("result");
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+
+            alert("change1");
+
+            //Only pics
+            if (!file.type.match('image'))
+                continue;
+
+            var picReader = new FileReader();
+
+            picReader.addEventListener("load", function (event) {
+
+                alert("change2");
+
+                var picFile = event.target;
+
+                $scope.Expense.ReceiptPath = picFile.result;
+
+                alert(picFile.result);
+
+                $scope.$apply();
+
+
+
+            });
+
+            //Read the image
+            picReader.readAsDataURL(file);
+        }
+    });
+
+
+   
    
 }]);
