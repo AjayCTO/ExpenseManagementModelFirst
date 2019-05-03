@@ -392,7 +392,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ordersServiceFactory.saveIncoming = _saveIncoming;
     ordersServiceFactory.getIncomingByID = _getIncomingByID;
     ordersServiceFactory.getIncomingByProjectID = _getIncomingByProjectID;
-    ordersServiceFactory.updateIncomeing = _updateIncoming;
+    ordersServiceFactory.updateIncoming = _updateIncoming;
     ordersServiceFactory.deleteIncoming = _deleteIncoming;
 
     ordersServiceFactory.getManufacturer = _getManufacturer;

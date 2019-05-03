@@ -43,6 +43,8 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.openEditModal = function (obj) {
+        alert(obj);
+
         $scope.Incoming = {
             IncomingID: obj.incomingID,
             ProjectID: obj.projectID,
@@ -166,9 +168,9 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
     };
 
 
-    $scope.updateIncomeing = function () {
+    $scope.updateIncoming = function () {
         $scope.Incoming.projectID = $scope.projectID;
-        ordersService.updateIncomeing($scope.Incoming).then(function (response) {
+        ordersService.updateIncoming($scope.Incoming).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Incoming has been updated successfully";
@@ -242,5 +244,9 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
     });
 
 
+    $scope.makezoom = function (data) {
+        $("#imagemodal").modal("show");
+        $scope.enlargeimage = data;
+    }
 
 }]);

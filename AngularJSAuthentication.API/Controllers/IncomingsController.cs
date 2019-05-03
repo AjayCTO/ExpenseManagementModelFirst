@@ -72,8 +72,9 @@ namespace AngularJSAuthentication.API.Controllers
 
         // PUT: api/Incomings/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutIncoming(short id, Incoming incoming)
+        public IHttpActionResult PutIncoming(Incoming incoming)
         {
+            var id = incoming.IncomingID;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

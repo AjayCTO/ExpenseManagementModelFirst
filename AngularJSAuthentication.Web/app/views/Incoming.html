@@ -80,7 +80,7 @@
 
                 <img ng-if="obj.receiptPath==''|| obj.receiptPath == null" style="height:50px; width:50px;" src="https://static.thenounproject.com/png/220984-200.png" alt="Alternate Text" />
                 <a>
-                    <img ng-if="obj.receiptPath !='' || obj.receiptPath != null" style="height:50px; width:50px;" src="{{obj.receiptPath}}" alt="Alternate Text" />
+                    <img ng-click="makezoom(obj.receiptPath)" ng-if="obj.receiptPath !='' || obj.receiptPath != null" style="height:50px; width:50px;" src="{{obj.receiptPath}}" alt="Alternate Text" />
                 </a>
             </td>
             <td>
@@ -137,7 +137,23 @@
     <button data-ng-click="showlistofincomings()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
 
 </div>
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle-2">Receipt</h5>
 
+            </div>
+            <div class="modal-body">
+                <img src="{{enlargeimage}}" alt="Alternate Text" />
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--<form class="form-login" role="form">
