@@ -80,7 +80,7 @@
 
                 <img ng-if="obj.receiptPath==''|| obj.receiptPath == null" style="height:50px; width:50px;" src="https://static.thenounproject.com/png/220984-200.png" alt="Alternate Text" />
                 <a>
-                    <img ng-click="makezoom(obj.receiptPath)" ng-if="obj.receiptPath !='' || obj.receiptPath != null" style="height:50px; width:50px;" src="{{obj.receiptPath}}" alt="Alternate Text" />
+                    <img ng-click="makezoom(obj.receiptPath)" ng-if="obj.receiptPath != null && obj.receiptPath != ''" style="height:50px; width:50px;" src="{{obj.receiptPath}}" alt="Alternate Text" />
                 </a>
             </td>
             <td>
