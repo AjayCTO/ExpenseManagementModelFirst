@@ -165,6 +165,10 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
     $scope.getdatabyid = function (id) {
 
+
+
+        $scope.projectID = id;
+
         $scope.Expense.ProjectID = id;
         $scope.Categoryobject.ProjectID = id;
         $scope.Assetobject.ProjectID = id;
@@ -464,6 +468,9 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         });
     };
 
-
-
+    $scope.sort = function (keyname) {
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
+   
 }]);
