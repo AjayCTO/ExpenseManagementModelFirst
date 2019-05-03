@@ -61,11 +61,12 @@
         </div>
 
 
-<div class="card">
-    <div class="card-body">
+<div class="summarysection card">
+
+    <div class="card-header">
         <div class="row">
             <div class="col-md-8">
-                <h4>Expenses summary</h4>
+                <h4 style="margin-top:8px;">Expenses summary</h4>
             </div>
 
             <div style="text-align:right" class="col-md-4">
@@ -75,27 +76,140 @@
                 </select>
             </div>
         </div>
+    </div>
 
-        <div class="table-responsive">
+
+    <div class="card-body">
+        
+
+        <h4>
+            <b>{{Projectname}}</b>
+        </h4>
+      
+
+        <div class="row">
+            <div class="col-md-2">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center">
+                        <i class="fa fa-money"></i>
+                        <p class="text-muted mt-2 mb-2">Project cost</p>
+                        <p class="lead text-22 m-0">{{totalcost}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center">
+                        <i class="fa fa-th"></i>
+                        <p class="text-muted mt-2 mb-2">Total Incoming</p>
+                        <p class="lead text-22 m-0">   {{totalincoming}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card card-icon mb-4">
+                    <div class="card-body text-center">
+                        <i class="fa fa-th"></i>
+                        <p class="text-muted mt-2 mb-2">Remain Incoming</p>
+                        <p class="lead text-22 m-0">  {{totalcost - totalincoming}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div ng-class="{'bg-danger': totalcost - totalexpense < 0}" class="card card-icon mb-4">
+                    <div class="card-body text-center">
+                        <i class="fa fa-exchange"></i>
+                        <p class="text-muted mt-2 mb-2">Total Expenses</p>
+                        <p class="lead text-22 m-0">     {{totalexpense}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div ng-class="{'bg-danger': totalcost - totalexpense < 0}" class="card card-icon mb-4">
+                    <div class="card-body text-center">
+                        <i class="fa fa-calendar"></i>
+                        <p class="text-muted mt-2 mb-2">Remaining Expenses</p>
+                        <p class="lead text-22 m-0">     {{totalcost - totalexpense}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+
+                    <div style="padding:17px;" class="badge-primary card-header">
+                        <h4 style="margin-bottom:0; color:#fff;" class="card-title">Last 5 Expenses</h4>
+                    </div>
+
+                    <div style="min-height:328px;" class="card-body">
+
+                        <div class="d-flex flex-column flex-sm-row align-items-center mb-3" ng-repeat="obj in ListOfExpenses">
+                            <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
+                            <div class="flex-grow-1">
+                                <h5 class=""><a href="">{{obj.description}}</a></h5>
+                                <h5 class=""><a href="">{{obj.projectName}}</a></h5>
+                                <p class="text-small text-danger m-0">${{obj.totalAmount}}</p>
+                            </div>
+                            <div>
+                                <button class="btn btn-outline-primary btn-rounded btn-sm">View details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+
+                    <div style="padding:17px;" class="badge-primary card-header">
+                        <h4 style="margin-bottom:0; color:#fff;" class="card-title">Last 5 Incoming</h4>
+                    </div>
+
+                    <div style="min-height:328px;" class="card-body">
+                       
+                        <div class="d-flex flex-column flex-sm-row align-items-center mb-3" ng-repeat="obj in ListOfIncomings">
+                            <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
+                            <div class="flex-grow-1">
+                                <h5 class=""><a href="">{{obj.sourceName}}</a></h5>
+                                <p class="m-0 text-small text-muted">{{obj.description}}</p>
+                                <p class="text-small text-danger m-0">${{obj.amount}} </p>
+                            </div>
+                            <div>
+                                <button class="btn btn-outline-primary btn-rounded btn-sm">View details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+
+
+        <!--<div class="table-responsive">
 
 
             <table style="overflow:hidden" class="summarytable table">
                 <thead>
                     <tr>
-                        <th>Project Name</th>
-                        <th>Total Cost</th>
-                        <th>Incoming</th>
+                        <th> Name</th>
+                        <th>Cost</th>
+                        <th>Total Incoming</th>
+                        <th>Remaining Incoming</th>
                         <th>Total Expenses</th>
+                        <th>Remaining Expenses</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr>
                         <td>
-                            <h4>
-                                <b>{{Projectname}}</b>
-                            </h4>
-                            <small>Some details for wall Putty</small>
+                           
 
 
                         </td>
@@ -110,16 +224,30 @@
                                 {{totalincoming}}
                             </span>
                         </td>
+
+                        <td>
+                            <span class="badge badge-warning">
+                                {{totalcost - totalincoming}}
+                            </span>
+                        </td>
+
                         <td>
 
                             <span class="badge badge-danger">
                                 {{totalexpense}}
                             </span>
                         </td>
+
+                        <td>
+
+                            <span class="badge badge-danger">
+                                {{totalcost - totalexpense}}
+                            </span>
+                        </td>
                     </tr>
 
                     <tr class="expensesrow">
-                        <td colspan="4">
+                        <td colspan="6">
 
                             <p style="margin-bottom:12px; font-weight:700;">ASSET DETAILS</p>
 
@@ -139,61 +267,33 @@
 
             </table>
 
-        </div>
+        </div>-->
     </div>
 </div>
 
 <br />
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="card-title">Last 5 Expenses</div>
-                <div class="d-flex flex-column flex-sm-row align-items-center mb-3" ng-repeat="obj in ListOfExpenses">
-                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
-                    <div class="flex-grow-1">
-                        <h5 class=""><a href="">{{obj.description}}</a></h5>
-                        <h5 class=""><a href="">{{obj.projectName}}</a></h5>
-                        <p class="text-small text-danger m-0">${{obj.totalAmount}}</p>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-primary btn-rounded btn-sm">View details</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="card-title">Last 5 Incoming</div>
-                <div class="d-flex flex-column flex-sm-row align-items-center mb-3" ng-repeat="obj in ListOfIncomings">
-                    <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
-                    <div class="flex-grow-1">
-                        <h5 class=""><a href="">{{obj.sourceName}}</a></h5>
-                        <p class="m-0 text-small text-muted">{{obj.description}}</p>
-                        <p class="text-small text-danger m-0">${{obj.amount}} </p>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-primary btn-rounded btn-sm">View details</button>
-                    </div>
-                </div>             
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 
 
 <style>
-    .badge {
+    /*.badge {
         font-size: 16px;
         padding: 12px;
         padding-left: 23px;
         padding-right: 23px;
       
+    }*/
+
+    .bg-danger i
+    {
+        color:#fff !important;
+    }
+
+    .bg-danger p {
+        color: #fff !important;
     }
 
     .expensesrow td
@@ -233,6 +333,11 @@
     .btn-sm:hover
     {
         color:#fff !important;
+    }
+
+    .summarysection i
+    {
+        font-size:25px;
     }
     
     
