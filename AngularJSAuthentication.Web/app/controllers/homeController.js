@@ -1,14 +1,14 @@
 ﻿'use strict';
 app.controller('homeController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
-  
+    $scope.projectID = localStorageService.get('projectID').projectID;
+    $scope.userName = localStorageService.get('authorizationData').userName;
+    
 
-    $scope.projectid = 0;
-
-    $scope.Projectname = "My Project";
-    $scope.totalcost = 1255;
-    $scope.totalexpense = 1000;
-    $scope.totalincoming = 300;
+    //$scope.Projectname = "My Project";
+    //$scope.totalcost = 1255;
+    //$scope.totalexpense = 1000;
+    //$scope.totalincoming = 300;
 
 
     $scope.getTransactionByID = function (id) {
@@ -60,28 +60,31 @@ app.controller('homeController', ['$scope', 'ordersService', 'localStorageServic
         
 
     }
-
-
-    $scope.userName = localStorageService.get('authorizationData').userName;
+    
 
 
     ordersService.getProjects($scope.userName).then(function (results) {
 
         $scope.ListOfProjects = results.data;
+
+        localStorageService.set('projectID', { projectID: $scope.ListOfProjects[0].projectID });
+
+        $scope.getTransactionByID($scope.ListOfProjects[0].projectID);
+
     }, function (error) {
     });
 
 
 
-    ordersService.getExpense($scope.userName).then(function (results) {
+    //ordersService.getExpense($scope.userName).then(function (results) {
 
-        $scope.ListOfExpenses = results.data;
-        console.log($scope.ListOfExpenses);
+    //    $scope.ListOfExpenses = results.data;
+    //    console.log($scope.ListOfExpenses);
 
-    }, function (error) {
+    //}, function (error) {
 
-        //alert(error.data.message);
-    });
+    //    //alert(error.data.message);
+    //});
 
 
    

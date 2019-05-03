@@ -92,7 +92,7 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
 
                 debugger;
 
-                $scope.project.CustomerID = response.data.customerID;
+                $scope.project.customerID = response.data.customerID;
                 $scope.$apply();
 
             }, 1500)
@@ -140,10 +140,7 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
         ordersService.getProjectByID(id).then(function (results) {
 
             $scope.project = results.data;
-
-            console.log("Get By id working");
-            console.log($scope.project);
-
+           
         }, function (error) {
             //alert(error.data.message);
         });

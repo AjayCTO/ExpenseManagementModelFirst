@@ -61,6 +61,7 @@ namespace AngularJSAuthentication.API.Controllers
                 ExpenseModel.assetID = expense.Asset != null ? (int)expense.AssetID : 0;
                 ExpenseModel.categoryID = expense.Category != null ? (int)expense.CategoryID : 0;
                 ExpenseModel.supplierID = expense.Supplier != null ? (int)expense.SupplierID : 0;
+                ExpenseModel.supplierName = expense.Supplier != null ? expense.Supplier.Name : "";
                 ExpenseModel.projectName = expense.Project.Name;
                 ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
                 ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
@@ -92,6 +93,7 @@ namespace AngularJSAuthentication.API.Controllers
                 ExpenseModel.assetID = expense.Asset != null ? (int)expense.AssetID : 0;
                 ExpenseModel.categoryID = expense.Category != null ? (int)expense.CategoryID : 0 ;
                 ExpenseModel.supplierID = expense.Supplier != null ? (int)expense.SupplierID : 0 ;
+                ExpenseModel.supplierName = expense.Supplier != null ? expense.Supplier.Name : "";
                 ExpenseModel.projectName = expense.Project.Name;
                 ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
                 ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
@@ -176,7 +178,7 @@ namespace AngularJSAuthentication.API.Controllers
 
             var supplier = db.Suppliers.FirstOrDefault(x => x.SupplierID == expense.Expense.SupplierID);
 
-            supplier.AmountPaid = supplier.AmountPaid +expense.Expense.Amount;
+            supplier.AmountPaid = (supplier.AmountPaid != null ? supplier.AmountPaid : 0 ) + expense.Expense.Amount;
 
 
             db.SaveChanges();

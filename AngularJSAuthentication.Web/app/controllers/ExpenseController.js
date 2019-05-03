@@ -142,6 +142,11 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
         //alert(error.data.message);
     });
 
+    ordersService.getProjects($scope.userName).then(function (results) {
+
+        $scope.ListOfProjects = results.data;
+    }, function (error) {
+    });
 
 
     //$scope.getAll = function () {
@@ -169,7 +174,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
                 $scope.categories = results.data;
 
             }, function (error) {
-                debugger;
+                
                 //alert(error.data.message);
             });
 
@@ -300,24 +305,40 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     };
 
 
-    ordersService.getProjects($scope.userName).then(function (results) {
+  
+    //ordersService.getProjects().then(function (results) {
+    //    $scope.projects = results.data;
 
-        $scope.ListOfProjects = results.data;
-    }, function (error) {
-    });
-
-    ordersService.getProjects().then(function (results) {
-        $scope.projects = results.data;
-
-    }, function (error) {
-    });
+    //}, function (error) {
+    //});
 
 
     $scope.getassetsagain = function () {
-        ordersService.getAssets().then(function (results) {
+        ordersService.getAssetsByID($scope.projectID).then(function (results) {
 
             $scope.assets = results.data;
 
+        }, function (error) {
+            //alert(error.data.message);
+        });
+    }
+
+
+
+    //ordersService.getAssets().then(function (results) {
+
+    //    $scope.assets = results.data;
+
+    //}, function (error) {
+
+    //    //alert(error.data.message);
+    //});
+
+
+    $scope.getcategoryagain = function () {
+        ordersService.getCategoryByID($scope.projectID).then(function (results) {
+
+            $scope.categories = results.data;
 
         }, function (error) {
 
@@ -326,51 +347,31 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     }
 
 
+    //ordersService.getCategory().then(function (results) {     
+    //    $scope.categories = results.data;      
 
-    ordersService.getAssets().then(function (results) {
-
-        $scope.assets = results.data;
-
-    }, function (error) {
-
-        //alert(error.data.message);
-    });
-
-
-    $scope.getcategoryagain = function () {
-        ordersService.getCategory().then(function (results) {
-            $scope.categories = results.data;
-
-        }, function (error) {
-        });
-    }
-
-
-    ordersService.getCategory().then(function (results) {     
-        $scope.categories = results.data;      
-
-    }, function (error) {
-    });
+    //}, function (error) {
+    //});
 
 
     $scope.getsupplieragain = function () {
-        ordersService.getSupplier().then(function (results) {
+        ordersService.getSupplierByID($scope.projectID).then(function (results) {
 
-            debugger;
             $scope.suppliers = results.data;
 
         }, function (error) {
+            //alert(error.data.message);
         });
     }
 
 
-    ordersService.getSupplier().then(function (results) {
+    //ordersService.getSupplier().then(function (results) {
 
-        debugger;
-        $scope.suppliers = results.data;
+    //    debugger;
+    //    $scope.suppliers = results.data;
 
-    }, function (error) {
-    });
+    //}, function (error) {
+    //});
 
 
     $scope.newcategory = function () {

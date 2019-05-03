@@ -44,15 +44,26 @@ namespace AngularJSAuthentication.API.Controllers
 
         // GET: api/Assets/5
         [ResponseType(typeof(Asset))]
-        public List<Asset> GetAsset(int id)
+        public List<AssetModel> GetAsset(int id)
         {
+            List<AssetModel> ListAssetModel = new List<AssetModel>();
+
+            List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
+
+            foreach (Asset asset in listOfAsset)
+            {
+                AssetModel AssetModel = new AssetModel();
+                AssetModel.name = asset.Name;
+                AssetModel.address = asset.Address;
+                AssetModel.contact = asset.Contact;
+                AssetModel.assetID = asset.AssetID;
+                AssetModel.projectID = asset.ProjectID;
+
+                ListAssetModel.Add(AssetModel);
+            }
 
 
-
-               List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
-
-
-               return listOfAsset;
+            return ListAssetModel;              
         }
 
 

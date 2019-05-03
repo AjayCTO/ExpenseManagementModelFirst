@@ -71,7 +71,7 @@
             <div style="text-align:right" class="col-md-4">
                 <select ng-model="projectid" data-ng-change="getTransactionByID(projectid)" style="margin-bottom:10px;" class="form-control">
                     <option selected value="0">- Select Project -</option>
-                    <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}">{{pr.name}}</option>
+                    <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
                 </select>
             </div>
         </div>
