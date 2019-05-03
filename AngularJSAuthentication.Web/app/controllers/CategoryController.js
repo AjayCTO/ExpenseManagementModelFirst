@@ -2,6 +2,9 @@
 app.controller('CategoryController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.userName = localStorageService.get('authorizationData').userName;
+
+    $scope.projectID = localStorageService.get('projectID').projectID;   
+
     $scope.isEditing = false;
 
     $scope.Category = {
@@ -15,7 +18,10 @@ app.controller('CategoryController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.savedSuccessfully = false; 
 
-    $scope.openEditModal = function(category) {
+    $scope.openEditModal = function (category) {
+
+        $scope.projectID = category.projectID;
+
         $scope.Category = {
             categoryID: category.categoryID,
             projectID: category.projectID,
@@ -41,7 +47,18 @@ app.controller('CategoryController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.showlist = true;
-    ordersService.getCategory().then(function (results) {
+
+    //GetAll
+    //ordersService.getCategory().then(function (results) {
+
+    //    $scope.ListOfCategories = results.data;
+
+    //}, function (error) {
+    //    //alert(error.data.message);
+    //});
+
+    //Get By Project ID.
+    ordersService.getCategoryByID($scope.projectID).then(function (results) {
 
         $scope.ListOfCategories = results.data;
 

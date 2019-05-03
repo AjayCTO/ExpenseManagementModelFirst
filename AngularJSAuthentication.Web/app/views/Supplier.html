@@ -104,16 +104,16 @@
         <input type="text" class="form-control" placeholder="Customer Name" data-ng-model="Supplier.Contact" required>
     </div>
 
-    <div class="form-group">
+    <!--<div class="form-group">
         <label> Select Category -- {{Expense.CategoryID}} <a data-ng-click="newcategory()" style="float:right">New</a></label>
 
         <select class="form-control" data-ng-model="Expense.CategoryID">
             <option selected value="">- Select Category -</option>
-            <option data-ng-repeat="cat in categories" value="{{cat.categoryID}}">{{cat.name}}</option>
+            <option data-ng-repeat="cat in categories" value="{{cat.categoryID}}" ng-selected="cat.categoryID == $scope.Supplier.CategoryID">{{cat.name}}</option>
         </select>
 
 
-    </div>
+    </div>-->
 
     <div class="form-group">
         <label>Total Amount</label>

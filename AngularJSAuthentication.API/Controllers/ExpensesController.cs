@@ -58,9 +58,9 @@ namespace AngularJSAuthentication.API.Controllers
                 ExpenseModel ExpenseModel = new Models.ExpenseModel();
                 ExpenseModel.expenseID = expense.ExpenseID;
                 ExpenseModel.projectID = (int)expense.ProjectID;
-                ExpenseModel.assetID = (int)expense.AssetID;
-                ExpenseModel.categoryID = (int)expense.CategoryID;
-                ExpenseModel.supplierID = (int)expense.SupplierID;
+                ExpenseModel.assetID = expense.Asset != null ? (int)expense.AssetID : 0;
+                ExpenseModel.categoryID = expense.Category != null ? (int)expense.CategoryID : 0;
+                ExpenseModel.supplierID = expense.Supplier != null ? (int)expense.SupplierID : 0;
                 ExpenseModel.projectName = expense.Project.Name;
                 ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
                 ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
@@ -88,10 +88,17 @@ namespace AngularJSAuthentication.API.Controllers
             {
                 ExpenseModel ExpenseModel = new Models.ExpenseModel();
                 ExpenseModel.expenseID = expense.ExpenseID;
+                ExpenseModel.projectID = (int)expense.ProjectID;
+                ExpenseModel.assetID = expense.Asset != null ? (int)expense.AssetID : 0;
+                ExpenseModel.categoryID = expense.Category != null ? (int)expense.CategoryID : 0 ;
+                ExpenseModel.supplierID = expense.Supplier != null ? (int)expense.SupplierID : 0 ;
                 ExpenseModel.projectName = expense.Project.Name;
                 ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
                 ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
                 ExpenseModel.totalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
+                ExpenseModel.refrence = expense.Refrence;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModel.isApproved = expense.IsApproved;
                 ExpenseModel.description = expense.Description;
                 ExpenseModelList.Add(ExpenseModel);
             }

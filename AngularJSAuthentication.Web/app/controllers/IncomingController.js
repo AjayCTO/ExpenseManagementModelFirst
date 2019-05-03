@@ -3,7 +3,7 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.isEditing = false;
   
-    $scope.projectID = null;
+   
 
     $scope.Incoming = {
         IncomingID: null,
@@ -26,12 +26,14 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.userName = localStorageService.get('authorizationData').userName;
 
-    ordersService.getIncoming().then(function (results) {     
+    $scope.projectID = localStorageService.get('projectID').projectID;
 
-        $scope.ListOfIncoming = results.data;       
-    }, function (error) {
-        //alert(error.data.message);
-    });
+    //ordersService.getIncoming().then(function (results) {     
+
+    //    $scope.ListOfIncoming = results.data;       
+    //}, function (error) {
+    //    //alert(error.data.message);
+    //});
 
 
     $scope.openEditModal = function (obj) {
@@ -45,6 +47,20 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
         $scope.isEditing = true;
         $scope.showlist = false;
     }
+
+
+    ordersService.getIncomingByProjectID($scope.projectID).then(function (results) {
+
+        $scope.ListOfIncoming = results.data;
+
+        console.log("lit of incoming");
+        console.log($scope.ListOfIncoming);
+
+
+    }, function (error) {
+        //alert(error.data.message);
+    });
+
 
 
     $scope.getIncomingsByProjectID = function (id) {

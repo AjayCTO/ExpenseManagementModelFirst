@@ -3,7 +3,8 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.userName = localStorageService.get('authorizationData').userName;
 
-    $scope.projectID = 0;
+    $scope.projectID = localStorageService.get('projectID').projectID;
+   
 
     $scope.Supplier = {
         SupplierID:"",
@@ -34,17 +35,20 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
         });
     }
 
+    ordersService.getSupplierByID($scope.projectID).then(function (results) {
+        $scope.ListOfSupplier = results.data;
+    }, function (error) {
+    });
 
 
+    //$scope.getAll = function () {
+    //    ordersService.getSupplier().then(function (results) {
+    //        $scope.ListOfSupplier = results.data;
+    //    }, function (error) {
+    //    });
+    //}
 
-    $scope.getAll = function () {
-        ordersService.getSupplier().then(function (results) {
-            $scope.ListOfSupplier = results.data;
-        }, function (error) {
-        });
-    }
-
-    $scope.getAll();
+    //$scope.getAll();
 
     $scope.getdatabyid = function (id) {
         $scope.Supplier.ProjectID = id;
@@ -79,7 +83,10 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
     }
 
 
-    $scope.openEditModal = function (obj) {
+    $scope.openEditModal = function (obj) {      
+
+        $scope.projectID = obj.projectID;
+
         $scope.Supplier = {
             SupplierID: obj.supplierID,
             Name: obj.name,
@@ -88,8 +95,9 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
             AmountPaid: obj.amountPaid,
             Category: obj.category,
             TotalAmount: obj.totalAmount,
-            ProjectID: obj.projectID
-        };
+            ProjectID: obj.projectID,
+            CategoryID: obj.categoryID
+    };
 
 
         $scope.isEditing = true;

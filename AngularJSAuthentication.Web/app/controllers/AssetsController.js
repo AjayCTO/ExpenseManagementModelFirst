@@ -2,6 +2,9 @@
 app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.userName = localStorageService.get('authorizationData').userName;
+
+    $scope.projectID = localStorageService.get('projectID').projectID;
+
     $scope.showlist = true;
     $scope.ListOfAssets = [];
     $scope.savedSuccessfully = false;
@@ -56,18 +59,25 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
 
 
+    ordersService.getAssetsByProjectID($scope.projectID).then(function (results) {
+        $scope.ListOfAssets = results.data;
 
-    $scope.getAll = function () {
-        ordersService.getAssets().then(function (results) {
-            $scope.ListOfAssets = results.data;
-
-        }, function (error) {
-            //alert(error.data.message);
-        });
-    }
+    }, function (error) {
+        //alert(error.data.message);
+    });
 
 
-    $scope.getAll();
+    //$scope.getAll = function () {
+    //    ordersService.getAssets().then(function (results) {
+    //        $scope.ListOfAssets = results.data;
+
+    //    }, function (error) {
+    //        //alert(error.data.message);
+    //    });
+    //}
+
+
+    //$scope.getAll();
    
 
 
@@ -123,7 +133,11 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
     $scope.openEditModal = function (Asset) {
 
-       
+        $scope.projectID = Asset.projectID;
+
+        console.log("open edit modal");
+        console.log(Asset);
+
         $scope.Asset = {
             assetID: Asset.assetID,
             projectID: Asset.projectID,

@@ -11,6 +11,8 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
 
     $scope.userName = localStorageService.get('authorizationData').userName;
 
+    $scope.projectID = localStorageService.get('projectID').projectID;
+
     $scope.isEditing = false;
 
     $scope.Expense = {
@@ -55,11 +57,9 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     };
 
 
-    $scope.openEditModal = function (obj) {
+    $scope.openEditModal = function (obj) {      
 
-        console.log("Open edit modal");
-        console.log(obj);
-
+        $scope.projectID = obj.projectID;
 
         $scope.Expense = {
             ExpenseID: obj.expenseID,
@@ -69,7 +69,7 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
             SupplierID: obj.supplierID,
             Date: obj.date,
             Amount: obj.totalAmount,
-            Refrence: obj.refrense,
+            Refrence: obj.refrence,
             ReceiptPath: obj.receiptPath,
             IsApproved: obj.isApproved,
             Description: obj.description
@@ -131,21 +131,32 @@ app.controller('ExpenseController', ['$scope', 'ordersService', 'localStorageSer
     
 
 
+    ordersService.getExpenseByProjectID($scope.projectID).then(function (results) {
+
+        $scope.ListOfExpenses = results.data;
+
+        $scope.getdatabyid($scope.projectID);
+
+    }, function (error) {
+
+        //alert(error.data.message);
+    });
 
 
-    $scope.getAll = function () {
-        ordersService.getExpense($scope.userName).then(function (results) {
 
-            $scope.ListOfExpenses = results.data;           
+    //$scope.getAll = function () {
+    //    ordersService.getExpense($scope.userName).then(function (results) {
 
-        }, function (error) {
+    //        $scope.ListOfExpenses = results.data;           
 
-            //alert(error.data.message);
-        });
-    }
+    //    }, function (error) {
+
+    //        //alert(error.data.message);
+    //    });
+    //}
 
 
-    $scope.getAll();
+    //$scope.getAll();
 
     $scope.getdatabyid = function (id) {
 

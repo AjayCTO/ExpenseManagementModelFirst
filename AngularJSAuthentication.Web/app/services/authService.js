@@ -39,10 +39,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
 
-            console.log("=============auth service=================")
-            console.log(response)
-            console.log("=============auth service=================")
-
+          
 
             if (loginData.useRefreshTokens) {
                 localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
