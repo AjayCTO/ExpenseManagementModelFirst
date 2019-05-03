@@ -149,7 +149,9 @@
                     <div style="min-height:328px;" class="card-body">
 
                         <div class="d-flex flex-column flex-sm-row align-items-center mb-3" ng-repeat="obj in ListOfExpenses">
-                            <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
+                            <img ng-if="obj.receiptPath!=''"  class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{obj.receiptPath}}" alt="">
+                            <img ng-if="obj.receiptPath==''" style="height:50px; width:50px;" src="https://static.thenounproject.com/png/220984-200.png" alt="Alternate Text" />
+
                             <div class="flex-grow-1">
                                 <h5 class=""><a href="">{{obj.description}}</a></h5>
                                 <h5 class=""><a href="">{{obj.projectName}}</a></h5>
@@ -172,7 +174,9 @@
                     <div style="min-height:328px;" class="card-body">
                        
                         <div class="d-flex flex-column flex-sm-row align-items-center mb-3" ng-repeat="obj in ListOfIncomings">
-                            <img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="http://gull-html-laravel.ui-lib.com/assets/images/products/headphone-4.jpg" alt="">
+                            <img ng-if="obj.receiptPath !=''"  class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{obj.receiptPath}}" alt="">
+                            <img ng-if="obj.receiptPath ==''" style="height:50px; width:50px;" src="https://static.thenounproject.com/png/220984-200.png" alt="Alternate Text" />
+
                             <div class="flex-grow-1">
                                 <h5 class=""><a href="">{{obj.sourceName}}</a></h5>
                                 <p class="m-0 text-small text-muted">{{obj.description}}</p>

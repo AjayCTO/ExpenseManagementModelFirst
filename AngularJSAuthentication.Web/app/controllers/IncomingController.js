@@ -10,7 +10,8 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
         ProjectID: $scope.projectID,
         Date: "",
         Amount: "",
-        SourceName:""
+        SourceName: "",
+        ReceiptPath: ""
     };
 
 
@@ -47,7 +48,8 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
             ProjectID: obj.projectID,
             Date: obj.date,
             Amount: obj.amount,
-            SourceName: obj.sourceName
+            SourceName: obj.sourceName,
+            ReceiptPath: obj.receiptPath
         };
         $scope.isEditing = true;
         $scope.showlist = false;
@@ -199,5 +201,46 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
         $scope.sortKey = keyname;   //set the sortKey to the param passed
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     }
+
+
+
+    function removePaddingCharacters(bytes) {
+        bytes = bytes.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
+
+        return bytes;
+    }
+
+    $(document.body).on('change', '#fileName', function () {
+
+        var files = event.target.files; //FileList object
+        var output = document.getElementById("result");
+        var output = document.getElementById("showUploaded");
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            //Only pics
+            if (!file.type.match('image'))
+                continue;
+
+            var picReader = new FileReader();
+
+            picReader.addEventListener("load", function (event) {
+
+                var picFile = event.target;
+
+                $scope.Incoming.ReceiptPath = picFile.result;
+
+                output.src = picFile.result;
+                output.style.display = "block";
+                $scope.$apply();
+
+            });
+
+            //Read the image
+            picReader.readAsDataURL(file);
+        }
+    });
+
+
 
 }]);

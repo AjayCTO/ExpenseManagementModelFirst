@@ -15,5 +15,7 @@ namespace AngularJSAuthentication.API.Models
 
         public int projectID { get; set; }
         public string  projectName { get; set; }
+
+        public string receiptPath { get; set; }
     }
 }

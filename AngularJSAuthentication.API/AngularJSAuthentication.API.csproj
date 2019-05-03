@@ -193,6 +193,10 @@
     <Compile Include="Migrations\201904290725303_add2.Designer.cs">
       <DependentUpon>201904290725303_add2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905030931264_IncomeReceipt.cs" />
+    <Compile Include="Migrations\201905030931264_IncomeReceipt.Designer.cs">
+      <DependentUpon>201905030931264_IncomeReceipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Asset.cs" />
@@ -271,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904290725303_add2.resx">
       <DependentUpon>201904290725303_add2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905030931264_IncomeReceipt.resx">
+      <DependentUpon>201905030931264_IncomeReceipt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

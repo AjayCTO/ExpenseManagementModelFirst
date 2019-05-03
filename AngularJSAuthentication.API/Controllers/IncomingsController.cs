@@ -56,6 +56,7 @@ namespace AngularJSAuthentication.API.Controllers
                 singleIncome.amount = income.Amount;
                 singleIncome.date = income.Date;
                 singleIncome.incomingID = income.IncomingID;
+                singleIncome.receiptPath = income.receiptPath;
 
 
 
