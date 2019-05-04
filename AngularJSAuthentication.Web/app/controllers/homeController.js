@@ -13,6 +13,9 @@ app.controller('homeController', ['$scope', 'ordersService', 'localStorageServic
 
     $scope.getTransactionByID = function (id) {
 
+
+        localStorageService.set('projectID', { projectID: id });
+
         ordersService.getTransactionByID(id).then(function (results) {   
 
             $scope.Projectname = results.data.projectName;
@@ -62,6 +65,20 @@ app.controller('homeController', ['$scope', 'ordersService', 'localStorageServic
     }
     
 
+    $scope.openIncomingPage = function (name) {
+
+        localStorageService.set('searchIncoming', { name: name });
+
+        window.open("#/incoming");
+    }
+
+
+    $scope.openExpensePage = function (name) {
+
+        localStorageService.set('searchExpense', { name: name });
+
+        window.open("#/expense");
+    }
 
     ordersService.getProjects($scope.userName).then(function (results) {
 
@@ -69,7 +86,12 @@ app.controller('homeController', ['$scope', 'ordersService', 'localStorageServic
 
         localStorageService.set('projectID', { projectID: $scope.ListOfProjects[0].projectID });
 
-        $scope.getTransactionByID($scope.ListOfProjects[0].projectID);
+        if ($scope.projectID == '' || $scope.projectID == null || $scope.projectID == undefined) {
+            $scope.getTransactionByID($scope.ListOfProjects[0].projectID);
+        }
+        else {
+            $scope.getTransactionByID($scope.projectID);
+        }      
 
     }, function (error) {
     });

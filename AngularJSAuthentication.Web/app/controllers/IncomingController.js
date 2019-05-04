@@ -2,7 +2,11 @@
 app.controller('incomingController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.isEditing = false;
-  
+
+    if (localStorageService.get('searchIncoming') != '' && localStorageService.get('searchIncoming') != null && localStorageService.get('searchIncoming') != undefined)
+    {
+        $scope.search = localStorageService.get('searchIncoming').name;
+    }  
    
 
     $scope.Incoming = {
@@ -41,9 +45,12 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
     //    //alert(error.data.message);
     //});
 
+    $scope.removeImage = function () {
+        $scope.Incoming.ReceiptPath = "";
+    }
 
     $scope.openEditModal = function (obj) {
-        alert(obj);
+      
 
         $scope.Incoming = {
             IncomingID: obj.incomingID,

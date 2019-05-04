@@ -170,7 +170,7 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
         $scope.Asset.projectID = $scope.projectID;
 
-        alert($scope.Asset.projectID);
+     
 
         ordersService.updateAsset($scope.Asset).then(function (response) {
 

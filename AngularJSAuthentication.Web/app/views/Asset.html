@@ -26,7 +26,7 @@
 
         <div style="text-align:center;" class="col-md-6 form-inline">
             <div class="form-group">
-                <label style="width:auto; margin-right:7px;">Select Projects</label>
+                <label style="width:auto; margin-right:7px;">Select Project</label>
                 <select ng-model="projectid" data-ng-change="getAssetsByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
                     <option selected value="0">- Select Project -</option>
                     <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
@@ -83,7 +83,7 @@
 
             <td>
                 <button ng-click="openEditModal(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
-                <button ng-click="deleteAsset(obj.assetID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>
+                <!--<button ng-click="deleteAsset(obj.assetID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>-->
 
             </td>
 
@@ -95,17 +95,17 @@
 
 <div ng-if="showlist==false">
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Name</label>
         <input type="text" class="form-control" placeholder="Name" data-ng-model="Asset.name" required autofocus>
     </div>
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Contact</label>
         <input type="text" class="form-control" placeholder="Contact" data-ng-model="Asset.contact" required>
     </div>
     
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Project Name</label>
 
         <!--<select ng-model="Asset.projectID" class="form-control">
@@ -114,21 +114,21 @@
         </select>-->
 
         <select ng-model="projectid" data-ng-change="setProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
-            <option selected value="0">- Select Project -</option>
+            <option selected value="">- Select Project -</option>
             <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
         </select>
     </div>
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Address</label>
         <input type="text" class="form-control" placeholder="Address" data-ng-model="Asset.address" required>
     </div>
 
 
-    <form class="form-login" role="form">
+    <form class="form-login col-md-6" role="form">
 
-        <button ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveAsset()">Save</button>
-        <button ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateAsset()">Update</button>
+        <button ng-disabled="(projectID == '' || projectID == null) || (Asset.name == '' || Asset.name == null)" ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveAsset()">Save</button>
+        <button ng-disabled="(projectID == '' || projectID == null) || (Asset.name == '' || Asset.name == null)" ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateAsset()">Update</button>
         <button data-ng-click="showlistofassets()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
 
     </form>

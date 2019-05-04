@@ -26,7 +26,7 @@
 
         <div style="text-align:center;" class="col-md-6 form-inline">
             <div class="form-group">
-                <label style="width:auto; margin-right:7px;">Select Projects</label>
+                <label style="width:auto; margin-right:7px;">Select Project</label>
                 <select ng-model="projectid" data-ng-change="getCategoryByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
                     <option selected value="0">- Select Project -</option>
                     <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
@@ -84,17 +84,17 @@
 <form ng-if="showlist==false" class="form-login" role="form">
 
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Name </label>
         <input type="text" class="form-control" placeholder="Name" data-ng-model="Category.name" required autofocus>
     </div>
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Description</label>
         <input type="text" class="form-control" placeholder="Description" data-ng-model="Category.description" required>
     </div>  
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Project</label>
         <!--<select ng-model="projectid" data-ng-change="getCategoryByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
             <option selected value="0">- Select Project -</option>
@@ -102,18 +102,23 @@
         </select>-->
 
         <select ng-model="projectid" data-ng-change="setProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
-            <option selected value="0">- Select Project -</option>
+            <option selected value="">- Select Project -</option>
             <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
         </select>
     </div> 
    
 
-    <button ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveCategory()"> <i class="fa fa-check"></i> Save</button>
 
-    <button ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateCategory()"> <i class="fa fa-check"></i> Update</button>
+    <div class="form-group col-md-6">
+        <button ng-disabled="(projectID == '' || projectID == null) || (Category.name == '' || Category.name == null)" ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveCategory()"> <i class="fa fa-check"></i> Save</button>
 
-    <button data-ng-click="showcategorylist()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+        <button ng-disabled="(projectID == '' || projectID == null) || (Category.name == '' || Category.name == null)" ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateCategory()"> <i class="fa fa-check"></i> Update</button>
 
+        <button data-ng-click="showcategorylist()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+
+    </div>
+
+       
 </form>
 
 <div class="modal fade" id="customermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">

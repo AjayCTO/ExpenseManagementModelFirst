@@ -33,10 +33,10 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
 
             $scope.ListOfProjects = results.data;
 
-            localStorageService.set('projectID', { projectID: $scope.ListOfProjects[0].projectID });
-
-      
-
+            if (localStorageService.get('projectID').projectID == '' || localStorageService.get('projectID').projectID == '' || localStorageService.get('projectID').projectID == undefined)
+            {
+                localStorageService.set('projectID', { projectID: $scope.ListOfProjects[0].projectID });
+            }
         }, function (error) {
         });
     }

@@ -1,9 +1,12 @@
 ﻿'use strict';
 app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'localStorageService', 'SweetAlert', function ($scope, $rootScope, ordersService, localStorageService, SweetAlert) {
+    
+    
 
+    if (localStorageService.get('searchExpense') != '' && localStorageService.get('searchExpense') != null && localStorageService.get('searchExpense') != undefined) {
+        $scope.search = localStorageService.get('searchExpense').name;
+    }
 
-
-  
 
 
     $scope.showlist = true;
@@ -60,6 +63,10 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
         ProjectID:0
       
     };
+
+    $scope.removeImage = function () {
+        $scope.Expense.ReceiptPath = "";
+    }
 
 
     $scope.openEditModal = function (obj) {      

@@ -2,8 +2,7 @@
 <div class="breadcrumb">
     <h1>Project Management</h1>
     <ul>
-        <li><a href="">Dashboard</a></li>
-        <li>Version 1</li>
+        <li><a href="">Dashboard</a></li>       
     </ul>
 </div>
 
@@ -19,7 +18,7 @@
 
         <!--<div style="text-align:center;" class="col-md-6 form-inline">
             <div class="form-group">
-                <label style="width:auto; margin-right:7px;">Select Projects</label>
+                <label style="width:auto; margin-right:7px;">Select Project</label>
                 <select ng-model="projectid" data-ng-change="getIncomingsByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
                     <option selected value="0">- Select Project -</option>
                     <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
@@ -78,8 +77,6 @@
                 <button ng-click="openEditModal(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
                 <!--<button ng-click="deleteProject(obj.projectID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>-->
             </td>
-
-
         </tr>
     </table>
 </div>
@@ -88,20 +85,20 @@
 <form ng-if="showlist==false" class="form-login" role="form">
 
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Name </label>
         <input type="text" class="form-control" placeholder="Name" data-ng-model="project.name" required autofocus>
     </div>
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Billing Method</label>
         <input type="text" class="form-control" placeholder="Billing Method" data-ng-model="project.billingMethod" required>
     </div>
 
     
 
-    <div class="form-group">
-        <label>Select Customer<a data-ng-click="newcustomer()" style="float:right">New</a> </label>
+    <div class="form-group col-md-6">
+        <label>Select Customer<a data-ng-click="newcustomer()" style="cursor:pointer ;float:right">New</a> </label>
 
         <select ng-model="project.customerID" class="form-control">
             <option selected value="">- Select Customer -</option>
@@ -112,18 +109,21 @@
     </div>
 
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
         <label>Estimated Cost</label>
-        <input type="text" class="form-control" placeholder="Total Cost" data-ng-model="project.totalCost" required>
+        <input type="number" class="form-control" placeholder="Total Cost" data-ng-model="project.totalCost" required>
     </div>
     
 
-    <button ng-if="isEditing == false"  class="btn btn-primary m-1" type="submit" data-ng-click="saveProject()"> <i class="fa fa-check"></i> Save</button>
+    <div class="form-group col-md-6">
+        <button ng-disabled="(project.name == '' || project.name == null) || (project.totalCost == '' || project.totalCost == null) ||(project.customerID == '' || project.customerID == null)" ng-if="isEditing == false" class="btn btn-primary m-1" type="submit" data-ng-click="saveProject()"> <i class="fa fa-check"></i> Save</button>
 
-    <button ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateProject()"> <i class="fa fa-check"></i> Update</button>
+        <button ng-disabled="(project.name == '' || project.name == null) || (project.totalCost == '' || project.totalCost == null) ||(project.customerID == '' || project.customerID == null)" ng-if="isEditing == true" class="btn btn-primary m-1" type="submit" data-ng-click="updateProject()"> <i class="fa fa-check"></i> Update</button>
 
-    <button data-ng-click="showprojectlist()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+        <button data-ng-click="showprojectlist()" type="button" class="btn btn-dark m-1"><i class="fa fa-times"></i> Cancel</button>
+ </div>
 
+   
 </form>
 
 <div class="modal fade" id="customermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">
