@@ -2,7 +2,7 @@
 app.controller('incomingController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.isEditing = false;
-
+    $scope.search = "";
     if (localStorageService.get('searchIncoming') != '' && localStorageService.get('searchIncoming') != null && localStorageService.get('searchIncoming') != undefined)
     {
         $scope.search = localStorageService.get('searchIncoming').name;
@@ -36,7 +36,9 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.userName = localStorageService.get('authorizationData').userName;
 
-    $scope.projectID = localStorageService.get('projectID').projectID;
+    if (localStorageService.get('projectID') != null && localStorageService.get('projectID') != '' && localStorageService.get('projectID') != undefined) {
+        $scope.projectID = localStorageService.get('projectID').projectID;
+    }
 
     //ordersService.getIncoming().then(function (results) {     
 
@@ -50,7 +52,10 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
     }
 
     $scope.openEditModal = function (obj) {
-      
+
+        //$scope.search = "";
+        localStorageService.remove('searchExpense');
+        localStorageService.remove('searchIncoming');
 
         $scope.Incoming = {
             IncomingID: obj.incomingID,
@@ -118,6 +123,10 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.addnewincoming = function () {
+        $scope.search = "";
+        localStorageService.remove('searchExpense');
+        localStorageService.remove('searchIncoming');
+
         $scope.Incoming = {
             IncomingID: null,
             ProjectID: null,

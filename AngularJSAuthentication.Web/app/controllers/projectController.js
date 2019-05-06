@@ -3,7 +3,8 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
 
     $scope.userName = localStorageService.get('authorizationData').userName;
 
-
+    localStorageService.remove('searchExpense');
+    localStorageService.remove('searchIncoming');
 
     $scope.project = {
         projectID:null,
@@ -33,7 +34,7 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
 
             $scope.ListOfProjects = results.data;
 
-            if (localStorageService.get('projectID').projectID == '' || localStorageService.get('projectID').projectID == '' || localStorageService.get('projectID').projectID == undefined)
+            if (localStorageService.get('projectID') == '' || localStorageService.get('projectID') == null || localStorageService.get('projectID') == undefined)
             {
                 localStorageService.set('projectID', { projectID: $scope.ListOfProjects[0].projectID });
             }

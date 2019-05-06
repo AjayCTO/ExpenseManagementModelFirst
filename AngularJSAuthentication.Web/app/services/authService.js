@@ -63,6 +63,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     };
 
     var _logOut = function () {
+        localStorageService.remove('searchExpense');
+        localStorageService.remove('searchIncoming');
+        localStorageService.remove('projectID');
         localStorageService.remove('authorizationData');
         _authentication.isAuth = false;
         _authentication.userName = "";

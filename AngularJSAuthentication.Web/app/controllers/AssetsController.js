@@ -3,7 +3,13 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
     $scope.userName = localStorageService.get('authorizationData').userName;
 
-    $scope.projectID = localStorageService.get('projectID').projectID;
+    localStorageService.remove('searchExpense');
+    localStorageService.remove('searchIncoming');
+
+
+    if (localStorageService.get('projectID') != null && localStorageService.get('projectID') != '' && localStorageService.get('projectID') != undefined) {
+        $scope.projectID = localStorageService.get('projectID').projectID;
+    }
 
     $scope.showlist = true;
     $scope.ListOfAssets = [];

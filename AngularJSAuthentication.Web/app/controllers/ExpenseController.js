@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'localStorageService', 'SweetAlert', function ($scope, $rootScope, ordersService, localStorageService, SweetAlert) {
     
-    
+    $scope.search = "";
 
     if (localStorageService.get('searchExpense') != '' && localStorageService.get('searchExpense') != null && localStorageService.get('searchExpense') != undefined) {
         $scope.search = localStorageService.get('searchExpense').name;
@@ -19,7 +19,9 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
     $scope.userName = localStorageService.get('authorizationData').userName;
 
-    $scope.projectID = localStorageService.get('projectID').projectID;
+    if (localStorageService.get('projectID') != null && localStorageService.get('projectID') != '' && localStorageService.get('projectID') != undefined) {
+        $scope.projectID = localStorageService.get('projectID').projectID;
+    }
 
     $scope.isEditing = false;
 
@@ -70,6 +72,9 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
 
     $scope.openEditModal = function (obj) {      
+        //$scope.search = "";
+        localStorageService.remove('searchExpense');
+        localStorageService.remove('searchIncoming');
 
         $scope.projectID = obj.projectID;
 
@@ -100,7 +105,10 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
     $scope.addnewexpense = function () {
 
+        $scope.search = "";
 
+        localStorageService.remove('searchExpense');
+        localStorageService.remove('searchIncoming');
 
         $scope.Expense = {
             ExpenseID: null,

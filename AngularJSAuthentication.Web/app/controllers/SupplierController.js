@@ -1,9 +1,15 @@
 ﻿'use strict';
 app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
+    localStorageService.remove('searchExpense');
+    localStorageService.remove('searchIncoming');
+
+
     $scope.userName = localStorageService.get('authorizationData').userName;
 
-    $scope.projectID = localStorageService.get('projectID').projectID;
+    if (localStorageService.get('projectID') != null && localStorageService.get('projectID') != '' && localStorageService.get('projectID') != undefined) {
+        $scope.projectID = localStorageService.get('projectID').projectID;
+    }
    
 
     $scope.Supplier = {

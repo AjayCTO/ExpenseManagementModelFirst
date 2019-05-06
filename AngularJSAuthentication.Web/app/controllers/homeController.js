@@ -1,7 +1,17 @@
 ﻿'use strict';
 app.controller('homeController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
-    $scope.projectID = localStorageService.get('projectID').projectID;
+    localStorageService.remove('searchExpense');
+    localStorageService.remove('searchIncoming');
+
+
+    if (localStorageService.get('projectID') != null && localStorageService.get('projectID') != '' && localStorageService.get('projectID') != undefined)
+    {
+        $scope.projectID = localStorageService.get('projectID').projectID;
+    }
+
+
+    //$scope.projectID = localStorageService.get('projectID').projectID;
     $scope.userName = localStorageService.get('authorizationData').userName;
     
 
