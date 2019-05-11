@@ -111,6 +111,152 @@ namespace AngularJSAuthentication.API.Controllers
             return ExpenseModelList;
         }
 
+
+        //GET: api/Expenses/5
+        [HttpGet]
+        [Route("GetExpenseByAssetID")]
+        [ActionName("GetExpenseByAssetID")]
+        public List<ExpenseModel> GetExpenseByAssetID(short id, short projectID)
+        {
+            List<ExpenseModel> ExpenseModelList = new List<ExpenseModel>();
+
+            var expenses = db.Expenses.Where(x => x.ProjectID == projectID && x.AssetID == id).ToList();
+
+            foreach (var expense in expenses)
+            {
+                ExpenseModel ExpenseModel = new Models.ExpenseModel();
+                ExpenseModel.expenseID = expense.ExpenseID;
+                ExpenseModel.projectID = (int)expense.ProjectID;
+                ExpenseModel.assetID = expense.Asset != null ? (int)expense.AssetID : 0;
+                ExpenseModel.categoryID = expense.Category != null ? (int)expense.CategoryID : 0;
+                ExpenseModel.supplierID = expense.Supplier != null ? (int)expense.SupplierID : 0;
+                ExpenseModel.supplierName = expense.Supplier != null ? expense.Supplier.Name : "";
+                ExpenseModel.projectName = expense.Project.Name;
+                ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
+                ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
+                ExpenseModel.totalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
+                ExpenseModel.refrence = expense.Refrence;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModel.isApproved = expense.IsApproved;
+                ExpenseModel.description = expense.Description;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModelList.Add(ExpenseModel);
+            }
+
+
+            return ExpenseModelList;
+        }
+
+
+        //GET: api/Expenses/5
+        [HttpGet]
+        [Route("GetExpenseByAssetID")]
+        [ActionName("GetExpenseByAssetID")]
+        public List<ExpenseModel> GetExpenseByAssetID(short id)
+        {
+            List<ExpenseModel> ExpenseModelList = new List<ExpenseModel>();
+
+            var expenses = db.Expenses.Where(x => x.AssetID == id).ToList();
+
+            foreach (var expense in expenses)
+            {
+                ExpenseModel ExpenseModel = new Models.ExpenseModel();
+                ExpenseModel.expenseID = expense.ExpenseID;
+                ExpenseModel.projectID = (int)expense.ProjectID;
+                ExpenseModel.assetID = expense.Asset != null ? (int)expense.AssetID : 0;
+                ExpenseModel.categoryID = expense.Category != null ? (int)expense.CategoryID : 0;
+                ExpenseModel.supplierID = expense.Supplier != null ? (int)expense.SupplierID : 0;
+                ExpenseModel.supplierName = expense.Supplier != null ? expense.Supplier.Name : "";
+                ExpenseModel.projectName = expense.Project.Name;
+                ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
+                ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
+                ExpenseModel.totalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
+                ExpenseModel.refrence = expense.Refrence;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModel.isApproved = expense.IsApproved;
+                ExpenseModel.description = expense.Description;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModelList.Add(ExpenseModel);
+            }
+
+
+            return ExpenseModelList;
+        }
+
+
+        //GET: api/Expenses/5
+        [HttpGet]
+        [Route("GetExpenseBySupplierID")]
+        [ActionName("GetExpenseBySupplierID")]
+        public List<ExpenseModel> GetExpenseBySupplierID(short id, short projectID)
+        {
+            List<ExpenseModel> ExpenseModelList = new List<ExpenseModel>();
+
+            var expenses = db.Expenses.Where(x => x.ProjectID == projectID && x.SupplierID == id).ToList();
+
+            foreach (var expense in expenses)
+            {
+                ExpenseModel ExpenseModel = new Models.ExpenseModel();
+                ExpenseModel.expenseID = expense.ExpenseID;
+                ExpenseModel.projectID = (int)expense.ProjectID;
+                ExpenseModel.assetID = expense.Asset != null ? (int)expense.AssetID : 0;
+                ExpenseModel.categoryID = expense.Category != null ? (int)expense.CategoryID : 0;
+                ExpenseModel.supplierID = expense.Supplier != null ? (int)expense.SupplierID : 0;
+                ExpenseModel.supplierName = expense.Supplier != null ? expense.Supplier.Name : "";
+                ExpenseModel.projectName = expense.Project.Name;
+                ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
+                ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
+                ExpenseModel.totalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
+                ExpenseModel.refrence = expense.Refrence;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModel.isApproved = expense.IsApproved;
+                ExpenseModel.description = expense.Description;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModelList.Add(ExpenseModel);
+            }
+
+
+            return ExpenseModelList;
+        }
+
+
+        //GET: api/Expenses/5
+        [HttpGet]
+        [Route("GetExpenseBySupplierID")]
+        [ActionName("GetExpenseBySupplierID")]
+        public List<ExpenseModel> GetExpenseBySupplierID(short id)
+        {
+            List<ExpenseModel> ExpenseModelList = new List<ExpenseModel>();
+
+            var expenses = db.Expenses.Where(x => x.SupplierID == id).ToList();
+
+            foreach (var expense in expenses)
+            {
+                ExpenseModel ExpenseModel = new Models.ExpenseModel();
+                ExpenseModel.expenseID = expense.ExpenseID;
+                ExpenseModel.projectID = (int)expense.ProjectID;
+                ExpenseModel.assetID = expense.Asset != null ? (int)expense.AssetID : 0;
+                ExpenseModel.categoryID = expense.Category != null ? (int)expense.CategoryID : 0;
+                ExpenseModel.supplierID = expense.Supplier != null ? (int)expense.SupplierID : 0;
+                ExpenseModel.supplierName = expense.Supplier != null ? expense.Supplier.Name : "";
+                ExpenseModel.projectName = expense.Project.Name;
+                ExpenseModel.assetName = expense.Asset != null ? expense.Asset.Name : "";
+                ExpenseModel.categoryName = expense.Category != null ? expense.Category.Name : "";
+                ExpenseModel.totalAmount = expense.Amount != null ? (decimal)expense.Amount : 0;
+                ExpenseModel.refrence = expense.Refrence;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModel.isApproved = expense.IsApproved;
+                ExpenseModel.description = expense.Description;
+                ExpenseModel.receiptPath = expense.ReceiptPath;
+                ExpenseModelList.Add(ExpenseModel);
+            }
+
+
+            return ExpenseModelList;
+        }
+
+
+
         // PUT: api/Expenses/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutExpense(ExpenseUserModel expense)

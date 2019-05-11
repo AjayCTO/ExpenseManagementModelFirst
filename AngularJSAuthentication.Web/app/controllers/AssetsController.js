@@ -120,7 +120,7 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
         $scope.Asset.projectID = $scope.projectID;
 
-        ordersService.saveAsset($scope.Asset).then(function (response) {
+        ordersService.saveAsset($scope.Asset, $scope.projectID).then(function (response) {
 
 
             $scope.savedSuccessfully = true;

@@ -32,7 +32,7 @@ namespace AngularJSAuthentication.API.Controllers
                 AssetModel.address = asset.Address;
                 AssetModel.contact = asset.Contact;
                 AssetModel.assetID = asset.AssetID;
-                AssetModel.projectID = asset.ProjectID;
+                //AssetModel.projectID = asset.ProjectID;
 
                 ListAssetModel.Add(AssetModel);
             }
@@ -48,7 +48,8 @@ namespace AngularJSAuthentication.API.Controllers
         {
             List<AssetModel> ListAssetModel = new List<AssetModel>();
 
-            List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
+            //List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
+            List<Asset> listOfAsset = db.Assets.ToList();
 
             foreach (Asset asset in listOfAsset)
             {
@@ -57,7 +58,7 @@ namespace AngularJSAuthentication.API.Controllers
                 AssetModel.address = asset.Address;
                 AssetModel.contact = asset.Contact;
                 AssetModel.assetID = asset.AssetID;
-                AssetModel.projectID = asset.ProjectID;
+                //AssetModel.projectID = asset.ProjectID;
 
                 ListAssetModel.Add(AssetModel);
             }
@@ -74,7 +75,8 @@ namespace AngularJSAuthentication.API.Controllers
         {
             List<AssetModel> ListAssetModel = new List<AssetModel>();
 
-            List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
+            //List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
+            List<Asset> listOfAsset = db.Assets.ToList();
 
             foreach (Asset asset in listOfAsset)
             {
@@ -83,7 +85,7 @@ namespace AngularJSAuthentication.API.Controllers
                 AssetModel.address = asset.Address;
                 AssetModel.contact = asset.Contact;
                 AssetModel.assetID = asset.AssetID;
-                AssetModel.projectID = asset.ProjectID;
+                //AssetModel.projectID = asset.ProjectID;
 
                 ListAssetModel.Add(AssetModel);
             }
@@ -134,17 +136,26 @@ namespace AngularJSAuthentication.API.Controllers
 
         // POST: api/Assets
         [ResponseType(typeof(Asset))]
-        public IHttpActionResult PostAsset(Asset asset)
+        public IHttpActionResult PostAsset(assetPostModel assetPostModel)
         {
             if (!ModelState.IsValid)
             {
                 //return BadRequest(ModelState);
             }
 
-            db.Assets.Add(asset);
+            db.Assets.Add(assetPostModel.Asset);
             db.SaveChanges();
 
-            return Ok(asset);
+            var projectID = assetPostModel.projectID;
+
+            AssetsProject AssetsProject = new AssetsProject();
+            AssetsProject.projectID = projectID;
+            AssetsProject.assetID = assetPostModel.Asset.AssetID;
+
+            db.AssetsProjects.Add(AssetsProject);
+            db.SaveChanges();
+
+            return Ok(assetPostModel.Asset);
         }
 
         // DELETE: api/Assets/5
