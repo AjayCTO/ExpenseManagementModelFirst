@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'localStorageService', 'SweetAlert', function ($scope, $rootScope, ordersService, localStorageService, SweetAlert) {
-    
+app.controller('ReportsController', ['$scope', '$rootScope', 'ordersService', 'localStorageService', 'SweetAlert', function ($scope, $rootScope, ordersService, localStorageService, SweetAlert) {
+
     $scope.search = "";
 
     if (localStorageService.get('searchExpense') != '' && localStorageService.get('searchExpense') != null && localStorageService.get('searchExpense') != undefined) {
@@ -30,13 +30,13 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
         ProjectID: null,
         AssetID: null,
         CategoryID: null,
-        SupplierID:null,
+        SupplierID: null,
         Date: "",
         Amount: "",
         Refrence: "",
         ReceiptPath: "",
         IsApproved: "",
-        Description: "" 
+        Description: ""
     };
 
     $scope.Categoryobject = {
@@ -58,12 +58,12 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
     };
 
     $scope.Supplierobject = {
-      
+
         Name: "",
         Address: "",
         Contact: "",
-        ProjectID:0
-      
+        ProjectID: 0
+
     };
 
     $scope.removeImage = function () {
@@ -71,7 +71,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
     }
 
 
-    $scope.openEditModal = function (obj) {      
+    $scope.openEditModal = function (obj) {
         //$scope.search = "";
         localStorageService.remove('searchExpense');
         localStorageService.remove('searchIncoming');
@@ -101,7 +101,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
     }
 
 
-   
+
 
     $scope.addnewexpense = function () {
 
@@ -132,17 +132,28 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
     $scope.showexpenselist = function () {
         $scope.showlist = true;
         $scope.isEditing = false;
-    }  
+    }
 
 
-    $scope.getExpenseByProjectID = function (id) {
+    $scope.getExpenseByProjectID = function (id) {     
 
         $scope.projectID = id;
 
+        $scope.Expense.AssetID = 0;
+        $scope.Expense.SupplierID = 0;
+
         ordersService.getExpenseByProjectID(id).then(function (results) {
 
-            $scope.ListOfExpenses = results.data;         
+            $scope.ListOfExpenses = results.data;
 
+           
+            $scope.total = 0;
+            for (var i = 0; i < $scope.ListOfExpenses.length; i++) {
+               
+                $scope.total += $scope.ListOfExpenses[i].totalAmount;
+            }
+
+           
             $scope.getdatabyid(id);
 
         }, function (error) {
@@ -150,13 +161,67 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
             //alert(error.data.message);
         });
     }
-    
+
+
+
+    $scope.getExpenseByAssetID = function (id) {            
+
+       
+        $scope.Expense.SupplierID = 0;
+
+        ordersService.getExpenseByAssetID(id, $scope.projectID).then(function (results) {
+
+            $scope.ListOfExpenses = results.data;
+
+            //$scope.getdatabyid(id);
+            $scope.total = 0;
+            for (var i = 0; i < $scope.ListOfExpenses.length; i++) {
+
+                $scope.total += $scope.ListOfExpenses[i].totalAmount;
+            }
+        }, function (error) {
+
+            //alert(error.data.message);
+        });
+    }
+
+
+
+    $scope.getExpenseBySupplierID = function (id) {   
+
+       
+        $scope.Expense.AssetID = 0;
+
+        ordersService.getExpenseBySupplierID(id, $scope.projectID).then(function (results) {
+
+            $scope.ListOfExpenses = results.data;
+
+            //$scope.getdatabyid(id);
+            $scope.total = 0;
+            for (var i = 0; i < $scope.ListOfExpenses.length; i++) {
+
+                $scope.total += $scope.ListOfExpenses[i].totalAmount;
+            }
+        }, function (error) {
+
+            //alert(error.data.message);
+        });
+    }
+
+
+
+
+
 
 
     ordersService.getExpenseByProjectID($scope.projectID).then(function (results) {
 
         $scope.ListOfExpenses = results.data;
+        $scope.total = 0;
+        for (var i = 0; i < $scope.ListOfExpenses.length; i++) {
 
+            $scope.total += $scope.ListOfExpenses[i].totalAmount;
+        }
         $scope.getdatabyid($scope.projectID);
 
     }, function (error) {
@@ -195,37 +260,37 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
         $scope.Categoryobject.ProjectID = id;
         $scope.Assetobject.ProjectID = id;
         $scope.Supplierobject.ProjectID = id;
-            ordersService.getCategoryByID(id).then(function (results) {
+        ordersService.getCategoryByID(id).then(function (results) {
 
-                $scope.categories = results.data;
+            $scope.categories = results.data;
 
-            }, function (error) {
-                
-                //alert(error.data.message);
-            });
+        }, function (error) {
 
-            ordersService.getSupplierByID($scope.userName).then(function (results) {
+            //alert(error.data.message);
+        });
 
-                $scope.suppliers = results.data;
+        ordersService.getSupplierByID($scope.userName).then(function (results) {
 
-            }, function (error) {
-                //alert(error.data.message);
-            });
+            $scope.suppliers = results.data;
 
-            ordersService.getAssetsByID($scope.userName).then(function (results) {
+        }, function (error) {
+            //alert(error.data.message);
+        });
 
-                $scope.assets = results.data;
+        ordersService.getAssetsByID($scope.userName).then(function (results) {
 
-            }, function (error) {
-                //alert(error.data.message);
-            });
-    }  
+            $scope.assets = results.data;
+
+        }, function (error) {
+            //alert(error.data.message);
+        });
+    }
 
 
     $scope.saveNewCategory = function () {
 
-    
-       
+
+
         ordersService.saveCategory($scope.Categoryobject).then(function (response) {
 
             $("#categorymodal").modal("hide");
@@ -261,7 +326,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
 
     $scope.saveNewAsset = function () {
-        ordersService.saveAsset($scope.Assetobject, $scope.projectID, $scope.userName).then(function (response) {
+        ordersService.saveAsset($scope.Assetobject).then(function (response) {
 
             $("#assetmodal").modal("hide");
 
@@ -276,7 +341,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
                 $scope.Expense.AssetID = response.data.assetID;
                 $scope.$apply();
 
-            },1500)
+            }, 1500)
 
             $scope.savedSuccessfully = true;
             $scope.message = "Category has been added successfully";
@@ -298,7 +363,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
 
 
-        ordersService.saveSupplier($scope.Supplierobject, $scope.projectID, $scope.userName).then(function (response) {
+        ordersService.saveSupplier($scope.Supplierobject).then(function (response) {
 
             $("#suppliermodal").modal("hide");
 
@@ -331,7 +396,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
     };
 
 
-  
+
     //ordersService.getProjects().then(function (results) {
     //    $scope.projects = results.data;
 
@@ -340,7 +405,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
 
     $scope.getassetsagain = function () {
-        ordersService.getAssetsByID($scope.userName).then(function (results) {
+        ordersService.getAssetsByID($scope.projectID).then(function (results) {
 
             $scope.assets = results.data;
 
@@ -381,7 +446,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
 
     $scope.getsupplieragain = function () {
-        ordersService.getSupplierByID($scope.userName).then(function (results) {
+        ordersService.getSupplierByID($scope.projectID).then(function (results) {
 
             $scope.suppliers = results.data;
 
@@ -401,13 +466,13 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
 
     $scope.newcategory = function () {
-     
+
 
         $("#categorymodal").modal("show");
     }
 
     $scope.newasset = function () {
-     
+
 
         $("#assetmodal").modal("show");
     }
@@ -419,7 +484,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
         $("#suppliermodal").modal("show");
     }
 
-    
+
 
     $scope.getExpenseByID = function (id) {
         ordersService.getExpenseByID(id).then(function (results) {
@@ -432,12 +497,12 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
     }
 
 
-    
+
 
     $scope.saveExpense = function () {
 
         $scope.Expense.ProjectID = $scope.projectID;
-            
+
 
         ordersService.saveExpense($scope.Expense, $scope.userName).then(function (response) {
             $scope.savedSuccessfully = true;
@@ -516,14 +581,14 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
 
     $(document.body).on('change', '#fileName', function () {
-     
+
         var files = event.target.files; //FileList object
         var output = document.getElementById("result");
 
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
 
-          
+
 
             //Only pics
             if (!file.type.match('image'))
@@ -533,7 +598,7 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
 
             picReader.addEventListener("load", function (event) {
 
-             
+
 
                 var picFile = event.target;
 
@@ -555,8 +620,8 @@ app.controller('ExpenseController', ['$scope', '$rootScope', 'ordersService', 'l
     });
 
 
-   
-   
+
+
 }]);
 
 

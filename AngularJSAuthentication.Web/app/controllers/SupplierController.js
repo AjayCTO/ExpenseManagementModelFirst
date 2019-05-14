@@ -41,7 +41,7 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
         });
     }
 
-    ordersService.getSupplierByID($scope.projectID).then(function (results) {
+    ordersService.getSupplierByID($scope.userName).then(function (results) {
         $scope.ListOfSupplier = results.data;
     }, function (error) {
     });
@@ -148,8 +148,10 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
     $scope.saveSupplier = function () {
 
         $scope.Supplier.projectID = $scope.projectID;
+       
 
-        ordersService.saveSupplier($scope.Supplier).then(function (response) {
+        alert($scope.userName);
+        ordersService.saveSupplier($scope.Supplier, $scope.projectID, $scope.userName).then(function (response) {
 
             $scope.savedSuccessfully = true;
             $scope.message = "Supplier has been added successfully";

@@ -71,6 +71,7 @@
     <Content Include="app\controllers\ordersController.js" />
     <Content Include="app\controllers\projectController.js" />
     <Content Include="app\controllers\refreshController.js" />
+    <Content Include="app\controllers\ReportsController.js" />
     <Content Include="app\controllers\signupController.js" />
     <Content Include="app\controllers\SupplierController.js" />
     <Content Include="app\controllers\tokensManagerController.js" />
@@ -90,6 +91,7 @@
     <Content Include="app\views\orders.html" />
     <Content Include="app\views\project.html" />
     <Content Include="app\views\refresh.html" />
+    <Content Include="app\views\Reports.html" />
     <Content Include="app\views\signup.html" />
     <Content Include="app\views\Supplier.html" />
     <Content Include="app\views\tokens.html" />
@@ -128,6 +130,7 @@
     <Content Include="scripts\loading-bar.min.js" />
     <Content Include="scripts\sweetalert.js" />
     <Content Include="scripts\script.min.js" />
+    <Content Include="scripts\table2csv.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

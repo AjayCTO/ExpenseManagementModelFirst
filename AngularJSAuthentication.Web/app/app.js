@@ -73,6 +73,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/Manufacturer.html"
     });
 
+    $routeProvider.when("/reports", {
+        controller: "ReportsController",
+        templateUrl: "/app/views/Reports.html"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/login" });
 
 });

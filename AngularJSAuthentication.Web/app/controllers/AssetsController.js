@@ -62,7 +62,7 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
         $scope.projectID = id;
 
-        ordersService.getAssetsByProjectID(id).then(function (results) {
+        ordersService.getAssetsByProjectID($scope.userName).then(function (results) {
             $scope.ListOfAssets = results.data;
 
         }, function (error) {
@@ -72,7 +72,7 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
 
 
-    ordersService.getAssetsByProjectID($scope.projectID).then(function (results) {
+    ordersService.getAssetsByProjectID($scope.userName).then(function (results) {
         $scope.ListOfAssets = results.data;
 
     }, function (error) {
@@ -120,7 +120,7 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
 
         $scope.Asset.projectID = $scope.projectID;
 
-        ordersService.saveAsset($scope.Asset).then(function (response) {
+        ordersService.saveAsset($scope.Asset, $scope.projectID, $scope.userName).then(function (response) {
 
 
             $scope.savedSuccessfully = true;

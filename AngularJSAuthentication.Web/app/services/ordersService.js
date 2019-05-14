@@ -64,15 +64,15 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     };
 
 
-    var _getAssetsByID = function (id) {
-        return $http.get(serviceBase + 'api/Assets/GetAsset', { params: { id: id } }).then(function (results) {
+    var _getAssetsByID = function (userName) {
+        return $http.get(serviceBase + 'api/Assets/GetAsset', { params: { userName: userName } }).then(function (results) {
             return results;
         });
     };
 
 
-    var _getAssetsByProjectID = function (id) {
-        return $http.get(serviceBase + 'api/Assets/GetAssetByProjectID', { params: { id: id } }).then(function (results) {
+    var _getAssetsByProjectID = function (userName) {
+        return $http.get(serviceBase + 'api/Assets/GetAssetByProjectID', { params: { userName: userName } }).then(function (results) {
             return results;
         });
     };
@@ -88,8 +88,9 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
 
-    var _saveAsset = function (Asset) {     
-        return $http.post(serviceBase + 'api/Assets/PostAsset', Asset).then(function (response) {
+    var _saveAsset = function (Asset, projectID, userName) {
+        var assetPostModel = {Asset : Asset , projectId : projectID,UserName : userName}
+        return $http.post(serviceBase + 'api/Assets/PostAsset', assetPostModel).then(function (response) {
             return response;
         });
     };
@@ -157,6 +158,37 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
             return results;
         });
     };
+
+  
+    var _getExpenseByAssetID = function (id, projectID) {
+
+        if (projectID != 0) {
+            return $http.get(serviceBase + 'api/Expenses/GetExpenseByAssetID', { params: { id: id, projectID: projectID } }).then(function (results) {
+                return results;
+            });
+        }
+        else {
+            return $http.get(serviceBase + 'api/Expenses/GetExpenseByAssetID', { params: { id: id} }).then(function (results) {
+                return results;
+            });
+        }       
+    };
+
+
+    var _getExpenseBySupplierID = function (id, projectID) {
+
+        if (projectID != 0) {
+            return $http.get(serviceBase + 'api/Expenses/GetExpenseBySupplierID', { params: { id: id, projectID: projectID } }).then(function (results) {
+                return results;
+            });
+        }
+        else {
+            return $http.get(serviceBase + 'api/Expenses/GetExpenseBySupplierID', { params: { id: id} }).then(function (results) {
+                return results;
+            });
+        }        
+    };
+
 
     var _saveExpense = function (Expense, userName) {
 
@@ -234,9 +266,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
 
-    var _getCustomer = function () {
-
-       
+    var _getCustomer = function () {       
         return $http.get(serviceBase + 'api/Customers').then(function (results) {
             return results;
         });
@@ -256,16 +286,14 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ////////////////////////////////////////////////////////////////////
 
     var _getSupplier = function () {
-        return $http.get(serviceBase + 'api/Suppliers').then(function (results) {
-            console.log("Supplier");
-            console.log(results);
+        return $http.get(serviceBase + 'api/Suppliers').then(function (results) {            
             return results;
         });
     };
 
 
-    var _getSupplierByID = function (id) {
-        return $http.get(serviceBase + 'api/Suppliers/GetSupplier', { params: { id: id } }).then(function (results) {
+    var _getSupplierByID = function (userName) {
+        return $http.get(serviceBase + 'api/Suppliers/GetSupplier', { params: { userName: userName } }).then(function (results) {
             return results;
         });
     };
@@ -277,8 +305,13 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
         });
     };
 
-    var _saveSupplier = function (Supplier) {
-        return $http.post(serviceBase + 'api/Suppliers/PostSupplier', Supplier).then(function (response) {
+    var _saveSupplier = function (Supplier, projectID, userName) {
+
+        alert(userName);
+
+        var supplierProjectModel = {Supplier : Supplier, projectId : projectID, UserName : userName}
+
+        return $http.post(serviceBase + 'api/Suppliers/PostSupplier', supplierProjectModel).then(function (response) {
             return response;
         });
     };
@@ -386,6 +419,8 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     ordersServiceFactory.deleteExpense = _deleteExpense;
 
     ordersServiceFactory.getExpenseByProjectID = _getExpenseByProjectID;
+    ordersServiceFactory.getExpenseByAssetID = _getExpenseByAssetID;
+    ordersServiceFactory.getExpenseBySupplierID = _getExpenseBySupplierID;
 
 
     ordersServiceFactory.getIncoming = _getIncoming; 

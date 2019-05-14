@@ -9,9 +9,31 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
     }  
    
 
+
+
+    $scope.getcustomeragain = function () {
+        ordersService.getCustomer().then(function (results) {
+
+            debugger;
+            $scope.ListOfcustomer = results.data;
+
+        }, function (error) {
+        });
+    }
+
+    ordersService.getCustomer().then(function (results) {
+        $scope.ListOfcustomer = results.data;
+
+        console.log($scope.ListOfcustomer);
+
+    }, function (error) {
+    });
+
+
     $scope.Incoming = {
         IncomingID: null,
         ProjectID: $scope.projectID,
+        customerID: 0,
         Date: "",
         Amount: "",
         SourceName: "",
@@ -129,6 +151,7 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
         $scope.Incoming = {
             IncomingID: null,
+            customerID :0,
             ProjectID: null,
             Date: "",
             Amount: "",

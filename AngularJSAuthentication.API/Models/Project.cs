@@ -11,8 +11,8 @@ namespace AngularJSAuthentication.API.Models
     {
         public Project()
         {
-            this.Asset = new List<Asset>();
-            this.Supplier = new List<Supplier>();
+            this.AssetsProject = new List<AssetsProject>();
+            this.SupplierProject = new List<SupplierProject>();
             this.Manufacturer = new List<Manufacturer>();
             this.Category = new List<Category>();
             this.Incoming = new List<Incoming>();
@@ -27,8 +27,8 @@ namespace AngularJSAuthentication.API.Models
         public decimal TotalCost { get; set; }
 
 
-        public virtual ICollection<Asset> Asset { get; set; }
-        public virtual ICollection<Supplier> Supplier { get; set; }
+        public virtual ICollection<AssetsProject> AssetsProject { get; set; }
+        public virtual ICollection<SupplierProject> SupplierProject { get; set; }
         public virtual ICollection<Manufacturer> Manufacturer { get; set; }
         public virtual ICollection<Category> Category { get; set; }
         public virtual ICollection<Incoming> Incoming { get; set; }

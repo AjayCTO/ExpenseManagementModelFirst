@@ -28,6 +28,8 @@ namespace AngularJSAuthentication.API
         public DbSet<Incoming> Incomings { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<SupplierProject> SupplierProjects { get; set; }
+        public DbSet<AssetsProject> AssetsProjects { get; set; }
 
         //    public System.Data.Entity.DbSet<AngularJSAuthentication.API.Models.Expense> Expenses { get; set; }
 

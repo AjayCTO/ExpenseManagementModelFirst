@@ -36,7 +36,7 @@ namespace AngularJSAuthentication.API.Controllers
                 SupplierModel.supplierID = supplier.SupplierID;
                 SupplierModel.totalAmount = supplier.TotalAmount;
                 SupplierModel.amountPaid = supplier.AmountPaid;
-                SupplierModel.projectID = supplier.ProjectID;
+                //SupplierModel.projectID = supplier.ProjectID;
 
                 ListSupplierModel.Add(SupplierModel);
             }
@@ -49,11 +49,15 @@ namespace AngularJSAuthentication.API.Controllers
         [Route("GetSupplier")]
         [ActionName("GetSupplier")]
 
-        public List<SupplierModel> GetSupplier(int id)
+        public List<SupplierModel> GetSupplier(string userName)
         {
+
+            var userID = db.Users.FirstOrDefault(x => x.UserName == userName).Id;
             List<SupplierModel> ListSupplierModel = new List<SupplierModel>();
 
-            List<Supplier> listOfSupplier = db.Suppliers.Where(x => x.ProjectID == id).ToList();
+            //List<Supplier> listOfSupplier = db.Suppliers.Where(x => x.ProjectID == id).ToList();
+            //List<Supplier> listOfSupplier = db.Suppliers.ToList();
+            List<Supplier> listOfSupplier = db.Suppliers.Where(x => x.UserId == userID).ToList();
 
             foreach (var supplier in listOfSupplier)
             { 
@@ -65,7 +69,7 @@ namespace AngularJSAuthentication.API.Controllers
                 SupplierModel.supplierID = supplier.SupplierID;
                 SupplierModel.totalAmount = supplier.TotalAmount;
                 SupplierModel.amountPaid = supplier.AmountPaid;
-                SupplierModel.projectID = supplier.ProjectID;
+                //SupplierModel.projectID = supplier.ProjectID;
 
                 ListSupplierModel.Add(SupplierModel);
             }
@@ -123,17 +127,37 @@ namespace AngularJSAuthentication.API.Controllers
 
         // POST: api/Suppliers
         [ResponseType(typeof(Supplier))]
-        public IHttpActionResult PostSupplier(Supplier supplier)
+        public IHttpActionResult PostSupplier(SupplierPostModel SupplierPostModel)
         {
             //if (!ModelState.IsValid)
             //{
             //    return BadRequest(ModelState);
             //}
 
-            db.Suppliers.Add(supplier);
+            var userID = db.Users.FirstOrDefault(x => x.UserName == SupplierPostModel.UserName).Id;
+
+            SupplierPostModel.Supplier.UserId = userID;
+
+
+            db.Suppliers.Add(SupplierPostModel.Supplier);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = supplier.SupplierID }, supplier);
+
+            var projectId = SupplierPostModel.projectID;
+
+            SupplierProject supplierproject = new SupplierProject();
+
+            supplierproject.projectID = projectId;
+            supplierproject.supplierID = SupplierPostModel.Supplier.SupplierID;
+
+
+            db.SupplierProjects.Add(supplierproject);
+
+            db.SaveChanges();
+
+
+
+            return CreatedAtRoute("DefaultApi", new { id = SupplierPostModel.Supplier.SupplierID }, SupplierPostModel.Supplier);
         }
 
         // DELETE: api/Suppliers/5

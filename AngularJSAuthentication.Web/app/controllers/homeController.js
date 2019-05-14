@@ -60,7 +60,7 @@ app.controller('homeController', ['$scope', 'ordersService', 'localStorageServic
         });
 
 
-        ordersService.getAssetsByProjectID(id).then(function (results) {
+        ordersService.getAssetsByProjectID($scope.userName).then(function (results) {
 
             $scope.ListOfAssets = results.data;
 

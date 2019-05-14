@@ -1,10 +1,9 @@
 ﻿
 
 <div class="breadcrumb">
-    <h1>Expense Management </h1>
+    <h1>Reports</h1>
     <ul>
         <li><a href="">Dashboard</a></li>
-      
     </ul>
 </div>
 
@@ -13,11 +12,8 @@
 <div ng-if="showlist==true">
 
     <div class="row">
-        <div class="col-md-3">
-            <button data-ng-click="addnewexpense()" type="button" class="btn btn-success m-1"> <i class="fa fa-plus"></i> Add Expense</button>
-        </div>
 
-        <div style="text-align:center;" class="col-md-6 form-inline">
+        <div class="col-md-3">
             <div class="form-group">
                 <label style="width:auto; margin-right:7px;">Select Project</label>
                 <select ng-model="projectid" data-ng-change="getExpenseByProjectID(projectid)" style="margin-bottom:10px;" class="form-control">
@@ -25,19 +21,38 @@
                     <option ng-repeat="pr in ListOfProjects" value="{{pr.projectID}}" ng-selected="pr.projectID == projectID">{{pr.name}}</option>
                 </select>
             </div>
-            
-
-
         </div>
-
+        <div class="col-md-3">
+            <div class="form-group">
+                <label style="width:auto; margin-right:7px;">Select Asset</label>
+                <select class="form-control" data-ng-change="getExpenseByAssetID(Expense.AssetID)" data-ng-model="Expense.AssetID">
+                    <option selected value="">- Select Asset -</option>
+                    <option data-ng-repeat="as in assets" value="{{as.assetID}}" ng-selected="as.assetID == Expense.AssetID">{{as.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label style="width:auto; margin-right:7px;">Select Supplier</label>
+                <select class="form-control" data-ng-change="getExpenseBySupplierID(Expense.SupplierID)" data-ng-model="Expense.SupplierID">
+                    <option selected value="">- Select Supplier -</option>
+                    <option data-ng-repeat="supp in suppliers" value="{{supp.supplierID}}" ng-selected="supp.supplierID == Expense.SupplierID">{{supp.name}}</option>
+                </select>
+            </div>
+        </div>
         <div style="text-align:right" class="col-md-3">
-            <input class="form-control" placeholder="Type to Search" type="text" data-ng-model="search" name="name" value="" /> 
-        </div>
-    </div>
-  
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <button class="btn btn-success m-1" type="button" onclick="DownloadCSV()" value="Download CSV"><i class="fa fa-download"></i> Download</button>
+            </div>
 
-  
-    <table class="table table-bordered">
+        </div>
+     
+    </div>
+
+
+
+    <table class="table table-bordered" id="tab">
         <thead>
             <tr>
 
@@ -55,7 +70,7 @@
                     Amount
                     <i class="fa" ng-show="sortKey=='totalAmount'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
                 </th>
-                <th>
+                <th class="col1">
                     Receipt
                 </th>
                 <th ng-click="sort('supplierName')">
@@ -67,12 +82,6 @@
                     Description
                     <i class="fa" ng-show="sortKey=='description'" ng-class="{'fa fa-sort-asc':reverse,'fa fa-sort-desc':!reverse}"></i>
                 </th>
-
-
-
-                <th>
-                    Action
-                </th>
             </tr>
         </thead>
 
@@ -80,36 +89,33 @@
             <td>
                 {{obj.projectName}}
             </td>
-
             <td>
                 {{obj.assetName}}
             </td>
-
             <td>
                 {{obj.totalAmount}}
             </td>
-            <td>
-
-
-
+            <td class="col1">
                 <img ng-if="obj.receiptPath==''" style="height:50px; width:50px;" src="https://static.thenounproject.com/png/220984-200.png" alt="Alternate Text" />
                 <a data-ng-click="makezoom(obj.receiptPath)">
                     <img ng-if="obj.receiptPath!=''" style="height:50px; width:50px;" src="{{obj.receiptPath}}" alt="Alternate Text" />
                 </a>
             </td>
-
             <td>
                 {{obj.supplierName}}
             </td>
             <td>
                 {{obj.description}}
             </td>
+        </tr>
 
-            <td>
-                <!--<button ng-click="getProjectByID(obj.ProjectID)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> GetByID</button>-->
-                <button ng-click="openEditModal(obj)" type="button" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil"></i> Edit</button>
-                <!--<button ng-click="deleteProject(obj.ProjectID)" type="button" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash-o"></i> Delete</button>-->
-            </td>
+        <tr>
+            <td></td>
+            <td>Total Amount</td>
+            <td style="background-color:aqua">{{total}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
     </table>
 </div>
@@ -147,7 +153,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Refrence</label>
-                    <input type="text" class="form-control" placeholder="Refrence" data-ng-model="Expense.Refrence">
+                    <input type="text" class="form-control" placeholder="Refrence" data-ng-model="Expense.Refrence" required>
                 </div>
             </div>
             <div class="col-md-6">
@@ -168,7 +174,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>IsApproved</label>
-                    <input type="text" class="form-control" placeholder="IsApproved" data-ng-model="Expense.IsApproved">
+                    <input type="text" class="form-control" placeholder="IsApproved" data-ng-model="Expense.IsApproved" required>
                 </div>
             </div>
         </div>
@@ -213,7 +219,7 @@
                         <img ng-if="Expense.ReceiptPath!=''" alt="Choose Image" id="showUploaded" style="width:89px;height:90px" src="{{Expense.ReceiptPath}}" />
 
                         <img ng-if="Expense.ReceiptPath==''" alt="Choose Image" id="showUploaded" style="width:89px;height:90px" src="https://static.thenounproject.com/png/220984-200.png" />
-                        
+
                         <button ng-if="isEditing == true" ng-click="removeImage()">Update Image</button>
                     </div>
                 </div>
@@ -227,10 +233,10 @@
     </form>
 </div>
 
-   
 
 
-  <!-- Modal -->
+
+<!-- Modal -->
 <div class="modal fade" id="categorymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -243,7 +249,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Type Your category</label>
-                    <input data-ng-model="Categoryobject.Name" type="text" class="form-control" name="name" value="" />   
+                    <input data-ng-model="Categoryobject.Name" type="text" class="form-control" name="name" value="" />
                 </div>
             </div>
             <div class="modal-footer">
@@ -324,10 +330,30 @@
 
 
 <style>
-    label
-    {
-        width:100%;
+    label {
+        width: 100%;
     }
 </style>
-  
 
+
+
+
+    
+<script src="../../scripts/table2csv.js"></script>
+<script>
+    function DownloadCSV()
+    {
+        let options = {
+            "separator": ",",
+            "newline": "\n",
+            "quoteFields": true,
+            "excludeColumns": ".col1",
+            "excludeRows": "",
+            "trimContent": true,
+            "filename": "table.csv",
+            "appendTo": "#output"
+        }
+
+        $('#tab').table2csv('download', options)
+    }
+</script>

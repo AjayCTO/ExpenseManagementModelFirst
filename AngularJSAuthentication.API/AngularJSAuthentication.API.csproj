@@ -197,10 +197,32 @@
     <Compile Include="Migrations\201905030931264_IncomeReceipt.Designer.cs">
       <DependentUpon>201905030931264_IncomeReceipt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905070846394_migration.cs" />
+    <Compile Include="Migrations\201905070846394_migration.Designer.cs">
+      <DependentUpon>201905070846394_migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905070920473_assetProject.cs" />
+    <Compile Include="Migrations\201905070920473_assetProject.Designer.cs">
+      <DependentUpon>201905070920473_assetProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905070951009_removeProjectId.cs" />
+    <Compile Include="Migrations\201905070951009_removeProjectId.Designer.cs">
+      <DependentUpon>201905070951009_removeProjectId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905130530531_init.cs" />
+    <Compile Include="Migrations\201905130530531_init.Designer.cs">
+      <DependentUpon>201905130530531_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905130536437_useridadd.cs" />
+    <Compile Include="Migrations\201905130536437_useridadd.Designer.cs">
+      <DependentUpon>201905130536437_useridadd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\AssetModel.cs" />
+    <Compile Include="Models\assetPostModel.cs" />
+    <Compile Include="Models\AssetsProject.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -219,6 +241,8 @@
     <Compile Include="Models\ProjectUser.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\SupplierModel.cs" />
+    <Compile Include="Models\SupplierPostModel.cs" />
+    <Compile Include="Models\SupplierProject.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -278,6 +302,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905030931264_IncomeReceipt.resx">
       <DependentUpon>201905030931264_IncomeReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905070846394_migration.resx">
+      <DependentUpon>201905070846394_migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905070920473_assetProject.resx">
+      <DependentUpon>201905070920473_assetProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905070951009_removeProjectId.resx">
+      <DependentUpon>201905070951009_removeProjectId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130530531_init.resx">
+      <DependentUpon>201905130530531_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130536437_useridadd.resx">
+      <DependentUpon>201905130536437_useridadd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
