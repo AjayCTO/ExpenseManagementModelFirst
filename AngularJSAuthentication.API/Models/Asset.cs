@@ -27,9 +27,11 @@ namespace AngularJSAuthentication.API.Models
         public virtual ICollection<Transaction> Transaction { get; set; }
         public virtual ICollection<AssetsProject> AssetsProject { get; set; }
 
+
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
+
 
     }
 }

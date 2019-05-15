@@ -119,14 +119,9 @@ app.controller('AssetsController', ['$scope', 'ordersService', 'localStorageServ
     $scope.saveAsset = function () {
 
         $scope.Asset.projectID = $scope.projectID;
-
         ordersService.saveAsset($scope.Asset, $scope.projectID, $scope.userName).then(function (response) {
-
-
             $scope.savedSuccessfully = true;
-            $scope.message = "Asset has been added successfully";
-
-           
+            $scope.message = "Asset has been added successfully";           
             $scope.getAssetsByProjectID($scope.projectID);
             $scope.showlist = true;
             $scope.isEditing = false;

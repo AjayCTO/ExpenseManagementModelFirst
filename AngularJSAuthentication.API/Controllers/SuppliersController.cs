@@ -56,6 +56,7 @@ namespace AngularJSAuthentication.API.Controllers
             List<SupplierModel> ListSupplierModel = new List<SupplierModel>();
 
             //List<Supplier> listOfSupplier = db.Suppliers.Where(x => x.ProjectID == id).ToList();
+
             //List<Supplier> listOfSupplier = db.Suppliers.ToList();
             List<Supplier> listOfSupplier = db.Suppliers.Where(x => x.UserId == userID).ToList();
 
@@ -134,9 +135,11 @@ namespace AngularJSAuthentication.API.Controllers
             //    return BadRequest(ModelState);
             //}
 
+
             var userID = db.Users.FirstOrDefault(x => x.UserName == SupplierPostModel.UserName).Id;
 
             SupplierPostModel.Supplier.UserId = userID;
+
 
 
             db.Suppliers.Add(SupplierPostModel.Supplier);

@@ -269,7 +269,9 @@ app.controller('ReportsController', ['$scope', '$rootScope', 'ordersService', 'l
             //alert(error.data.message);
         });
 
+
         ordersService.getSupplierByID($scope.userName).then(function (results) {
+
 
             $scope.suppliers = results.data;
 
@@ -277,7 +279,9 @@ app.controller('ReportsController', ['$scope', '$rootScope', 'ordersService', 'l
             //alert(error.data.message);
         });
 
+
         ordersService.getAssetsByID($scope.userName).then(function (results) {
+
 
             $scope.assets = results.data;
 

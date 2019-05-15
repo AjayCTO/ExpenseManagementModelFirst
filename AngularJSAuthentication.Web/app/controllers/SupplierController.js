@@ -150,8 +150,9 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
         $scope.Supplier.projectID = $scope.projectID;
        
 
-        alert($scope.userName);
-        ordersService.saveSupplier($scope.Supplier, $scope.projectID, $scope.userName).then(function (response) {
+
+       
+        ordersService.saveSupplier($scope.Supplier, $scope.projectID, $scope.userName).then(function (response) { 
 
             $scope.savedSuccessfully = true;
             $scope.message = "Supplier has been added successfully";

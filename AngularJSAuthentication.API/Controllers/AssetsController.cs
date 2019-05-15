@@ -51,6 +51,7 @@ namespace AngularJSAuthentication.API.Controllers
             List<AssetModel> ListAssetModel = new List<AssetModel>();
 
             //List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
+
             //List<Asset> listOfAsset = db.Assets.ToList();
             List<Asset> listOfAsset = db.Assets.Where(x => x.UserId == userID).ToList();
 
@@ -81,8 +82,10 @@ namespace AngularJSAuthentication.API.Controllers
             List<AssetModel> ListAssetModel = new List<AssetModel>();
 
             //List<Asset> listOfAsset = db.Assets.Where(x => x.ProjectID == id).ToList();
+
             //List<Asset> listOfAsset = db.Assets.ToList();
             List<Asset> listOfAsset = db.Assets.Where(x => x.UserId == userID).ToList();
+
 
             foreach (Asset asset in listOfAsset)
             {

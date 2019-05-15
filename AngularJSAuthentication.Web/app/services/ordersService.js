@@ -88,8 +88,10 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
 
+
     var _saveAsset = function (Asset, projectID, userName) {
         var assetPostModel = {Asset : Asset , projectId : projectID,UserName : userName}
+
         return $http.post(serviceBase + 'api/Assets/PostAsset', assetPostModel).then(function (response) {
             return response;
         });
@@ -305,11 +307,13 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
         });
     };
 
+
     var _saveSupplier = function (Supplier, projectID, userName) {
 
         alert(userName);
 
         var supplierProjectModel = {Supplier : Supplier, projectId : projectID, UserName : userName}
+
 
         return $http.post(serviceBase + 'api/Suppliers/PostSupplier', supplierProjectModel).then(function (response) {
             return response;

@@ -10,5 +10,6 @@ namespace AngularJSAuthentication.API.Models
         public int projectID { get; set; }
         public Asset Asset { get; set; }
         public string UserName { get; set; }
+
     }
 }
