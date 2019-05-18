@@ -13,6 +13,7 @@ using AngularJSAuthentication.API.Models;
 
 namespace AngularJSAuthentication.API.Controllers
 {
+     [RoutePrefix("api/Customers")]
     public class CustomersController : ApiController
     {
         private AuthContext db = new AuthContext();
@@ -24,16 +25,21 @@ namespace AngularJSAuthentication.API.Controllers
         }
 
         // GET: api/Customers/5
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult GetCustomer(int id)
+        [HttpGet]
+        [Route("GetCustomer")]
+        [ActionName("GetCustomer")]
+        public List<Customer> GetCustomer(string userName)
         {
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(customer);
+            var userID = db.Users.FirstOrDefault(x => x.UserName == userName).Id;
+
+            var customers = db.Customers.Where(x => x.UserId == userID).ToList();
+            //if (customers == null)
+            //{
+            //    return BadRequest();
+            //}
+
+            return customers;
         }
 
         // PUT: api/Customers/5
@@ -72,18 +78,23 @@ namespace AngularJSAuthentication.API.Controllers
         }
 
         // POST: api/Customers
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult PostCustomer(Customer customer)
+        [HttpPost]
+        [Route("PostCustomer")]
+        [ActionName("PostCustomer")]
+        public IHttpActionResult PostCustomer(customerPostModel customer)
         {
+            var userID = db.Users.FirstOrDefault(x => x.UserName == customer.UserName).Id;
+
             if (!ModelState.IsValid)
             {
                 //return BadRequest(ModelState);
             }
 
-            db.Customers.Add(customer);
+            customer.Customer.UserId = userID;
+            db.Customers.Add(customer.Customer);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = customer.CustomerID }, customer);
+            return Ok(customer.Customer);
         }
 
         // DELETE: api/Customers/5

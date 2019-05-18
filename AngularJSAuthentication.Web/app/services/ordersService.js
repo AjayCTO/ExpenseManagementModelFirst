@@ -268,14 +268,18 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
 
 
-    var _getCustomer = function () {       
-        return $http.get(serviceBase + 'api/Customers').then(function (results) {
+    var _getCustomer = function (userName) {
+
+        return $http.get(serviceBase + 'api/Customers/GetCustomer', { params: { userName: userName } }).then(function (results) {
             return results;
         });
     };
 
-    var _saveCustomer = function (Customer) {
-        return $http.post(serviceBase + 'api/Customers/PostCustomer', Customer).then(function (response) {
+    var _saveCustomer = function (Customer, userName) {
+
+        var customerUserNameModel = { Customer: Customer, UserName: userName }
+
+        return $http.post(serviceBase + 'api/Customers/PostCustomer', customerUserNameModel).then(function (response) {
             return response;
         });
     };
@@ -308,9 +312,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
     };
 
 
-    var _saveSupplier = function (Supplier, projectID, userName) {
-
-        alert(userName);
+    var _saveSupplier = function (Supplier, projectID, userName) {      
 
         var supplierProjectModel = {Supplier : Supplier, projectId : projectID, UserName : userName}
 

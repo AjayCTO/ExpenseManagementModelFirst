@@ -35,7 +35,7 @@ app.controller('SupplierController', ['$scope', 'ordersService', 'localStorageSe
 
         $scope.projectID = id;
 
-        ordersService.getSupplierByID(id).then(function (results) {
+        ordersService.getSupplierByID($scope.userName).then(function (results) {
             $scope.ListOfSupplier = results.data;
         }, function (error) {
         });

@@ -8,11 +8,23 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
         $scope.search = localStorageService.get('searchIncoming').name;
     }  
    
+    $scope.savedSuccessfully = false;
+
+    $scope.ListOfIncoming = [];
+
+    $scope.userName = localStorageService.get('authorizationData').userName;
+
+    if (localStorageService.get('projectID') != null && localStorageService.get('projectID') != '' && localStorageService.get('projectID') != undefined) {
+        $scope.projectID = localStorageService.get('projectID').projectID;
+    }
+
+
+
 
 
 
     $scope.getcustomeragain = function () {
-        ordersService.getCustomer().then(function (results) {
+        ordersService.getCustomer($scope.userName).then(function (results) {
 
             debugger;
             $scope.ListOfcustomer = results.data;
@@ -21,7 +33,7 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
         });
     }
 
-    ordersService.getCustomer().then(function (results) {
+    ordersService.getCustomer($scope.userName).then(function (results) {
         $scope.ListOfcustomer = results.data;
 
         console.log($scope.ListOfcustomer);
@@ -52,16 +64,7 @@ app.controller('incomingController', ['$scope', 'ordersService', 'localStorageSe
 
     }
 
-    $scope.savedSuccessfully = false;
-
-    $scope.ListOfIncoming = [];
-
-    $scope.userName = localStorageService.get('authorizationData').userName;
-
-    if (localStorageService.get('projectID') != null && localStorageService.get('projectID') != '' && localStorageService.get('projectID') != undefined) {
-        $scope.projectID = localStorageService.get('projectID').projectID;
-    }
-
+    
     //ordersService.getIncoming().then(function (results) {     
 
     //    $scope.ListOfIncoming = results.data;       

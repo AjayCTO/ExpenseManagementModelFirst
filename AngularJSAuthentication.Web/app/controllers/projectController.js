@@ -81,7 +81,7 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
 
 
     $scope.saveNewCustomer = function () {
-        ordersService.saveCustomer($scope.Customerobject).then(function (response) {
+        ordersService.saveCustomer($scope.Customerobject,$scope.userName).then(function (response) {
 
             $("#customermodal").modal("hide");
 
@@ -114,7 +114,7 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
     };
 
     $scope.getcustomeragain = function () {
-        ordersService.getCustomer().then(function (results) {
+        ordersService.getCustomer($scope.userName).then(function (results) {
 
             debugger;
             $scope.ListOfcustomer = results.data;
@@ -123,7 +123,7 @@ app.controller('projectController', ['$scope', 'ordersService', 'localStorageSer
         });
     }
   
-    ordersService.getCustomer().then(function (results) {
+    ordersService.getCustomer($scope.userName).then(function (results) {
         $scope.ListOfcustomer = results.data;
 
         console.log($scope.ListOfcustomer);

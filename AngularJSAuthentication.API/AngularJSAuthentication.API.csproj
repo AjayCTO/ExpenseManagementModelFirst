@@ -217,6 +217,10 @@
     <Compile Include="Migrations\201905130536437_useridadd.Designer.cs">
       <DependentUpon>201905130536437_useridadd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905150406336_customeruser.cs" />
+    <Compile Include="Migrations\201905150406336_customeruser.Designer.cs">
+      <DependentUpon>201905150406336_customeruser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Asset.cs" />
@@ -226,6 +230,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\customerPostModel.cs" />
     <Compile Include="Models\DashboardProjectModel.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Expense.cs" />
@@ -317,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905130536437_useridadd.resx">
       <DependentUpon>201905130536437_useridadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905150406336_customeruser.resx">
+      <DependentUpon>201905150406336_customeruser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
